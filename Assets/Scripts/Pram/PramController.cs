@@ -184,8 +184,8 @@ public class PramController : MonoBehaviour
             _objectColor.a = 0.6f;
             collision.gameObject.GetComponentInParent<SpriteRenderer>().color = _objectColor;
 
-            transform.GetComponent<SpriteRenderer>().sortingOrder = 0;
-            collision.gameObject.GetComponentInParent<SpriteRenderer>().sortingOrder = 1;
+            transform.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            //collision.gameObject.GetComponentInParent<SpriteRenderer>().sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder;
         }
     }
 
@@ -197,8 +197,8 @@ public class PramController : MonoBehaviour
             _objectColor.a = 1.0f;
             collision.gameObject.GetComponentInParent<SpriteRenderer>().color = _objectColor;
 
-            transform.GetComponent<SpriteRenderer>().sortingOrder = 1;
-            collision.gameObject.GetComponentInParent<SpriteRenderer>().sortingOrder = 0;
+            transform.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            //collision.gameObject.GetComponentInParent<SpriteRenderer>().sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder;
         }
     }
 }
