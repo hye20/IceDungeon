@@ -8,7 +8,7 @@ public class ObjectTrigger : MonoBehaviour
 
     void Awake()
     {
-        _controller = GameObject.Find("Pram").GetComponent<PramController>();
+        _controller = GameObject.Find("Pram_F").GetComponent<PramController>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
