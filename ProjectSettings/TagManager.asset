@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Chest
   - BlurObject
+  - Pram
+  - Mao
   layers:
   - Default
   - TransparentFX

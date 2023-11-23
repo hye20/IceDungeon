@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class ObjectTrigger : MonoBehaviour
 {
-    private PramController _controller;
+    private PlayerController _controller;
 
     void Awake()
     {
-        _controller = GameObject.Find("Pram_F").GetComponent<PramController>();
+        //_controller = GameObject.Find("Pram_F").GetComponent<PlayerController>();
+
+        if(GameObject.FindGameObjectWithTag("Pram"))
+        {
+            _controller = GameObject.Find("Pram").GetComponent<PlayerController>();
+        }
+        else if(GameObject.FindGameObjectWithTag("Mao"))
+        {
+            _controller = GameObject.Find("Mao").GetComponent<PlayerController>();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.name == "LU_Trigger")
         {
-            _controller.ArrowButtons[0].interactable = false;
+            _controller.ArrowButtons[0].gameObject.SetActive(false);
         }
         else if (collision.name == "RU_Trigger")
         {
-            _controller.ArrowButtons[1].interactable = false;
+            _controller.ArrowButtons[1].gameObject.SetActive(false);
         }
         else if (collision.name == "LD_Trigger")
         {
-            _controller.ArrowButtons[2].interactable = false;
+            _controller.ArrowButtons[2].gameObject.SetActive(false);
         }
         else if (collision.name == "RD_Trigger")
         {
-            _controller.ArrowButtons[3].interactable = false;
+            _controller.ArrowButtons[3].gameObject.SetActive(false);
         }
     }
 
@@ -35,19 +44,19 @@ public class ObjectTrigger : MonoBehaviour
     {
         if (collision.name == "LU_Trigger")
         {
-            _controller.ArrowButtons[0].interactable = true;
+            _controller.ArrowButtons[0].gameObject.SetActive(true);
         }
         else if (collision.name == "RU_Trigger")
         {
-            _controller.ArrowButtons[1].interactable = true;
+            _controller.ArrowButtons[1].gameObject.SetActive(true);
         }
         else if (collision.name == "LD_Trigger")
         {
-            _controller.ArrowButtons[2].interactable = true;
+            _controller.ArrowButtons[2].gameObject.SetActive(true);
         }
         else if (collision.name == "RD_Trigger")
         {
-            _controller.ArrowButtons[3].interactable = true;
+            _controller.ArrowButtons[3].gameObject.SetActive(true);
         }
     }
 }
