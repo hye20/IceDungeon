@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -19,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     Animator _animator;
+    public bool pramAction;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -27,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public int DiceCount;
+    public int DiceCount;//Çàµ¿·Â
 
     void Awake()
     {
@@ -38,13 +36,14 @@ public class PlayerController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
 
-        for(int i = 0; i < ArrowButtons.Length; i++)
+        for (int i = 0; i < ArrowButtons.Length; i++)
         {
             int number = i;
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
     }
-    
+
+
     void Update()
     {
         PlayerTurn();
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void PlayerTurn()
     {
-        if(IsPlayerTurn)
+        if (IsPlayerTurn)
         {
             ArrowCanvas.gameObject.SetActive(true);
         }
@@ -62,8 +61,9 @@ public class PlayerController : MonoBehaviour
         }
 
         PramMove();
+        PramMagic();
 
-        if(DiceCount == 0)
+        if (DiceCount == 0)
         {
             IsPlayerTurn = false;
         }
@@ -151,15 +151,26 @@ public class PlayerController : MonoBehaviour
         {
             ArrowCanvas.gameObject.SetActive(false);
         }
-    }    
+    }
+    public void PramMagic()
+    {
+        if(pramAction) _animator.SetBool("M_Attack_LD", true);
 
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_LD") &&
+            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+        {
+            _animator.SetBool("M_Attack_LD", false);
+            pramAction = false;
+        }
+        //_animator.SetBool("M_Attack_LD", false);*/
+    }
     void OnButtonClicked(int number)
     {
-        switch(number)
+        switch (number)
         {
             case 0:
                 _endPos = transform.position + _luDirection;
-                LUButtonPressed = true;                
+                LUButtonPressed = true;
                 break;
             case 1:
                 _endPos = transform.position + _ruDirection;
@@ -172,13 +183,13 @@ public class PlayerController : MonoBehaviour
             case 3:
                 _endPos = transform.position + _rdDirection;
                 RDButtonPressed = true;
-                break;               
+                break;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 0.2f;
@@ -191,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 1.0f;
