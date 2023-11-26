@@ -8,6 +8,7 @@ TagManager:
   - BlurObject
   - Pram
   - Mao
+  - Item
   layers:
   - Default
   - TransparentFX
