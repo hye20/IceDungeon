@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     Animator _animator;
-    public bool pramAction;
+    public bool animAtk;
+    public bool animMagic;
+    public bool animGuard;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -154,13 +156,13 @@ public class PlayerController : MonoBehaviour
     }
     public void PramMagic()
     {
-        if(pramAction) _animator.SetBool("M_Attack_LD", true);
+        if(animMagic) _animator.SetBool("M_Attack_LD", true);
 
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_LD") &&
             _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
         {
             _animator.SetBool("M_Attack_LD", false);
-            pramAction = false;
+            animMagic = false;
         }
         //_animator.SetBool("M_Attack_LD", false);*/
     }

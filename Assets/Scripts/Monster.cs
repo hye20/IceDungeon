@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public int HP;
+    public int HP=100;
     public string[] skills;
     public string[] actions;
     // Start is called before the first frame update
     void Start()
     {
-        
+        HP = 100;
     }
 
     // Update is called once per frame

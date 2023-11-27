@@ -27137,7 +27137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1401450887}
-  HP: 0
+  HP: 100
   MP: 0
   dice: 0
   AP: 0
@@ -28013,8 +28013,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 985235462659211869, guid: 75c41da13e1f96f4e9b654e55ce3768e, type: 3}
       propertyPath: atk
-      value: 
-      objectReference: {fileID: 2119035120}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 985235462659211869, guid: 75c41da13e1f96f4e9b654e55ce3768e, type: 3}
       propertyPath: playerAction
       value: 0
@@ -28112,7 +28112,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5818171250196724797, guid: 75c41da13e1f96f4e9b654e55ce3768e, type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 1401450891}
   m_SourcePrefab: {fileID: 100100000, guid: 75c41da13e1f96f4e9b654e55ce3768e, type: 3}
 --- !u!1001 &1463109668
@@ -46689,6 +46689,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1401450891}
+  monsters:
+  - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
+  - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
+  - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
   btn: {fileID: 2119035120}
   playerTurn: 0
   delay: 0
