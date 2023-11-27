@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public int maxDiceCount;
     public int DiceCount;
 
+
+    public static bool isCollide = false;
     void Awake()
     {
         _luDirection = new Vector3(-0.5f, 0.25f, 0);
