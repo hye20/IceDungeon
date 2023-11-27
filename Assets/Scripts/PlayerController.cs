@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,12 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
+    [Header("Dice")]
+    public Button diceButton;
+    public Text diceText;
+
+    // 다이스에서 나온 숫자
+    public int maxDiceCount;
     public int DiceCount;
 
     void Awake()
@@ -45,26 +52,13 @@ public class PlayerController : MonoBehaviour
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
     }
-    
-    void Update()
+
+    private void Update()
     {
         PlayerTurn();
-        #region 애니메이션 테스트용
-        //InputM();
-        #endregion
     }
 
-    private void InputM()
-    {
-        Attack();
-        Mattack();
-        Guard();
-        Battle();
-        Faill();
-        Win();
-    }
-
-    #region PlayerAnim
+    #region PlayerAnim테스트
     public void Attack()
     {
         _animator.SetTrigger("Attack");
@@ -93,12 +87,27 @@ public class PlayerController : MonoBehaviour
     public void Win()
     {
         _animator.SetTrigger("Win");
-    } 
+    }
     #endregion
+    public void RandomDice()
+    {
+        if (DiceCount != 0 ||
+            ArrowCanvas.gameObject.activeSelf == true ||
+            IsPlayerTurn == true)
+        {
+            return;
+        }
+
+        IsPlayerTurn = true;
+        DiceCount = Random.Range(1, maxDiceCount+1);
+        diceText.text = DiceCount.ToString();
+
+        PlayerTurn();
+    }
 
     void PlayerTurn()
     {
-        if(IsPlayerTurn)
+        if (IsPlayerTurn)
         {
             ArrowCanvas.gameObject.SetActive(true);
         }
@@ -114,6 +123,7 @@ public class PlayerController : MonoBehaviour
             IsPlayerTurn = false;
         }
     }
+
 
     void PramMove()
     {
