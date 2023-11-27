@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour
     private int monstersHP;
     public Button btn;
     public bool playerTurn = true;
+    public bool enemyAlive = true;
 
     public float delay;//for test
 
