@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +49,52 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerTurn();
+        #region 애니메이션 테스트용
+        //InputM();
+        #endregion
     }
+
+    private void InputM()
+    {
+        Attack();
+        Mattack();
+        Guard();
+        Battle();
+        Faill();
+        Win();
+    }
+
+    #region PlayerAnim
+    public void Attack()
+    {
+        _animator.SetTrigger("Attack");
+    }
+
+    public void Mattack()
+    {
+        _animator.SetTrigger("MAttack");
+    }
+
+    public void Guard()
+    {
+        _animator.SetTrigger("Guard");
+    }
+
+    public void Battle()
+    {
+        _animator.SetTrigger("Battle");
+    }
+
+    public void Faill()
+    {
+        _animator.SetTrigger("Falling");
+    }
+
+    public void Win()
+    {
+        _animator.SetTrigger("Win");
+    } 
+    #endregion
 
     void PlayerTurn()
     {
