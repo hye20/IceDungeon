@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    bool isStart = true;
+    private float startTimer = 0;
+    private float timerSpeed = 3.0f;
+
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
@@ -18,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _endPos;
 
-    Animator _animator;
+    Animator animator;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -29,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     public int DiceCount;
 
+    public ItemManager ItemManager;
+    public SpriteRenderer ItemSpriteRenderer;
+
     void Awake()
     {
         _luDirection = new Vector3(-0.5f, 0.25f, 0);
@@ -36,7 +43,10 @@ public class PlayerController : MonoBehaviour
         _ldDirection = new Vector3(-0.5f, -0.25f, 0);
         _rdDirection = new Vector3(0.5f, -0.25f, 0);
 
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+
+        ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
 
         for(int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -44,10 +54,40 @@ public class PlayerController : MonoBehaviour
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
     }
-    
+
     void Update()
     {
+        Starter();
         PlayerTurn();
+        ItemObtained();
+    }
+
+    void Starter()
+    {
+        if (isStart)
+        {
+            animator.SetBool("Falling", true);
+
+            Vector3 endPos = new Vector3(0.5f, 0, 0);
+
+            transform.position = Vector3.MoveTowards(transform.position, endPos, 2.0f * Time.deltaTime);
+
+            if (transform.position == endPos)
+            {
+                animator.SetBool("Falling", false);
+                animator.SetBool("Lying", true);
+
+                startTimer = timerSpeed * Time.time;
+
+                if (startTimer > 10.0f)
+                {
+                    animator.SetBool("Lying", false);
+                    GameObject startCamera = GameObject.Find("StartCamera");
+                    Destroy(startCamera);
+                    isStart = false;
+                }
+            }
+        }
     }
 
     void PlayerTurn()
@@ -61,7 +101,7 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
 
-        PramMove();
+        Move();
 
         if(DiceCount == 0)
         {
@@ -69,20 +109,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void PramMove()
+    void Move()
     {
         if (LUButtonPressed)
         {
-            _animator.SetTrigger("LU_Trigger");
-            _animator.SetBool("Move_LU", true);
+            animator.SetTrigger("LU_Trigger");
+            animator.SetBool("Move_LU", true);
 
             transform.position = Vector3.MoveTowards(transform.position, _endPos, moveSpeed * Time.deltaTime);
 
             if (transform.position == _endPos)
             {
                 LUButtonPressed = false;
-                _animator.ResetTrigger("LU_Trigger");
-                _animator.SetBool("Move_LU", false);
+                animator.ResetTrigger("LU_Trigger");
+                animator.SetBool("Move_LU", false);
                 transform.position = _endPos;
 
                 DiceCount--;
@@ -91,16 +131,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (RUButtonPressed)
         {
-            _animator.SetTrigger("RU_Trigger");
-            _animator.SetBool("Move_RU", true);
+            animator.SetTrigger("RU_Trigger");
+            animator.SetBool("Move_RU", true);
 
             transform.position = Vector3.MoveTowards(transform.position, _endPos, moveSpeed * Time.deltaTime);
 
             if (transform.position == _endPos)
             {
                 RUButtonPressed = false;
-                _animator.ResetTrigger("RU_Trigger");
-                _animator.SetBool("Move_RU", false);
+                animator.ResetTrigger("RU_Trigger");
+                animator.SetBool("Move_RU", false);
                 transform.position = _endPos;
 
                 DiceCount--;
@@ -109,16 +149,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (LDButtonPressed)
         {
-            _animator.SetTrigger("LD_Trigger");
-            _animator.SetBool("Move_LD", true);
+            animator.SetTrigger("LD_Trigger");
+            animator.SetBool("Move_LD", true);
 
             transform.position = Vector3.MoveTowards(transform.position, _endPos, moveSpeed * Time.deltaTime);
 
             if (transform.position == _endPos)
             {
                 LDButtonPressed = false;
-                _animator.ResetTrigger("LD_Trigger");
-                _animator.SetBool("Move_LD", false);
+                animator.ResetTrigger("LD_Trigger");
+                animator.SetBool("Move_LD", false);
                 transform.position = _endPos;
 
                 DiceCount--;
@@ -127,16 +167,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (RDButtonPressed)
         {
-            _animator.SetTrigger("RD_Trigger");
-            _animator.SetBool("Move_RD", true);
+            animator.SetTrigger("RD_Trigger");
+            animator.SetBool("Move_RD", true);
 
             transform.position = Vector3.MoveTowards(transform.position, _endPos, moveSpeed * Time.deltaTime);
 
             if (transform.position == _endPos)
             {
                 RDButtonPressed = false;
-                _animator.ResetTrigger("RD_Trigger");
-                _animator.SetBool("Move_RD", false);
+                animator.ResetTrigger("RD_Trigger");
+                animator.SetBool("Move_RD", false);
                 transform.position = _endPos;
 
                 DiceCount--;
@@ -144,10 +184,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Move_LU") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("Move_RU") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("Move_LD") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("Move_RD"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Move_LU") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Move_RU") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Move_LD") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Move_RD"))
         {
             ArrowCanvas.gameObject.SetActive(false);
         }
@@ -174,6 +214,36 @@ public class PlayerController : MonoBehaviour
                 RDButtonPressed = true;
                 break;               
         }
+    }
+
+    void ItemObtained()
+    {
+        if(ItemManager.obtainItem)
+        {
+            StartCoroutine(ItemSpriteActive());
+
+            ItemManager.obtainItem = false;
+
+            animator.SetTrigger("Obtain_Trigger");
+            ArrowCanvas.gameObject.SetActive(false);
+
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Obtain_Trigger") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            {
+                animator.SetTrigger("Obtain_Trigger");
+                ArrowCanvas.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    IEnumerator ItemSpriteActive()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        ItemSpriteRenderer.sprite = ItemManager.Items[ItemManager.Items.Count - 1].ItemSprite;
+
+        yield return new WaitForSeconds(0.5f);
+        
+        ItemSpriteRenderer.sprite = null;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
