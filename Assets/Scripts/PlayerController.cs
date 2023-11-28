@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _endPos;
 
-    Animator animator;
+    public Animator animator;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Falling", false);
                 animator.SetBool("Lying", true);
 
+                /*
                 startTimer = timerSpeed * Time.time;
 
                 if (startTimer > 10.0f)
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(startCamera);
                     isStart = false;
                 }
+                */
             }
         }
     }
