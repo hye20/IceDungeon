@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class BattleManager : MonoBehaviour
 {
     public Player player;
+    [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] private Transform[] monterSpawnPoint;
     public Monster[] monsters;
-    private int monstersHP;
     public Button btn;
     public bool playerTurn = true;
     public bool enemyAlive = true;
@@ -14,6 +15,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        player.transform.position = playerSpawnPoint.position;
         playerTurn = true;
         btn.onClick.AddListener(Magicbtn);
         SetMonsters();
@@ -22,15 +24,15 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.HP > 0 && monstersHP > 0)
+        if (player.HP > 0 && !Check_Monsters_Dead())
         {
             PlayerAction();
             MonsterAction();
         }
-        else if (player.HP <= 0 || monstersHP <= 0)
+        else if (player.HP <= 0 || Check_Monsters_Dead())
         {
             Debug.Log(player.HP);
-            Debug.Log(monstersHP);
+            Debug.Log(Check_Monsters_Dead());
             Debug.Log("Battle phase End");
         }
     }
@@ -61,16 +63,16 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerAtk()
     {
+        playerTurn = false;
         Debug.Log("player's attack");
         for (int i = 0; i < monsters.Length; i++)
         {
-            monsters[i].HP -= 50;
+            monsters[i].HP -= player.atk;
         }
     }
     public void Magicbtn()//일반 공격이랑 호환 가능한지? 변수 조정으로?
     {
         player.controller.animMagic = true;
-        playerTurn = false;
         PlayerAtk();
         /*
         if(!player.controller.pramAction)
@@ -90,14 +92,34 @@ public class BattleManager : MonoBehaviour
         int rand = Random.RandomRange(1, 3);
         for (int i = 0; i <= rand; i++)
         {
-            monsters[i] = Instantiate(monsters[i]);
+            monsters[i] = Instantiate(monsters[i], monterSpawnPoint[i]);
             Debug.Log(monsters[i].HP);
-            monstersHP += monsters[i].HP;
         }
+    }
+    private bool Check_Monsters_Dead()
+    {
+        bool is_dead = false;
+        int deadMonsterCnt = 0;
+        for (int i = 0; i < monsters.Length; i++)
+        {
+            if (monsters[i].is_dead)
+            {
+                deadMonsterCnt++;
+            }
+        }
+        if (deadMonsterCnt == monsters.Length)
+        {
+            is_dead = true;
+        }
+        return is_dead;
     }
     private void MonsterAtk()
     {
         Debug.Log("Monster's attack");
-        player.HP -= 25;// 30 -> monster.atk
+        if (0.1 >= Random.value)
+        {
+            Debug.Log("But, monster's attack is missed");
+        }
+        player.HP -= 25;// -> monster.atk
     }
 }

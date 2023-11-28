@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
@@ -16,9 +17,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     Animator _animator;
-    public bool animAtk;
-    public bool animMagic;
-    public bool animGuard;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -28,6 +26,12 @@ public class PlayerController : MonoBehaviour
     public bool RDButtonPressed = false;
 
     public int DiceCount;//Çàµ¿·Â
+
+
+    /*************Battle Mode****************/
+    public bool animAtk;
+    public bool animMagic;
+    public bool animGuard;
 
     void Awake()
     {
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
             int number = i;
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
+
     }
 
 
@@ -154,14 +159,26 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
     }
+
+
+    public void BattleMode()
+    {
+        _animator.SetTrigger("RU_Trigger");
+        IsPlayerTurn = false;
+    }
+    public void QuestMode()
+    {
+        _animator.ResetTrigger("RU_Trigger");
+        IsPlayerTurn = true;
+    }
     public void PramMagic()
     {
-        if(animMagic) _animator.SetBool("M_Attack_LD", true);
+        if (animMagic) _animator.SetBool("M_Attack_RU", true);
 
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_LD") &&
-            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
+            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            _animator.SetBool("M_Attack_LD", false);
+            _animator.SetBool("M_Attack_RU", false);
             animMagic = false;
         }
         //_animator.SetBool("M_Attack_LD", false);*/

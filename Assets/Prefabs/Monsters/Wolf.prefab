@@ -120,5 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
+  atk: 0
   skills: []
   actions: []
+  is_dead: 0
