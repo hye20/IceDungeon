@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
-    public Player player;
+    
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Transform[] monterSpawnPoint;
     public Monster[] monsters;
@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        player.transform.position = playerSpawnPoint.position;
+        GameManager.instance.player.transform.position = playerSpawnPoint.position;
         playerTurn = true;
         btn.onClick.AddListener(Magicbtn);
         SetMonsters();
@@ -24,16 +24,18 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.HP > 0 && !Check_Monsters_Dead())
+        if (GameManager.instance.player.HP > 0 && !Check_Monsters_Dead())
         {
             PlayerAction();
             MonsterAction();
         }
-        else if (player.HP <= 0 || Check_Monsters_Dead())
+        else if (GameManager.instance.player.HP <= 0 || Check_Monsters_Dead())
         {
-            Debug.Log(player.HP);
+            Debug.Log(GameManager.instance.player.HP);
             Debug.Log(Check_Monsters_Dead());
             Debug.Log("Battle phase End");
+            GameManager.instance.QuestPhase();
+            GameManager.instance.player.controller.QuestMode();
         }
     }
     public void MonsterAction()
@@ -67,12 +69,12 @@ public class BattleManager : MonoBehaviour
         Debug.Log("player's attack");
         for (int i = 0; i < monsters.Length; i++)
         {
-            monsters[i].HP -= player.atk;
+            monsters[i].HP -= GameManager.instance.player.atk;
         }
     }
     public void Magicbtn()//일반 공격이랑 호환 가능한지? 변수 조정으로?
     {
-        player.controller.animMagic = true;
+        GameManager.instance.player.controller.animMagic = true;
         PlayerAtk();
         /*
         if(!player.controller.pramAction)
@@ -89,10 +91,11 @@ public class BattleManager : MonoBehaviour
 
     private void SetMonsters()
     {
-        int rand = Random.RandomRange(1, 3);
+        int rand = Random.Range(1, 3);//1~3마리
         for (int i = 0; i <= rand; i++)
         {
-            monsters[i] = Instantiate(monsters[i], monterSpawnPoint[i]);
+            monsters[i] = Instantiate(monsters[i]);
+            monsters[i].transform.position = monterSpawnPoint[i].position;
             Debug.Log(monsters[i].HP);
         }
     }
@@ -120,6 +123,6 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("But, monster's attack is missed");
         }
-        player.HP -= 25;// -> monster.atk
+        GameManager.instance.player.HP -= 25;// -> monster.atk
     }
 }

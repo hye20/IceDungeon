@@ -936,9 +936,9 @@ Transform:
   m_GameObject: {fileID: 5818171250196724797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3484129035278679778}
   - {fileID: 3902121702025968467}
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   RDButtonPressed: 0
   DiceCount: 100
   animAtk: 0
-  animMagic: 0
+  animMagic: 1
   animGuard: 0
 --- !u!114 &4282134009817620013
 MonoBehaviour:
@@ -1058,9 +1058,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 985235462659211869}
+  playerSpawnPoint: {fileID: 9025449354921319338, guid: d0fa6aca80e03bd4f9d69b3f3ed97842, type: 3}
   HP: 100
   MP: 0
-  atk: 10
+  atk: 50
   def: 0
   SP: 0
   dice: 0

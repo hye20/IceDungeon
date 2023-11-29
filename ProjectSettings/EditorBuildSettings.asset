@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TEST_PJP.unity
+    guid: b9db85d047f4f8e46ac5db37475b03b7
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: ae5f0987cfd67e84183f4b46161db6d6
   m_configObjects: {}

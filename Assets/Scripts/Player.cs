@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController controller;
+    public Transform playerSpawnPoint;
 
     private int MaxHP = 100;
     public int HP=100;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         controller = GetComponent<PlayerController>();
     }
 
