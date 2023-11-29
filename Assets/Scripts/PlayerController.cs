@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     bool isStart = true;
-    private float startTimer = 0;
-    private float timerSpeed = 3.0f;
 
     private float moveSpeed = 1.0f;
 
@@ -35,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public ItemManager ItemManager;
     public SpriteRenderer ItemSpriteRenderer;
+    PenguinStarter penguinStarter;
 
     void Awake()
     {
@@ -47,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
         ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
+        penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
         for(int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -77,17 +77,15 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Falling", false);
                 animator.SetBool("Lying", true);
 
-                /*
-                startTimer = timerSpeed * Time.time;
-
-                if (startTimer > 10.0f)
+                if(penguinStarter.penguinReturn)
                 {
                     animator.SetBool("Lying", false);
                     GameObject startCamera = GameObject.Find("StartCamera");
                     Destroy(startCamera);
                     isStart = false;
+
+                    penguinStarter.penguinReturn = false;                    
                 }
-                */
             }
         }
     }

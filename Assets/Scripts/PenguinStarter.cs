@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PenguinStarter : MonoBehaviour
@@ -8,13 +9,20 @@ public class PenguinStarter : MonoBehaviour
     Animator animator;
 
     float moveSpeed = 1.0f;
+
+    Vector3 startPos;
     Vector3 endPos;
 
-    PlayerController controller;
+    float animationTimer = 0;
+    float timerSpeed = 1.5f;
 
-    float animatorTimer = 0;
-    float animatorSpeed = 1.0f;
-    int animationLoopCount = 0;
+    bool isPicking = false;
+    bool itemPicked = false;
+
+    public bool returned;
+    public bool penguinReturn;
+
+    PlayerController controller;
 
     void Start()
     {
@@ -29,41 +37,79 @@ public class PenguinStarter : MonoBehaviour
             controller = player.GetComponent<PlayerController>();
         }
 
+        startPos = transform.position;
         endPos = transform.position - new Vector3(3.5f, 1.75f, 0);
         animator = GetComponent<Animator>();
+
+        returned = true;
+        penguinReturn = false;
     }
 
     void Update()
     {
         Movement();
-        Debug.Log(animatorTimer);
+        Picking();
+        Spinning();
+        Returning();
     }
 
     void Movement()
     {
-        if(controller.animator.GetCurrentAnimatorStateInfo(0).IsName("Lying"))
-        {
+        if(controller.animator.GetCurrentAnimatorStateInfo(0).IsName("Lying") && returned)
+        {          
             transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
             animator.SetBool("Walking", true);
+
+            if (transform.position == endPos)
+            {
+                animator.SetBool("Walking", false);
+                returned = false;
+            }
+        }
+    }
+
+    void Picking()
+    {
+        if(!isPicking)
+        {
+            animationTimer = timerSpeed * Time.time;
+
+            if (animationTimer > 10.0f)
+            {
+                animationTimer = 0;
+                animator.SetTrigger("Picking");
+                isPicking = true;
+            }
         }
 
-        if (transform.position == endPos)
+        if (isPicking && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_Picking") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            transform.position = endPos;
-            animator.SetBool("Walking", false);
-
-            animatorTimer = animatorSpeed * Time.time;
+            animator.ResetTrigger("Picking");
+            animator.SetBool("Spinning", true);
+            itemPicked = true;            
         }
+    }
 
-        if (animatorTimer > 7.0f)
+    void Spinning()
+    {
+        if(itemPicked && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_Spin") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            animatorTimer = 0;
-            animator.SetBool("Picking", true);
+            itemPicked = false;
+            animator.SetBool("Spinning", false);
         }
+    }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_Picking") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)
+    void Returning()
+    {
+        if(!returned && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_WalkR"))
         {
-            animator.SetBool("Picking", false);
+            transform.position = Vector3.MoveTowards(transform.position, startPos, moveSpeed * Time.deltaTime);
+
+            if(transform.position == startPos)
+            {
+                penguinReturn = true;
+                Destroy(gameObject);
+            }
         }
     }
 }
