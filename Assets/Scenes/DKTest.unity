@@ -41693,23 +41693,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1810096199286765367, guid: 3cd209ae2cc7e534191b0382b9e778f9, type: 3}
   m_PrefabInstance: {fileID: 1550713062}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1552553745 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 943802155222686459, guid: 9a92af8e95831c94289e62028c9d8e45, type: 3}
-  m_PrefabInstance: {fileID: 3200590468281119764}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1552553749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552553745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed243c04d3bcdb47b99576bcea9729a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1553127606
 GameObject:
   m_ObjectHideFlags: 0
@@ -78850,10 +78833,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4597988890951921074, guid: 4dea548798e274743978df040955fc6d, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -78995,10 +78974,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple_Penguin
       objectReference: {fileID: 0}
-    - target: {fileID: 1700806791535847118, guid: 9a92af8e95831c94289e62028c9d8e45, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3646686136320812779, guid: 9a92af8e95831c94289e62028c9d8e45, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -79042,10 +79017,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 943802155222686459, guid: 9a92af8e95831c94289e62028c9d8e45, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1552553749}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a92af8e95831c94289e62028c9d8e45, type: 3}
 --- !u!1001 &3673923898047107570
 PrefabInstance:
@@ -79116,10 +79088,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3276247012015583748, guid: db98d63accc99bc41859280ec343a128, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5127637910636642454, guid: db98d63accc99bc41859280ec343a128, type: 3}
       propertyPath: m_Name
       value: Orange_Penguin
@@ -79180,10 +79148,6 @@ PrefabInstance:
     - target: {fileID: 501493086333529069, guid: 7c940286c359d654594c45d4fa8254d7, type: 3}
       propertyPath: m_Name
       value: Red_Penguin
-      objectReference: {fileID: 0}
-    - target: {fileID: 6740038183468139355, guid: 7c940286c359d654594c45d4fa8254d7, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8599482143071864144, guid: 7c940286c359d654594c45d4fa8254d7, type: 3}
       propertyPath: m_LocalPosition.x
