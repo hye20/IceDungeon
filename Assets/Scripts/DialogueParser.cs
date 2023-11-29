@@ -22,7 +22,6 @@ public class DialogueParser : MonoBehaviour
             dialogue.name = row[1];
 
             List<string> contextList = new List<string>();
-
             // 현재 캐릭터에 대한 대화 라인 추출
             do
             {

@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,10 +19,10 @@ public class DatabaseManager : MonoBehaviour
             instance = this;
             DialogueParser theParser = GetComponent<DialogueParser>();
             Dialogue[] dialogues = theParser.Parser(csv_FileName);
-
             for (int i = 0; i < dialogues.Length; i++)
             {
                 dialogueDic.Add(i + 1, dialogues[i]);
+                
             }
 
             isFinish = true;

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] GameObject go_NpcTalk;
+    [Header("대화창")]
+    [SerializeField] GameObject go_npcTalk;
 
     [SerializeField] Text txt_Name;
     [SerializeField] Text txt_Dialogue;
@@ -22,21 +23,31 @@ public class DialogueManager : MonoBehaviour
     int contextCount = 0;// 대사 카운트
 
 
-    InteractionController IControll;
+    InteractionController interactionController;
 
     void Start()
     {
-        IControll = FindObjectOfType<InteractionController>();    
+        interactionController = FindObjectOfType<InteractionController>();    
     }
+
     void Update()
     {
-        if (isDialogue){
-            if (isNext){
-                if (Input.GetKeyDown(KeyCode.Space)){
+        TextCp();
+    }
+
+    void TextCp()
+    {
+        if (isDialogue)
+        {
+            if (isNext)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
                     isNext = false;
                     txt_Dialogue.text = "";
 
-                    if (++contextCount< dialogues[lineCount].contexts.Length) {
+                    if (++contextCount < dialogues[lineCount].contexts.Length)
+                    {
                         StartCoroutine(TypeWriter());
                     }
                     else
@@ -53,7 +64,7 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
             }
-        }    
+        }
     }
 
     public void ShowDialogue(Dialogue[] p_dialogues)
@@ -61,7 +72,7 @@ public class DialogueManager : MonoBehaviour
         isDialogue = true;
         txt_Dialogue.text = "";
         txt_Name.text = "";
-        IControll.SettingUI(false);
+        interactionController.SettingUI(true);
         dialogues = p_dialogues;
 
         StartCoroutine(TypeWriter());
@@ -69,21 +80,22 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        Debug.Log("EndDialogue");
         isDialogue = false;
         contextCount = 0;
         lineCount = 0;
         dialogues = null;
-        IControll.SettingUI(true);
-        SettingUI(false);
+        interactionController.SettingUI(false);
+        SettinUI(false);
     }
 
     IEnumerator TypeWriter()
     {
-        SettingUI(true);
-    
+        SettinUI(true);
+
         string t_ReplaceText = dialogues[lineCount].contexts[contextCount];
         t_ReplaceText = t_ReplaceText.Replace("`", ",");
-                
+
         txt_Name.text = dialogues[lineCount].name;
         for (int i = 0; i < t_ReplaceText.Length; i++)
         {
@@ -94,8 +106,8 @@ public class DialogueManager : MonoBehaviour
         yield return null;
     }
 
-    void SettingUI(bool p_flag)
+    void SettinUI(bool p_flag)
     {
-        go_NpcTalk.SetActive(p_flag);
+        go_npcTalk.SetActive(p_flag);
     }
 }

@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
     public int maxDiceCount;
     public int DiceCount;
 
-
-    public static bool isCollide = false;
     void Awake()
     {
         _luDirection = new Vector3(-0.5f, 0.25f, 0);
@@ -48,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
 
-        for(int i = 0; i < ArrowButtons.Length; i++)
+        for (int i = 0; i < ArrowButtons.Length; i++)
         {
             int number = i;
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
@@ -101,7 +99,7 @@ public class PlayerController : MonoBehaviour
         }
 
         IsPlayerTurn = true;
-        DiceCount = Random.Range(1, maxDiceCount+1);
+        DiceCount = Random.Range(1, maxDiceCount + 1);
         diceText.text = DiceCount.ToString();
 
         PlayerTurn();
@@ -120,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
         PramMove();
 
-        if(DiceCount == 0)
+        if (DiceCount == 0)
         {
             IsPlayerTurn = false;
         }
@@ -209,15 +207,15 @@ public class PlayerController : MonoBehaviour
         {
             ArrowCanvas.gameObject.SetActive(false);
         }
-    }    
+    }
 
     void OnButtonClicked(int number)
     {
-        switch(number)
+        switch (number)
         {
             case 0:
                 _endPos = transform.position + _luDirection;
-                LUButtonPressed = true;                
+                LUButtonPressed = true;
                 break;
             case 1:
                 _endPos = transform.position + _ruDirection;
@@ -230,13 +228,13 @@ public class PlayerController : MonoBehaviour
             case 3:
                 _endPos = transform.position + _rdDirection;
                 RDButtonPressed = true;
-                break;               
+                break;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 0.2f;
@@ -249,7 +247,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 1.0f;
