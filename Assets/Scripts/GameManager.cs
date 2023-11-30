@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     enum Mode { QuestMode, BattleMode }//player.controller.NowMode
     [SerializeField]private Mode mode;
 
-    public Button battleBtn;
 
     private void Start()
     {
@@ -32,15 +31,21 @@ public class GameManager : MonoBehaviour
     {
         player = Instantiate(player);
         playerSpawnPoint = new Vector3(0, 0.25f, 0);
-        player.transform.position = playerSpawnPoint; 
-        battleBtn.onClick.AddListener(BattlePhase);
+        player.transform.position = playerSpawnPoint;
         DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //****************************************************************************
+        //FOR_TEST
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (mode == Mode.QuestMode)BattlePhase();
+            else if (mode == Mode.BattleMode)QuestPhase();
+        }
+        //*****************************************************************************
     }
     public void BattlePhase()
     {

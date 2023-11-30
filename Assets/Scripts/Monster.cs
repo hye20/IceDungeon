@@ -23,8 +23,9 @@ public class Monster : MonoBehaviour
         {
             is_dead = true;
         }
+        else is_dead = false;
     }
-    public void Action()
+    public void Action()//argument = akt, def, counter
     {
         //akt, def, counter
     }

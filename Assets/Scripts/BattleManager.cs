@@ -22,7 +22,6 @@ public class BattleManager : MonoBehaviour
         SetMonsters();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.instance.player.HP > 0 && !Check_Monsters_Dead())
@@ -125,6 +124,6 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("But, monster's attack is missed");
         }
-        GameManager.instance.player.HP -= 25;// -> monster.atk
+        else GameManager.instance.player.HP -= 25;// -> monster.atk
     }
 }
