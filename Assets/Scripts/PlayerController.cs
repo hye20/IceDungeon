@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-<<<<<<< HEAD
-    bool isStart = true;
+    [SerializeField]bool isStart = true;
 
-=======
     /*************Quest Mode***************/
->>>>>>> parent of 419da07 (Revert "Dungeon battle system")
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
@@ -51,9 +49,9 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
-        ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
-        penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
+        //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
+        //penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -63,15 +61,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 419da07 (Revert "Dungeon battle system")
     void Update()
     {
-        Starter();
+        //Starter();
         PlayerTurn();
-        ItemObtained();
+        //ItemObtained();
     }
 
     void Starter()
@@ -112,13 +107,8 @@ public class PlayerController : MonoBehaviour
         {
             ArrowCanvas.gameObject.SetActive(false);
         }
-
-<<<<<<< HEAD
         Move();
-=======
-        PramMove();
         PramMagic();
->>>>>>> parent of 419da07 (Revert "Dungeon battle system")
 
         if (DiceCount == 0)
         {
@@ -213,22 +203,22 @@ public class PlayerController : MonoBehaviour
 
     public void BattleMode()
     {
-        _animator.SetTrigger("RU_Trigger");
+        animator.SetTrigger("RU_Trigger");
         IsPlayerTurn = false;
     }
     public void QuestMode()
     {
-        _animator.ResetTrigger("RU_Trigger");
+        animator.ResetTrigger("RU_Trigger");
         IsPlayerTurn = true;
     }
     public void PramMagic()
     {
-        if (animMagic) _animator.SetBool("M_Attack_RU", true);
+        if (animMagic) animator.SetBool("M_Attack_RU", true);
 
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
-            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            _animator.SetBool("M_Attack_RU", false);
+            animator.SetBool("M_Attack_RU", false);
             animMagic = false;
         }
         //_animator.SetBool("M_Attack_LD", false);*/

@@ -2270,9 +2270,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: BattleMode
+      - m_Target: {fileID: 361641042}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: Magicbtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2437,6 +2437,6 @@ SceneRoots:
   - {fileID: 928141867}
   - {fileID: 347733716}
   - {fileID: 625680765}
-  - {fileID: 361641043}
   - {fileID: 193773422}
   - {fileID: 272667779}
+  - {fileID: 361641043}
