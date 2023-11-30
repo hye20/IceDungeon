@@ -18725,7 +18725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4c957af94aefa49a11b87a76e82ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1914490991622604421, guid: 617b1c10e9a06924d9fcd483f09ad8f7, type: 3}
+  player: {fileID: 4282134009817620013, guid: 75c41da13e1f96f4e9b654e55ce3768e, type: 3}
   mode: 0
   battleBtn: {fileID: 1663377123}
 --- !u!4 &674812212

@@ -267,9 +267,7 @@ MonoBehaviour:
   - {fileID: 650761609}
   - {fileID: 851031002}
   - {fileID: 1580426929}
-  monsters:
-  - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
-  - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
+  monsterData:
   - {fileID: -2744201418064005700, guid: 2d8936d9e8b4ef647871eed21a698256, type: 3}
   btn: {fileID: 882547826}
   playerTurn: 0
@@ -405,7 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650761609}
   m_Layer: 0
-  m_Name: Monster spawn point
+  m_Name: Monster spawn point1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1580,7 +1578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851031002}
   m_Layer: 0
-  m_Name: Monster spawn point (1)
+  m_Name: Monster spawn point2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2330,7 +2328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1580426929}
   m_Layer: 0
-  m_Name: Monster spawn point (2)
+  m_Name: Monster spawn point3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

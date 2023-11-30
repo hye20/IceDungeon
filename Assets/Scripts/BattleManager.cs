@@ -6,7 +6,8 @@ public class BattleManager : MonoBehaviour
     
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Transform[] monterSpawnPoint;
-    public Monster[] monsters;
+    public Monster[] monsterData;
+    [SerializeField]private Monster[] monsters;
     public Button btn;
     public bool playerTurn = true;
     public bool enemyAlive = true;
@@ -31,8 +32,8 @@ public class BattleManager : MonoBehaviour
         }
         else if (GameManager.instance.player.HP <= 0 || Check_Monsters_Dead())
         {
-            Debug.Log(GameManager.instance.player.HP);
-            Debug.Log(Check_Monsters_Dead());
+            Debug.Log($"player HP : { GameManager.instance.player.HP}");
+            Debug.Log($"Monsters terminated : {Check_Monsters_Dead()}");
             Debug.Log("Battle phase End");
             GameManager.instance.QuestPhase();
             GameManager.instance.player.controller.QuestMode();
@@ -91,10 +92,11 @@ public class BattleManager : MonoBehaviour
 
     private void SetMonsters()
     {
-        int rand = Random.Range(1, 3);//1~3마리
-        for (int i = 0; i <= rand; i++)
+        int rand = Random.Range(1, 4);//1~3마리
+        monsters = new Monster[rand];
+        for (int i = 0; i < rand; i++)
         {
-            monsters[i] = Instantiate(monsters[i]);
+            monsters[i] = Instantiate(monsterData[0]);
             monsters[i].transform.position = monterSpawnPoint[i].position;
             Debug.Log(monsters[i].HP);
         }

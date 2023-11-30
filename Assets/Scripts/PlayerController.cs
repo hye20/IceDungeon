@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
+
+    public ItemManager ItemManager;
+    public SpriteRenderer ItemSpriteRenderer;
+    PenguinStarter penguinStarter;
+
     public Canvas ArrowCanvas;
 
     private Vector3 _luDirection;
@@ -35,10 +40,6 @@ public class PlayerController : MonoBehaviour
     public bool animAtk;
     public bool animMagic;
     public bool animGuard;
-
-    public ItemManager ItemManager;
-    public SpriteRenderer ItemSpriteRenderer;
-    PenguinStarter penguinStarter;
 
     void Awake()
     {

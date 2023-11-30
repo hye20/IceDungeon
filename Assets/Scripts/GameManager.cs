@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player player;
+    public Vector3 playerSpawnPoint;
     enum Mode { QuestMode, BattleMode }//player.controller.NowMode
     [SerializeField]private Mode mode;
 
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player = Instantiate(player);
+        playerSpawnPoint = new Vector3(0, 0.25f, 0);
+        player.transform.position = playerSpawnPoint; 
         battleBtn.onClick.AddListener(BattlePhase);
         DontDestroyOnLoad(this.gameObject);
     }
@@ -43,14 +46,14 @@ public class GameManager : MonoBehaviour
     {
         mode = Mode.BattleMode;
         player.controller.BattleMode();
-        player.playerSpawnPoint.position = player.transform.position;
+        playerSpawnPoint = player.transform.position; 
         SceneManager.LoadScene("BattleScene");
     }
     public void QuestPhase()
     {
         mode = Mode.QuestMode;
         player.controller.QuestMode();
-        player.transform.position = player.playerSpawnPoint.position;
+        player.transform.position = playerSpawnPoint;
         SceneManager.LoadScene("TEST_PJP");
     }
 }
