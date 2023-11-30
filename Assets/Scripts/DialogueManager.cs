@@ -30,14 +30,15 @@ public class DialogueManager : MonoBehaviour
         interactionController = FindObjectOfType<InteractionController>();    
     }
 
-    void Update()
+    private void Update()
     {
-        TextCp();
+        
+        TextCp();  
     }
 
     void TextCp()
     {
-        if (isDialogue)
+        if (isDialogue && interactionController.npcInter ==true)
         {
             if (isNext)
             {
@@ -81,25 +82,49 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         Debug.Log("EndDialogue");
+        SettinUI(false);
         isDialogue = false;
         contextCount = 0;
         lineCount = 0;
         dialogues = null;
         interactionController.SettingUI(false);
-        SettinUI(false);
     }
 
+    // 글자가 들어가게 함
+    // 글자의 색상도 들어감
     IEnumerator TypeWriter()
     {
         SettinUI(true);
 
         string t_ReplaceText = dialogues[lineCount].contexts[contextCount];
         t_ReplaceText = t_ReplaceText.Replace("`", ",");
+        // 엔터 기능 구현
+        t_ReplaceText = t_ReplaceText.Replace("\\n", "\n");
 
         txt_Name.text = dialogues[lineCount].name;
+        // 글자색 인식
+        bool t_white = false, t_yellow = false, t_cyan = false;
+        // 특수 문자 사용 확인
+        bool t_ignre = false;
         for (int i = 0; i < t_ReplaceText.Length; i++)
         {
-            txt_Dialogue.text += t_ReplaceText[i];
+            switch (t_ReplaceText[i])
+            {
+                case 'ⓦ': t_white = true; t_yellow = false; t_cyan = false; t_ignre = true; break;
+                case 'ⓨ': t_white = false; t_yellow = true; t_cyan = false; t_ignre = true; break;
+                case 'ⓒ': t_white = false; t_yellow = false; t_cyan = true; t_ignre = true; break;
+            }
+            //색상 변화
+            string t_letter = t_ReplaceText[i].ToString();
+
+            if (!t_ignre)
+            {
+                if (t_white) { t_letter = "<color=#ffffff>" + t_letter + "</color>"; }
+                else if (t_yellow) { t_letter = "<color=#ffff00>" + t_letter + "</color>"; }
+                else if (t_cyan) { t_letter = "<color=#45dee3>" + t_letter + "</color>"; }
+                txt_Dialogue.text += t_letter; 
+            }
+            t_ignre = false;
             yield return new WaitForSeconds(textDelay);
         }        
         isNext = true;
@@ -109,5 +134,22 @@ public class DialogueManager : MonoBehaviour
     void SettinUI(bool p_flag)
     {
         go_npcTalk.SetActive(p_flag);
+
+        if (p_flag)
+        {
+            if (dialogues[lineCount].name == "")
+            {
+                interactionController.go_npcName.SetActive(false);
+            }
+            else
+            {
+                interactionController.go_npcName.SetActive(true);
+                txt_Name.text = "";
+            }
+        }
+        else
+        {
+            go_npcTalk.SetActive(false);
+        }
     }
 }

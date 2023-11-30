@@ -13,14 +13,14 @@ public class InteractionController : MonoBehaviour
 
 
     [Header("이름 창")]
-    [SerializeField] GameObject go_npcName;
+    public GameObject go_npcName;
     [SerializeField] Text txt_TargetName;
 
     string npcChildName = "Quset";
     bool isContact = false;
 
     [Header("Npc 접속 가능 확인")]
-    public bool npcInter;
+    public bool npcInter=false;
     public static bool isCollide = false;
 
     // Npc 인식
@@ -41,7 +41,7 @@ public class InteractionController : MonoBehaviour
             Contact();
         }
         else
-        { 
+        {
             // 인식 못 하면
             NotContact();
         }
@@ -56,7 +56,7 @@ public class InteractionController : MonoBehaviour
             {
                 isContact = true;
                 InteractionEvent tempEvent = trigObject.transform.GetComponent<InteractionEvent>();
-                if(tempEvent != null)
+                if (tempEvent != null)
                 {
                     dialogueM.ShowDialogue(tempEvent.GetDialogues());
 
@@ -65,7 +65,7 @@ public class InteractionController : MonoBehaviour
                 {
                     Debug.Log("null");
                 }
-            } 
+            }
         }
         else
         {
@@ -87,14 +87,16 @@ public class InteractionController : MonoBehaviour
         go_npcName.SetActive(p_flag);
     }
 
-    
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         // interaction을 tag로 소지한 객체의 충돌시 작동
         if (collision.gameObject.tag == "Interaction")
         {
-            CheckObject();
-
+            if (Input.GetKeyDown(KeyCode.Space)) 
+            {
+                CheckObject(); 
+            }
             if (trigObject == null)
             {
                 npcInter = true;
