@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+<<<<<<< HEAD
     bool isStart = true;
 
+=======
+    /*************Quest Mode***************/
+>>>>>>> parent of 419da07 (Revert "Dungeon battle system")
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
@@ -29,7 +30,13 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public int DiceCount;
+    public int DiceCount;//Çàµ¿·Â
+
+
+    /*************Battle Mode****************/
+    public bool animAtk;
+    public bool animMagic;
+    public bool animGuard;
 
     public ItemManager ItemManager;
     public SpriteRenderer ItemSpriteRenderer;
@@ -48,13 +55,18 @@ public class PlayerController : MonoBehaviour
         ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
-        for(int i = 0; i < ArrowButtons.Length; i++)
+        for (int i = 0; i < ArrowButtons.Length; i++)
         {
             int number = i;
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
+
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 419da07 (Revert "Dungeon battle system")
     void Update()
     {
         Starter();
@@ -92,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     void PlayerTurn()
     {
-        if(IsPlayerTurn)
+        if (IsPlayerTurn)
         {
             ArrowCanvas.gameObject.SetActive(true);
         }
@@ -101,9 +113,14 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
 
+<<<<<<< HEAD
         Move();
+=======
+        PramMove();
+        PramMagic();
+>>>>>>> parent of 419da07 (Revert "Dungeon battle system")
 
-        if(DiceCount == 0)
+        if (DiceCount == 0)
         {
             IsPlayerTurn = false;
         }
@@ -191,15 +208,38 @@ public class PlayerController : MonoBehaviour
         {
             ArrowCanvas.gameObject.SetActive(false);
         }
-    }    
+    }
 
+
+    public void BattleMode()
+    {
+        _animator.SetTrigger("RU_Trigger");
+        IsPlayerTurn = false;
+    }
+    public void QuestMode()
+    {
+        _animator.ResetTrigger("RU_Trigger");
+        IsPlayerTurn = true;
+    }
+    public void PramMagic()
+    {
+        if (animMagic) _animator.SetBool("M_Attack_RU", true);
+
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
+            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            _animator.SetBool("M_Attack_RU", false);
+            animMagic = false;
+        }
+        //_animator.SetBool("M_Attack_LD", false);*/
+    }
     void OnButtonClicked(int number)
     {
-        switch(number)
+        switch (number)
         {
             case 0:
                 _endPos = transform.position + _luDirection;
-                LUButtonPressed = true;                
+                LUButtonPressed = true;
                 break;
             case 1:
                 _endPos = transform.position + _ruDirection;
@@ -212,7 +252,7 @@ public class PlayerController : MonoBehaviour
             case 3:
                 _endPos = transform.position + _rdDirection;
                 RDButtonPressed = true;
-                break;               
+                break;
         }
     }
 
@@ -248,7 +288,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 0.2f;
@@ -261,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "BlurObject")
+        if (collision.gameObject.tag == "BlurObject")
         {
             Color _objectColor = collision.gameObject.GetComponentInParent<SpriteRenderer>().color;
             _objectColor.a = 1.0f;
