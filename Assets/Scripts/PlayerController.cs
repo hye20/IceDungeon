@@ -58,37 +58,6 @@ public class PlayerController : MonoBehaviour
         PlayerTurn();
     }
 
-    #region PlayerAnimÅ×½ºÆ®
-    public void Attack()
-    {
-        _animator.SetTrigger("Attack");
-    }
-
-    public void Mattack()
-    {
-        _animator.SetTrigger("MAttack");
-    }
-
-    public void Guard()
-    {
-        _animator.SetTrigger("Guard");
-    }
-
-    public void Battle()
-    {
-        _animator.SetTrigger("Battle");
-    }
-
-    public void Faill()
-    {
-        _animator.SetTrigger("Falling");
-    }
-
-    public void Win()
-    {
-        _animator.SetTrigger("Win");
-    }
-    #endregion
     public void RandomDice()
     {
         if (DiceCount != 0 ||

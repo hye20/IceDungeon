@@ -19,6 +19,7 @@ public class DialogueParser : MonoBehaviour
             string[] row = data[i].Split(new char[] { ',' }); 
             
             Dialogue dialogue = new Dialogue(); 
+            // 대화하는 사람 이름 추가해주기
             dialogue.name = row[1];
 
             List<string> contextList = new List<string>();

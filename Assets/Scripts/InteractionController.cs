@@ -33,6 +33,14 @@ public class InteractionController : MonoBehaviour
         dialogueM = FindObjectOfType<DialogueManager>();
     }
 
+    private void Update()
+    {
+        if (true)
+        {
+            CheckObject(); 
+        }
+    }
+
 
     void CheckObject()
     {
@@ -41,8 +49,7 @@ public class InteractionController : MonoBehaviour
             Contact();
         }
         else
-        {
-            // 인식 못 하면
+        { // 인식 못 하면
             NotContact();
         }
     }
@@ -59,7 +66,6 @@ public class InteractionController : MonoBehaviour
                 if (tempEvent != null)
                 {
                     dialogueM.ShowDialogue(tempEvent.GetDialogues());
-
                 }
                 else
                 {
@@ -93,10 +99,6 @@ public class InteractionController : MonoBehaviour
         // interaction을 tag로 소지한 객체의 충돌시 작동
         if (collision.gameObject.tag == "Interaction")
         {
-            if (Input.GetKeyDown(KeyCode.Space)) 
-            {
-                CheckObject(); 
-            }
             if (trigObject == null)
             {
                 npcInter = true;
@@ -116,7 +118,7 @@ public class InteractionController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Interaction")
         {
-            if (trigObject != null)
+            if (trigObject != null && npcInter == true)
             {
                 npcInter = false;
                 trigObject = null;

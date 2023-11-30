@@ -27,12 +27,11 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        interactionController = FindObjectOfType<InteractionController>();    
+        interactionController = FindObjectOfType<InteractionController>(); 
     }
 
     private void Update()
     {
-        
         TextCp();  
     }
 
