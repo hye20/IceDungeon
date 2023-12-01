@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 4850926844093844264}
   - component: {fileID: 2408318758605439634}
   - component: {fileID: 8982793600894306329}
+  - component: {fileID: 1914490991622604421}
   m_Layer: 0
   m_Name: Mao
   m_TagString: Mao
@@ -764,6 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8491f3cec60132f41ad0f371d25495c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStart: 1
   IsPlayerTurn: 1
   ArrowCanvas: {fileID: 8376143026380630264}
   animator: {fileID: 4475679228995686000}
@@ -776,7 +778,10 @@ MonoBehaviour:
   RUButtonPressed: 0
   LDButtonPressed: 0
   RDButtonPressed: 0
-  DiceCount: 10000
+  DiceCount: 100
+  animAtk: 0
+  animMagic: 0
+  animGuard: 0
   ItemManager: {fileID: 0}
   ItemSpriteRenderer: {fileID: 5116415999133260345}
 --- !u!50 &2408318758605439634
@@ -851,6 +856,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &1914490991622604421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5476404836357401801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4475b49f99e9664b8099e3db7b48b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
+  HP: 100
+  MP: 200
+  atk: 0
+  def: 0
+  SP: 0
+  dice: 6
+  AP: 0
 --- !u!1 &6413478117355623883
 GameObject:
   m_ObjectHideFlags: 0
