@@ -344,7 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: {fileID: 6616974871259932439}
   ItemButton: {fileID: 6197703759285238768}
-  itemManager: {fileID: 0}
+  ItemManager: {fileID: 0}
+  ItemDatabase: {fileID: 11400000, guid: 490037ec0fc013045ab207c089366a58, type: 2}
 --- !u!1 &7209832710208312107
 GameObject:
   m_ObjectHideFlags: 0
