@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
-        //penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
+        penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
         gManager = GetComponent<GManager>();
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //Starter();
+        Starter();
         PlayerTurn();
         //ItemObtained();
     }
