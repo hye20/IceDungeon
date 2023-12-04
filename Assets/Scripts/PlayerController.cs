@@ -1,11 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]bool isStart = true;
-
+    GManager gManager;
     /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
 
@@ -28,7 +33,14 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public int DiceCount;//�ൿ��
+
+    [Header("Dice")]
+    public Button diceButton;
+    public Text diceText;
+
+    // ´ÙÀÌ½º¿¡¼­ ³ª¿Â ¼ýÀÚ
+    public int maxDiceCount;
+    public int DiceCount;//Çàµ¿·Â
 
 
     /*************Battle Mode****************/
@@ -52,6 +64,8 @@ public class PlayerController : MonoBehaviour
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         //penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
+
+        gManager = GetComponent<GManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -95,6 +109,22 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void RandomDice()
+    {
+        if (DiceCount != 0 ||
+            ArrowCanvas.gameObject.activeSelf == true ||
+            IsPlayerTurn == true)
+        {
+            return;
+        }
+
+        IsPlayerTurn = true;
+        DiceCount = Random.Range(1, maxDiceCount + 1);
+        diceText.text = DiceCount.ToString();
+
+        PlayerTurn();
     }
 
     void PlayerTurn()
@@ -200,7 +230,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public void BattleMode()
     {
         animator.SetTrigger("RU_Trigger");
@@ -214,7 +243,6 @@ public class PlayerController : MonoBehaviour
     public void PramMagic()
     {
         if (animMagic) animator.SetBool("M_Attack_RU", true);
-
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
