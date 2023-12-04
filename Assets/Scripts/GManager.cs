@@ -56,6 +56,7 @@ public class GManager : MonoBehaviour
             talkText.text = talkData.Split(':')[0];
             Debug.Log(talkData.Split(':')[0]);
             talkImg.sprite = talkManager.GetPortait(id,int.Parse(talkData.Split(':')[1]));
+            talkImg.color = new Color(1,1,1,1);
             Debug.Log(talkData.Split(':')[1]);
 
         }
@@ -63,6 +64,7 @@ public class GManager : MonoBehaviour
         {
             talkName.text = interactionType.GetName();
             talkText.text = talkData;
+            talkImg.color = new Color(1, 1, 1, 0);
         }
 
         isAction = true;
