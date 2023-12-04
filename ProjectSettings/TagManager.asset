@@ -9,6 +9,8 @@ TagManager:
   - Pram
   - Mao
   - Interaction
+  - Item
+  - Penguin
   layers:
   - Default
   - TransparentFX
