@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    GManager gManager;
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
         _rdDirection = new Vector3(0.5f, -0.25f, 0);
 
         _animator = GetComponent<Animator>();
+
+        gManager = GetComponent<GManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -85,14 +88,13 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
 
-        PramMove();
+         PramMove(); 
 
         if (DiceCount == 0)
         {
             IsPlayerTurn = false;
         }
     }
-
 
     void PramMove()
     {

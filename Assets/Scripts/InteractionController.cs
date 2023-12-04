@@ -8,111 +8,73 @@ using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
 {
-    PlayerController playerController;
-    DialogueManager dialogueM;
-
-
+    //DialogueManager dialogueManager;
+    public GManager gManager;
+    
     [Header("이름 창")]
-    public GameObject go_npcName;
+    public GameObject go_npcTalk;
+    public GameObject go_npcTalkImg;
     [SerializeField] Text txt_TargetName;
+    [SerializeField] Text txt_TargetTalk;
 
     string npcChildName = "Quset";
-    bool isContact = false;
+
 
     [Header("Npc 접속 가능 확인")]
     public bool npcInter=false;
-    public static bool isCollide = false;
 
     // Npc 인식
     public GameObject trigObject;
     // Npc 상호 작용 가능한지 확인 하는 것
     GameObject ChildQ;
 
-    void Start()
-    {
-        dialogueM = FindObjectOfType<DialogueManager>();
-    }
-
-    private void Update()
-    {
-        if (true)
-        {
-            CheckObject(); 
-        }
-    }
-
-
-    void CheckObject()
-    {
-        if (trigObject != null)
-        { // 인식 하면
-            Contact();
-        }
-        else
-        { // 인식 못 하면
-            NotContact();
-        }
-    }
-
-    private void Contact()
-    {
-        if (trigObject.transform.CompareTag("Interaction"))
-        {
-            txt_TargetName.text = trigObject.transform.GetComponent<InteractionType>().GetName();
-            if (!isContact)
-            {
-                isContact = true;
-                InteractionEvent tempEvent = trigObject.transform.GetComponent<InteractionEvent>();
-                if (tempEvent != null)
-                {
-                    dialogueM.ShowDialogue(tempEvent.GetDialogues());
-                }
-                else
-                {
-                    Debug.Log("null");
-                }
-            }
-        }
-        else
-        {
-            NotContact();
-        }
-    }
-
-    private void NotContact()
-    {
-        if (isContact)
-        {
-            isContact = false;
-        }
-    }
-
-
     public void SettingUI(bool p_flag)
     {
-        go_npcName.SetActive(p_flag);
+        go_npcTalk.SetActive(p_flag);
+        go_npcTalkImg.SetActive(p_flag);
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)&& npcInter == true)
+        {
+            SettingUI(npcInter);
+            gManager.Action(trigObject);
+        }
+    }
+    
 
+
+
+    /// <summary>
+    /// interaction을 tag로 소지한 객체의 collision 충돌시 작동
+    /// trigObject 는 충돌한 Npc를 gameObject로 인식을 함
+    /// ChildQ는 gameObject로 이미지 값을 가져와서 작업
+    /// </summary>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // interaction을 tag로 소지한 객체의 충돌시 작동
         if (collision.gameObject.tag == "Interaction")
         {
             if (trigObject == null)
             {
                 npcInter = true;
+                Transform toq = collision.gameObject.transform.parent.parent;
 
-                Transform parentObject = collision.gameObject.transform.parent.parent;
-                if (parentObject != null)
+                if (toq!=null)  
                 {
-                    trigObject = parentObject.gameObject;
-                    ChildQ = trigObject.transform.Find(npcChildName).gameObject;
+                    trigObject = toq.gameObject;
+
+                    ChildQ = toq.Find(npcChildName).gameObject;
                     ChildQ.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("not toq:" + toq);
                 }
             }
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {

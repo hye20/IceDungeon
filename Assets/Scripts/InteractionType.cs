@@ -5,13 +5,19 @@ using UnityEngine;
 public class InteractionType : MonoBehaviour
 {
     public bool isObject;
-    public bool Npc;
+    public bool isNpc;
     public bool Item;
 
-    [SerializeField] string interactionName;
+    public string NpcName;
+    public int id;
 
     public string GetName()
     {
-        return interactionName;
+        return NpcName;
+    }
+
+    public int GetIndex()
+    {
+        return id;
     }
 }
