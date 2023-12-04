@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-using System.Collections;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour

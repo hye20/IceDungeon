@@ -7,6 +7,8 @@ public class GManager : MonoBehaviour
 {
     InteractionType interactionType;
     public TalkManager talkManager;
+    public QuestManager questManager;
+
     // 대화창
     [Header ("TalkDateWrite")]
     public GameObject talkPanel;
@@ -34,16 +36,20 @@ public class GManager : MonoBehaviour
     
     void Talk(int id, bool isNpc)
     {
-        string talkData = talkManager.GetTalk(id, talkIndex);
+        int questTalkIndex = questManager.GetQuestTalkIndex(id);
+        string talkData = talkManager.GetTalk(id +questTalkIndex, talkIndex);
 
         // Talk 데이터가 값을 가지고 있지 않으면
+        // Talk 의 종료
         if (talkData == null)
         {
             isAction = false;
             talkIndex = 0;
             Time.timeScale = 1;
+            Debug.Log(questManager.CheckQuest(id));
             return;
         }
+
         if (Time.timeScale != 0)
         {
             Time.timeScale = 0; 
