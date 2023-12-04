@@ -10,6 +10,7 @@ TagManager:
   - Mao
   - Item
   - Penguin
+  - IceCracked
   layers:
   - Default
   - TransparentFX
