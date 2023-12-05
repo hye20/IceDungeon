@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: ae5f0987cfd67e84183f4b46161db6d6
+  - enabled: 1
+    path: Assets/Scenes/DKTest_MiniGame1.unity
+    guid: 1f2170f6b9625e84eaef1996196c3d49
   m_configObjects: {}

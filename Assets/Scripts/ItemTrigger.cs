@@ -10,12 +10,14 @@ public class ItemTrigger : MonoBehaviour
 
     public Button ItemButton;
 
-    public ItemManager ItemManager;
+    [SerializeField]
+    ItemManager itemManager;
     public ItemDatabase ItemDatabase;
 
     void Start()
     {
         ItemButton.interactable = false;
+        itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -40,8 +42,8 @@ public class ItemTrigger : MonoBehaviour
 
     public void ObtainItem()
     {
-        ItemManager.obtainItem = true;        
-        ItemManager.Items.Add(ItemDatabase);
+        itemManager.obtainItem = true;
+        itemManager.Items.Add(ItemDatabase);
         Destroy(gameObject);
     }
 }

@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
+    public Canvas StatusCanvas;
+    //public Canvas UICanvas;
+
     public int DiceCount;//Çàµ¿·Â
 
 
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public ItemManager ItemManager;
     public SpriteRenderer ItemSpriteRenderer;
     PenguinStarter penguinStarter;
+    DiceManager diceManager;
 
     void Awake()
     {
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
+        diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -91,7 +96,10 @@ public class PlayerController : MonoBehaviour
                     Destroy(startCamera);
                     isStart = false;
 
-                    penguinStarter.penguinReturn = false;                    
+                    penguinStarter.penguinReturn = false;
+
+                    StatusCanvas.gameObject.SetActive(true);
+                    //UICanvas.gameObject.SetActive(true);
                 }
             }
         }
@@ -133,6 +141,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
+                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -151,6 +160,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
+                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -169,6 +179,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
+                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -187,6 +198,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
+                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
