@@ -22,12 +22,11 @@ public class SceneTester : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene("DKTest_MiniGame1");
-        }
+            SceneManager.LoadScene("Minigame1");
+            player.transform.position = new Vector3(1, -0.25f, 0);
 
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SceneManager.LoadScene("Main");
-        }
+            player.GetComponent<PlayerController>().IsPlayerTurn = true;
+            player.GetComponent<PlayerController>().DiceCount = 10000;
+        } 
     }
 }

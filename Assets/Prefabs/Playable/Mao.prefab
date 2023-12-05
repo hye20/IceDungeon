@@ -855,6 +855,7 @@ MonoBehaviour:
   LDButtonPressed: 0
   RDButtonPressed: 0
   StatusCanvas: {fileID: 7797289479497324220}
+  UICanvas: {fileID: 0}
   DiceCount: 100
   animAtk: 0
   animMagic: 0
@@ -931,7 +932,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.4}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &1914490991622604421
 MonoBehaviour:
@@ -1737,11 +1738,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1890445269537076105, guid: ae1bd9bea1fb46a4fb625c2c42ed3414, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2540562443066737806, guid: ae1bd9bea1fb46a4fb625c2c42ed3414, type: 3}
       propertyPath: ShapeModule.type
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540562443066737806, guid: ae1bd9bea1fb46a4fb625c2c42ed3414, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2540562443066737806, guid: ae1bd9bea1fb46a4fb625c2c42ed3414, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -1824,6 +1829,10 @@ PrefabInstance:
     - target: {fileID: 3439096777849915660, guid: 95dc4b8698b7ca7428e52b14b522c6ef, type: 3}
       propertyPath: m_Name
       value: Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439096777849915660, guid: 95dc4b8698b7ca7428e52b14b522c6ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6210814983719499710, guid: 95dc4b8698b7ca7428e52b14b522c6ef, type: 3}
       propertyPath: m_SortingOrder
