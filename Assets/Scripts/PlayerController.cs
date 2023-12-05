@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public bool RDButtonPressed = false;
 
     public Canvas StatusCanvas;
-    //public Canvas UICanvas;
+    public Canvas UICanvas;
 
     public int DiceCount;//Çàµ¿·Â
 
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                     penguinStarter.penguinReturn = false;
 
                     StatusCanvas.gameObject.SetActive(true);
-                    //UICanvas.gameObject.SetActive(true);
+                    UICanvas.gameObject.SetActive(true);
                 }
             }
         }

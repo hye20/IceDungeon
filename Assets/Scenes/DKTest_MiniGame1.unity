@@ -21328,63 +21328,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2980522848801879324, guid: e65445db965a0c440b7af1529728e700, type: 3}
   m_PrefabInstance: {fileID: 2137051894}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6200101691686030259
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4126353102060693706, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_Name
-      value: Orange_Penguin_MiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4454621999248869377, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a9c2e28e1d8c48e4ebe086ccef8ee52a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -21396,4 +21339,3 @@ SceneRoots:
   - {fileID: 2039704156}
   - {fileID: 1762237153}
   - {fileID: 1262996015}
-  - {fileID: 6200101691686030259}

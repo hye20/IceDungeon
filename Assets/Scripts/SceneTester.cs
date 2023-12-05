@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneTester : MonoBehaviour
 {
-    const string minigame1 = "DKTest_MiniGame1";
     GameObject player;
 
     void Start()
@@ -23,8 +22,12 @@ public class SceneTester : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene(minigame1);
-            player.transform.position = new Vector3(1, -0.25f, 0);
+            SceneManager.LoadScene("DKTest_MiniGame1");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Main");
         }
     }
 }
