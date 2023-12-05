@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Diagnostics.Contracts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,9 +38,11 @@ public class PlayerController : MonoBehaviour
 
 
     /*************Battle Mode****************/
-    public bool animAtk;
-    public bool animMagic;
-    public bool animGuard;
+    public bool is_Attack;
+    public bool is_Magic;
+    public bool is_Guard;
+    public bool is_Victory;
+    public Coroutine currentCoroutine;
 
     void Awake()
     {
@@ -109,7 +112,9 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
         Move();
-        PramMagic();
+        AttackAnim();
+        MagicAnim();
+        VictoryAnim();
 
         if (DiceCount == 0)
         {
@@ -204,7 +209,7 @@ public class PlayerController : MonoBehaviour
 
     public void BattleMode()
     {
-        animator.SetTrigger("RU_Trigger");
+        animator.Play("Idle_RU",-1,0);
         IsPlayerTurn = false;
     }
     public void QuestMode()
@@ -212,18 +217,40 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("RU_Trigger");
         IsPlayerTurn = true;
     }
-    public void PramMagic()
+    public void AttackAnim()
     {
-        if (animMagic) animator.SetBool("M_Attack_RU", true);
+        if (is_Attack) animator.SetBool("Attack", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_RU") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Attack", false);
+            is_Attack = false;
+        }
+    }
+    public void MagicAnim()
+    {
+        if (is_Magic) animator.SetBool("Magic", true);
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            animator.SetBool("M_Attack_RU", false);
-            animMagic = false;
+            animator.SetBool("Magic", false);
+            is_Magic = false;
         }
-        //_animator.SetBool("M_Attack_LD", false);*/
     }
+    public void VictoryAnim()
+    {
+        if (is_Victory) animator.SetBool("Victory", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Victory", false);
+            is_Victory = false;
+        }
+    }
+
     void OnButtonClicked(int number)
     {
         switch (number)

@@ -3,14 +3,19 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
-    
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Transform[] monterSpawnPoint;
-    public Monster[] monsterData;
-    [SerializeField]private Monster[] monsters;
-    public Button btn;
+    [SerializeField] private Monster[] monsterData;
+    [SerializeField] private Monster[] monsters;//monsters instance
     public bool playerTurn = true;
-    public bool enemyAlive = true;
+    private bool monsters_is_dead = false;
+    private bool battle_end = false;
+
+    [SerializeField] public GameObject btnList;
+    [SerializeField] public Button attackBtn;
+    [SerializeField] public Button magicBtn;
+    [SerializeField] public Button runBtn;
+    [SerializeField] public Button exitBtn;
 
     public float delay;//for test
 
@@ -18,70 +23,108 @@ public class BattleManager : MonoBehaviour
     {
         GameManager.instance.player.transform.position = playerSpawnPoint.position;
         playerTurn = true;
-        btn.onClick.AddListener(Magicbtn);
+        monsters_is_dead = false;
+        battle_end = false;
+        attackBtn.onClick.AddListener(PlayerAtk);
+        magicBtn.onClick.AddListener(PlayerMagic);
+        runBtn.onClick.AddListener(PlayerRun);
         SetMonsters();
+        exitBtn.onClick.AddListener(GameManager.instance.QuestPhase);
+        exitBtn.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (GameManager.instance.player.HP > 0 && !Check_Monsters_Dead())
+        Check_Monsters_Dead();
+        if (GameManager.instance.player.HP > 0 && !monsters_is_dead)
         {
             PlayerAction();
             MonsterAction();
         }
-        else if (GameManager.instance.player.HP <= 0 || Check_Monsters_Dead())
+        else if (GameManager.instance.player.HP <= 0)
         {
-            Debug.Log($"player HP : { GameManager.instance.player.HP}");
-            Debug.Log($"Monsters terminated : {Check_Monsters_Dead()}");
+            Debug.Log($"player HP : {GameManager.instance.player.HP}");
             Debug.Log("Battle phase End");
-            GameManager.instance.QuestPhase();
-            GameManager.instance.player.controller.QuestMode();
+            PrintResult();
+        }
+        else if (monsters_is_dead)
+        {
+            Debug.Log($"Monsters terminated : {monsters_is_dead}");
+            Debug.Log($"player HP : {GameManager.instance.player.HP}");
+            PrintResult();
         }
     }
+
     public void MonsterAction()
     {
-        if (playerTurn == false)
+        int randomAction;
+        if (!playerTurn && !monsters_is_dead)
         {
-            Debug.Log(playerTurn);
-            delay += Time.deltaTime;
-            //random action
-            btn.gameObject.SetActive(false);
-            if (delay > 3.0f)
+            btnList.gameObject.SetActive(false);
+            Debug.Log(monsters.Length);
+            for (int i = 0; i < monsters.Length; i++)
             {
-                MonsterAtk();
-                playerTurn = true;
-                delay = 0f;
+                Debug.Log($"print{i}");
+                randomAction = Random.Range(1, 3);//1~2
+                Debug.Log(randomAction);
+                if (randomAction == 1)
+                {
+                    Debug.Log($"{monsters[i]}atk");
+                }
+                else if (randomAction == 2)
+                {
+                    Debug.Log($"{monsters[i]}skill");
+                }
+                //random action
+                //monster atk
             }
+            ChangeTurn();
         }
     }
     public void PlayerAction()
     {
         if (playerTurn == true)
         {
-            //select action
-            btn.gameObject.SetActive(true);
+            //+select action
+            btnList.gameObject.SetActive(true);
         }
     }
 
     private void PlayerAtk()
     {
-        playerTurn = false;
+        Invoke("ChangeTurn", 3.0f);
+        //play atk anim
+        GameManager.instance.player.controller.is_Attack = true;
         Debug.Log("player's attack");
         for (int i = 0; i < monsters.Length; i++)
         {
-            monsters[i].HP -= GameManager.instance.player.atk;
+            if (!monsters[i].is_dead) monsters[i].HP -= GameManager.instance.player.atk;
         }
     }
-    public void Magicbtn()//일반 공격이랑 호환 가능한지? 변수 조정으로?
+    private void PlayerMagic()
     {
-        GameManager.instance.player.controller.animMagic = true;
-        PlayerAtk();
-        /*
-        if(!player.controller.pramAction)
+        Invoke("ChangeTurn", 3.0f);
+        GameManager.instance.player.controller.is_Magic = true;
+        Debug.Log("player's magic");
+        for (int i = 0; i < monsters.Length; i++)
         {
-            playerTurn = false;
-        }*/
+            if (!monsters[i].is_dead) monsters[i].HP -= GameManager.instance.player.SP;
+        }
     }
+    public void PrintResult()
+    {
+        if (GameManager.instance.player.HP <= 0)
+        {
+            Debug.Log("defeated");
+        }
+        else if (monsters_is_dead && !battle_end)
+        {
+            exitBtn.gameObject.SetActive(true);
+            GameManager.instance.player.controller.is_Victory = true;
+            battle_end = true;
+        }
+    }
+    private void PlayerRun() { }
 
     public void ChangeTurn()
     {
@@ -102,7 +145,6 @@ public class BattleManager : MonoBehaviour
     }
     private bool Check_Monsters_Dead()
     {
-        bool is_dead = false;
         int deadMonsterCnt = 0;
         for (int i = 0; i < monsters.Length; i++)
         {
@@ -113,17 +155,34 @@ public class BattleManager : MonoBehaviour
         }
         if (deadMonsterCnt == monsters.Length)
         {
-            is_dead = true;
+            monsters_is_dead = true;
         }
-        return is_dead;
+        return monsters_is_dead;
     }
-    private void MonsterAtk()
+    private void MonsterAtk(Monster monster)
     {
-        Debug.Log("Monster's attack");
         if (0.1 >= Random.value)
         {
             Debug.Log("But, monster's attack is missed");
         }
-        else GameManager.instance.player.HP -= 25;// -> monster.atk
+        else if(monster.is_dead)
+        {
+            Debug.Log($"Monster-{monster.name} is attacked!");
+            GameManager.instance.player.HP -= monster.atk;// -> monster.atk
+        }
+        monster.Anim("Attack");
+    }
+    private void MonsterSkill(Monster monster)
+    {
+        if (0.1 >= Random.value)
+        {
+            Debug.Log("But, monster's attack is missed");
+        }
+        else
+        {
+            Debug.Log($"Monster-{monster.name} uses special attack!");
+            GameManager.instance.player.HP -= monster.SP;// -> monster.atk
+        }
+        monster.Anim("Skill");
     }
 }

@@ -58,7 +58,8 @@ public class GameManager : MonoBehaviour
     {
         mode = Mode.QuestMode;
         player.controller.QuestMode();
-        player.transform.position = playerSpawnPoint;
         SceneManager.LoadScene("TEST_PJP");
+        //eventController.playchangeScene
+        player.transform.position = playerSpawnPoint;
     }
 }

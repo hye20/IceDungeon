@@ -1061,7 +1061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4475b49f99e9664b8099e3db7b48b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5818171250196724797}
   HP: 100
   MP: 0
   atk: 50
