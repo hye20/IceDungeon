@@ -15,23 +15,10 @@ public class GManager : MonoBehaviour
     public Text talkText;
     public Text talkName;
     public Image talkImg;
-   // bool btnTrue = false;
-    public Text[] btnTxt;
-
 
     public GameObject scanObject;
     public bool isAction = false;
     public int talkIndex;
-
-    void Awake()
-    {
-        
-    }
-
-    private void Start()
-    {
-        Debug.Log(questManager.CheckQuest());
-    }
 
 
     // 이 행동을 실행하면
@@ -50,9 +37,7 @@ public class GManager : MonoBehaviour
     void Talk(int id, bool isNpc)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        Debug.Log(questTalkIndex);
-        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
-        Debug.Log(id + questTalkIndex + talkIndex);
+        string talkData = talkManager.GetTalk(id +questTalkIndex, talkIndex);
 
         // Talk 데이터가 값을 가지고 있지 않으면
         // Talk 의 종료
@@ -61,7 +46,7 @@ public class GManager : MonoBehaviour
             isAction = false;
             talkIndex = 0;
             Time.timeScale = 1;
-            Debug.Log(questManager.CheckQuest());
+            Debug.Log(questManager.CheckQuest(id));
             return;
         }
 
@@ -75,9 +60,11 @@ public class GManager : MonoBehaviour
         {
             talkName.text = interactionType.GetName();
             talkText.text = talkData.Split(':')[0];
-            talkImg.sprite = talkManager.GetPortait(id, int.Parse(talkData.Split(':')[1]));
+            Debug.Log(talkData.Split(':')[0]);
+            talkImg.sprite = talkManager.GetPortait(id,int.Parse(talkData.Split(':')[1]));
+            talkImg.color = new Color(1,1,1,1);
+            Debug.Log(talkData.Split(':')[1]);
 
-            talkImg.color = new Color(1, 1, 1, 1);
         }
         else
         {

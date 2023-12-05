@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
     // ´ÙÀÌ½º¿¡¼­ ³ª¿Â ¼ýÀÚ
     public int maxDiceCount;
-    public int minDiceCount;
     public int DiceCount;//Çàµ¿·Â
 
 
@@ -79,10 +78,6 @@ public class PlayerController : MonoBehaviour
     {
         //Starter();
         PlayerTurn();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RandomDice();
-        }
         //ItemObtained();
     }
 
@@ -124,7 +119,7 @@ public class PlayerController : MonoBehaviour
         }
 
         IsPlayerTurn = true;
-        DiceCount = Random.Range(minDiceCount, maxDiceCount + 1);
+        DiceCount = Random.Range(1, maxDiceCount + 1);
         diceText.text = DiceCount.ToString();
 
         PlayerTurn();
