@@ -21,15 +21,15 @@ public class TalkManager : MonoBehaviour
         // Talk Data
         // Npc Gm: 1000, Angel: 2000
         // Box: 100 , Desk: 200
-        talkData.Add(1000, new string[] {   "안녕? :0", 
+        talkData.Add(1000, new string[] {   "안녕? :0",
                                             "이 곳에 처음 왔구나? :4" ,
                                             "한번 둘러보도록해:1"});
-        talkData.Add(2000, new string[] {   "안녕 하냥? :0", 
+        talkData.Add(2000, new string[] {   "안녕 하냥? :0",
                                             "이 곳에 처음 왔구냐? :4",
                                             "Gm을 찾아 보는 것도 나쁘지 않다냐?:1"});
 
         talkData.Add(100, new string[] { "평범한 나무상자다" });
-        talkData.Add(200, new string[] {"누군가 사용한 흔적이 있는 책상이다"});
+        talkData.Add(200, new string[] { "누군가 사용한 흔적이 있는 책상이다" });
 
         // Quest Talk
         talkData.Add(10 + 1000, new string[] {  "잘둘러 봤어? :0",
@@ -43,9 +43,9 @@ public class TalkManager : MonoBehaviour
 
         talkData.Add(20 + 1000, new string[] {  "아직 말을 걸지 않음 :0",
                                                 "일단 계속 이야기 진행:4"});
-        talkData.Add(20 + 2000, new string[] {  "아직 이야기 진행중:0"});
+        talkData.Add(20 + 2000, new string[] { "아직 이야기 진행중:0" });
 
-        talkData.Add(20 + 3000, new string[] {  "퀘스트 완료:4"});
+        talkData.Add(20 + 3000, new string[] { "퀘스트 완료:4" });
         talkData.Add(21 + 1000, new string[] { "완료 퀘스트 나타내기:0" });
         talkData.Add(21 + 2000, new string[] { "완료 퀘스트 티내기:0" });
 
@@ -77,20 +77,20 @@ public class TalkManager : MonoBehaviour
 
     public string GetTalk(int id, int talkIndex)
     {
-        if (!talkData.ContainsKey(id)) 
+        if (!talkData.ContainsKey(id))
         {
-            if (!talkData.ContainsKey(id - id % 10))
+            if (talkData.ContainsKey(id - id % 10))
             { // 순서에 따라 변경되는 대사가 없을때 -> 기본대사를 가져온다
-                return GetTalk(id-id % 100, talkIndex);
+                return GetTalk(id - id % 10, talkIndex);
             }
             else
             {  // 해당 퀘스트 진행 순서 대사가 없을 때 -> 맨 처음 대사를 가져온다
-                return GetTalk(id - id % 10, talkIndex);
+                return GetTalk(id - id % 100, talkIndex);
             }
         }
 
         if (talkIndex == talkData[id].Length) { return null; }
-        else { return talkData[id][talkIndex]; } 
+        else { return talkData[id][talkIndex]; }
     }
 
     public Sprite GetPortait(int id, int portraitIndex)

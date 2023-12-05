@@ -86,7 +86,7 @@ public class InteractionController : MonoBehaviour
                 trigObject = null;
                 ChildQ.SetActive(false);
                 ChildQ = null;
-                Debug.Log("Npc 立盟 秦力");
+                //Debug.Log("Npc 立盟 秦力");
             }
         }
     }
