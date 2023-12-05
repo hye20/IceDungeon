@@ -34,6 +34,5 @@ public class Monster : MonoBehaviour
     public void Anim(string actionName)//argument = akt, def, counter
     {
         //akt, def, counter
-        animator.Play(actionName);
     }
 }

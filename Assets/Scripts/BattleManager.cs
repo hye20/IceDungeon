@@ -60,25 +60,22 @@ public class BattleManager : MonoBehaviour
         int randomAction;
         if (!playerTurn && !monsters_is_dead)
         {
-            btnList.gameObject.SetActive(false);
-            Debug.Log(monsters.Length);
             for (int i = 0; i < monsters.Length; i++)
             {
-                Debug.Log($"print{i}");
                 randomAction = Random.Range(1, 3);//1~2
-                Debug.Log(randomAction);
                 if (randomAction == 1)
                 {
-                    Debug.Log($"{monsters[i]}atk");
+                    MonsterAtk(monsters[i]);
                 }
                 else if (randomAction == 2)
                 {
-                    Debug.Log($"{monsters[i]}skill");
+                    MonsterSkill(monsters[i]);
                 }
                 //random action
                 //monster atk
             }
             ChangeTurn();
+            btnList.gameObject.SetActive(true);
         }
     }
     public void PlayerAction()
@@ -86,12 +83,13 @@ public class BattleManager : MonoBehaviour
         if (playerTurn == true)
         {
             //+select action
-            btnList.gameObject.SetActive(true);
+            //btnList.gameObject.SetActive(true);
         }
     }
 
     private void PlayerAtk()
     {
+        btnList.gameObject.SetActive(false);
         Invoke("ChangeTurn", 3.0f);
         //play atk anim
         GameManager.instance.player.controller.is_Attack = true;
@@ -103,6 +101,7 @@ public class BattleManager : MonoBehaviour
     }
     private void PlayerMagic()
     {
+        btnList.gameObject.SetActive(false);
         Invoke("ChangeTurn", 3.0f);
         GameManager.instance.player.controller.is_Magic = true;
         Debug.Log("player's magic");
@@ -165,12 +164,11 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("But, monster's attack is missed");
         }
-        else if(monster.is_dead)
+        else
         {
             Debug.Log($"Monster-{monster.name} is attacked!");
             GameManager.instance.player.HP -= monster.atk;// -> monster.atk
         }
-        monster.Anim("Attack");
     }
     private void MonsterSkill(Monster monster)
     {
@@ -183,6 +181,5 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"Monster-{monster.name} uses special attack!");
             GameManager.instance.player.HP -= monster.SP;// -> monster.atk
         }
-        monster.Anim("Skill");
     }
 }
