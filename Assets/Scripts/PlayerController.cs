@@ -119,8 +119,6 @@ public class PlayerController : MonoBehaviour
         }
 
         IsPlayerTurn = true;
-        DiceCount = Random.Range(minDiceCount, maxDiceCount + 1);
-        diceText.text = DiceCount.ToString();
 
         PlayerTurn();
     }
