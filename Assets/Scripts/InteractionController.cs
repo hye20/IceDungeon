@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
 {
-    //DialogueManager dialogueManager;
+    public static InteractionController instance;
     public GManager gManager;
     
     [Header("이름 창")]
@@ -21,7 +21,7 @@ public class InteractionController : MonoBehaviour
 
 
     [Header("Npc 접속 가능 확인")]
-    public bool npcInter=false;
+    public bool npcInter = false;
 
     // Npc 인식
     public GameObject trigObject;
@@ -38,13 +38,16 @@ public class InteractionController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)&& npcInter == true)
         {
-            SettingUI(npcInter);
-            gManager.Action(trigObject);
+            Action();
         }
     }
     
 
-
+    public void Action()
+    {
+        SettingUI(npcInter);
+        gManager.Action(trigObject);
+    }
 
     /// <summary>
     /// interaction을 tag로 소지한 객체의 collision 충돌시 작동
