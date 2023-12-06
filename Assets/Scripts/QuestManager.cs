@@ -121,6 +121,7 @@ public class QuestManager : MonoBehaviour
                 if (questActionIndex == questList[questId].npcId.Length)
                 {
                     ChoiceUISet(true);
+                    InteractionController.instance.Action();
                 }
                 break;
             case 40:
