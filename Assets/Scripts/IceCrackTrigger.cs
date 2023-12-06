@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IceCrackTrigger : MonoBehaviour
 {
     Transform playerPos;
     BoxCollider2D boxCollider;
     bool isTriggered;
+
+    MinigameManager minigameManager;
 
     SpriteRenderer currentSpriteRenderer;
     public Sprite CrackedSprite;
@@ -24,11 +27,16 @@ public class IceCrackTrigger : MonoBehaviour
 
         currentSpriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        if(SceneManager.GetActiveScene().name == "Minigame1")
+        {
+            minigameManager = GameObject.Find("MinigameManager").GetComponent<MinigameManager>();
+        }
     }
     
     void Update()
     {
-        if (playerPos.position - new Vector3(0, 0.25f, 0) == transform.position)
+        if (!isTriggered && playerPos.position - new Vector3(0, 0.25f, 0) == transform.position)
         {
             isTriggered = true;
         }
@@ -38,6 +46,13 @@ public class IceCrackTrigger : MonoBehaviour
             isTriggered = false;
             currentSpriteRenderer.sprite = CrackedSprite;
             boxCollider.enabled = true;
+
+            minigameManager.IceCracked.Add(gameObject);
+
+            if(SceneManager.GetActiveScene().name == "Minigame1")
+            {
+                minigameManager.IceCount++;
+            }
         }
     }
 }
