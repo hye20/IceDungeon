@@ -27,7 +27,7 @@ public class ItemTrigger : MonoBehaviour
             ItemName.GetComponent<TextMeshPro>().color = new Vector4(1, 1, 1, 1);
             ItemButton.interactable = true;
             ItemButton.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
-        }
+        }        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

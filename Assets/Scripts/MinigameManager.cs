@@ -5,10 +5,15 @@ using UnityEngine;
 public class MinigameManager : MonoBehaviour
 {
     GameObject player;
+    bool restartButtonPressed;
+
+    public Animator FaderAnimator;
+
+    public GameObject CrackedIcePrefab;
 
     public Transform Stage1RestartPos;
     public Transform Stage2RestartPos;
-    //public Transform Stage3RestartPos;
+    public Transform Stage3RestartPos;
 
     public int IceCount;
 
@@ -24,14 +29,32 @@ public class MinigameManager : MonoBehaviour
     public Animator Stage3ClearIceAnim1;
     public Animator Stage3ClearIceAnim2;
 
+    public List<GameObject> IceCracked = new List<GameObject>();
+
     void Awake()
     {
+        FaderAnimator.Play("FadeIn");
+
+        restartButtonPressed = false;
+
         player = GameObject.Find("Mao");
     }
 
     void Update()
     {
         CountIceCrakced();
+        RestartIce();
+
+        if(IceCracked.Count <= 0)
+        {
+            restartButtonPressed = false;
+        }
+
+        if(FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            restartButtonPressed = true;
+            FaderAnimator.Play("FadeIn");            
+        }
     }
 
     void CountIceCrakced()
@@ -55,17 +78,45 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    public void RestartButton()
+    void RestartIce()
     {
-        if(IceCount < 25)
+        if(restartButtonPressed)
         {
-            player.transform.position = Stage1RestartPos.position;
-            player.GetComponent<PlayerController>().animator.Play("Idle_RU");
+            for (int i = 0; i < IceCracked.Count; i++)
+            {
+                GameObject newIceCraked = Instantiate(CrackedIcePrefab, IceCracked[i].gameObject.transform.position, Quaternion.identity);
+                newIceCraked.transform.parent = GameObject.Find("Cracks").transform;
+                Destroy(IceCracked[i].gameObject);                
+
+                IceCracked.Remove(IceCracked[i]);
+            }
+
+            if (IceCount < 25)
+            {
+                IceCount = 0;
+
+                player.transform.position = Stage1RestartPos.position;
+                player.GetComponent<PlayerController>().animator.Play("Idle_RU");
+            }
+            else if(IceCount >= 25 || IceCount < 65)
+            {
+                IceCount = 25;
+
+                player.transform.position = Stage2RestartPos.position;
+                player.GetComponent<PlayerController>().animator.Play("Idle_RU");
+            }
+            else if(IceCount >= 65 || IceCount < 143)
+            {
+                IceCount = 65;
+
+                player.transform.position = Stage3RestartPos.position;
+                player.GetComponent<PlayerController>().animator.Play("Idle_RU");
+            }
         }
-        else if(IceCount <= 25 || IceCount < 65)
-        {
-            player.transform.position = Stage2RestartPos.position;
-            player.GetComponent<PlayerController>().animator.Play("Idle_RU");
-        }
+    }
+
+    public void RestartButton()
+    {        
+        FaderAnimator.Play("FadeOut");
     }
 }

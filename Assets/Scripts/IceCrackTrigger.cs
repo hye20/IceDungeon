@@ -36,7 +36,7 @@ public class IceCrackTrigger : MonoBehaviour
     
     void Update()
     {
-        if (playerPos.position - new Vector3(0, 0.25f, 0) == transform.position)
+        if (!isTriggered && playerPos.position - new Vector3(0, 0.25f, 0) == transform.position)
         {
             isTriggered = true;
         }
@@ -46,6 +46,8 @@ public class IceCrackTrigger : MonoBehaviour
             isTriggered = false;
             currentSpriteRenderer.sprite = CrackedSprite;
             boxCollider.enabled = true;
+
+            minigameManager.IceCracked.Add(gameObject);
 
             if(SceneManager.GetActiveScene().name == "Minigame1")
             {

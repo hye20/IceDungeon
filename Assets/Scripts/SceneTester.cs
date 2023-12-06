@@ -27,6 +27,7 @@ public class SceneTester : MonoBehaviour
 
             player.GetComponent<PlayerController>().IsPlayerTurn = true;
             player.GetComponent<PlayerController>().DiceCount = 10000;
+            player.GetComponent<PlayerController>().animator.Play("Idle_RU");
         } 
     }
 }

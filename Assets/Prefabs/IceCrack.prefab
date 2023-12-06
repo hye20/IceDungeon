@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3356143726132219679}
   m_Layer: 0
   m_Name: IceCrack
-  m_TagString: IceCracked
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdb3b6f3fe5a2443a403dd88c45619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCollider: {fileID: 2187967274634714106}
+  currentSpriteRenderer: {fileID: 2519302349710443494}
+  NotCrackedSprite: {fileID: 21300000, guid: 6e691344f36614b46892b8327afcc2be, type: 3}
   CrackedSprite: {fileID: 21300000, guid: 1c372957f9affed41924fbd1825a6788, type: 3}
 --- !u!61 &2187967274634714106
 BoxCollider2D:
