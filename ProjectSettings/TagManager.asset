@@ -8,8 +8,10 @@ TagManager:
   - BlurObject
   - Pram
   - Mao
+  - Interaction
   - Item
   - Penguin
+  - IceCracked
   layers:
   - Default
   - TransparentFX
