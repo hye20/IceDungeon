@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
@@ -36,12 +38,13 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         Check_Monsters_Dead();
+        /*
         if (GameManager.instance.player.HP > 0 && !monsters_is_dead)
         {
             PlayerAction();
             MonsterAction();
-        }
-        else if (GameManager.instance.player.HP <= 0)
+        }*/
+        if (GameManager.instance.player.HP <= 0)
         {
             Debug.Log($"player HP : {GameManager.instance.player.HP}");
             Debug.Log("Battle phase End");
@@ -51,39 +54,21 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log($"Monsters terminated : {monsters_is_dead}");
             Debug.Log($"player HP : {GameManager.instance.player.HP}");
-            PrintResult();
+            Invoke("PrintResult",2.0f);
         }
     }
 
-    public void MonsterAction()
+    
+    public void SelectTarget()
     {
-        int randomAction;
-        if (!playerTurn && !monsters_is_dead)
-        {
-            for (int i = 0; i < monsters.Length; i++)
-            {
-                randomAction = Random.Range(1, 3);//1~2
-                if (randomAction == 1)
-                {
-                    MonsterAtk(monsters[i]);
-                }
-                else if (randomAction == 2)
-                {
-                    MonsterSkill(monsters[i]);
-                }
-                //random action
-                //monster atk
-            }
-            ChangeTurn();
-            btnList.gameObject.SetActive(true);
-        }
+        //select target.
+        //do action
     }
     public void PlayerAction()
     {
         if (playerTurn == true)
         {
-            //+select action
-            //btnList.gameObject.SetActive(true);
+            btnList.gameObject.SetActive(true);
         }
     }
 
@@ -94,6 +79,7 @@ public class BattleManager : MonoBehaviour
         //play atk anim
         GameManager.instance.player.controller.is_Attack = true;
         Debug.Log("player's attack");
+        //selectTarget();
         for (int i = 0; i < monsters.Length; i++)
         {
             if (!monsters[i].is_dead) monsters[i].HP -= GameManager.instance.player.atk;
@@ -123,12 +109,31 @@ public class BattleManager : MonoBehaviour
             battle_end = true;
         }
     }
-    private void PlayerRun() { }
-
+    private void PlayerRun() 
+    {
+        if(Random.value>0.5)
+        {
+            Debug.Log("player is run");
+            GameManager.instance.QuestPhase();
+        }
+        else
+        {
+            Debug.Log("player is failed run");
+        }
+    }
+    private void DamageStep() { }
     public void ChangeTurn()
     {
         playerTurn = !playerTurn;
         Debug.Log($"Player Turn is {playerTurn} now.");
+        if(playerTurn)
+        {
+            PlayerAction();
+        }
+        else
+        {
+            MonsterAction();
+        }
     }
 
     private void SetMonsters()
@@ -158,6 +163,28 @@ public class BattleManager : MonoBehaviour
         }
         return monsters_is_dead;
     }
+    public void MonsterAction()
+    {
+        int randomAction;
+        if (!playerTurn && !monsters_is_dead)
+        {
+            for (int i = 0; i < monsters.Length; i++)
+            {
+                randomAction = Random.Range(1, 3);//1~2
+                if (randomAction == 1)
+                {
+                    MonsterAtk(monsters[i]);
+                }
+                else if (randomAction == 2)
+                {
+                    MonsterSkill(monsters[i]);
+                }
+                //random action
+                //monster atk
+            }
+            Invoke("ChangeTurn", 2.0f);
+        }
+    }
     private void MonsterAtk(Monster monster)
     {
         if (0.1 >= Random.value)
@@ -169,6 +196,7 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"Monster-{monster.name} is attacked!");
             GameManager.instance.player.HP -= monster.atk;// -> monster.atk
         }
+        monster.MonsterAnim("Attack");
     }
     private void MonsterSkill(Monster monster)
     {
@@ -181,5 +209,6 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"Monster-{monster.name} uses special attack!");
             GameManager.instance.player.HP -= monster.SP;// -> monster.atk
         }
+        monster.MonsterAnim("Skill");
     }
 }

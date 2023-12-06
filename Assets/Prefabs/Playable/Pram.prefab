@@ -1046,9 +1046,10 @@ MonoBehaviour:
   LDButtonPressed: 0
   RDButtonPressed: 0
   DiceCount: 100
-  animAtk: 0
-  animMagic: 0
-  animGuard: 0
+  is_Attack: 0
+  is_Magic: 0
+  is_Guard: 0
+  is_Victory: 0
 --- !u!114 &4282134009817620013
 MonoBehaviour:
   m_ObjectHideFlags: 0

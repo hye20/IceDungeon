@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     public Animator animator;
+    public GameObject[] EffectList;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour
     public bool RDButtonPressed = false;
 
     public int DiceCount;//Çàµ¿·Â
+    public int DiceAdvantage;
+    public int DicePenalty;
 
 
     /*************Battle Mode****************/

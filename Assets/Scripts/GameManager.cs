@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
     {
         mode = Mode.BattleMode;
         player.controller.BattleMode();
-        playerSpawnPoint = player.transform.position; 
         SceneManager.LoadScene("BattleScene");
+        playerSpawnPoint = player.transform.position; 
     }
     public void QuestPhase()
     {
