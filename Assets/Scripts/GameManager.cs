@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player player;
+    public Vector3 playerSpawnPoint;
     enum Mode { QuestMode, BattleMode }//player.controller.NowMode
     [SerializeField]private Mode mode;
 
-    public Button battleBtn;
 
     private void Start()
     {
@@ -30,27 +30,36 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player = Instantiate(player);
-        battleBtn.onClick.AddListener(BattlePhase);
+        playerSpawnPoint = new Vector3(0, 0.25f, 0);
+        player.transform.position = playerSpawnPoint;
         DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //****************************************************************************
+        //FOR_TEST
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (mode == Mode.QuestMode)BattlePhase();
+            else if (mode == Mode.BattleMode)QuestPhase();
+        }
+        //*****************************************************************************
     }
     public void BattlePhase()
     {
         mode = Mode.BattleMode;
         player.controller.BattleMode();
-        player.playerSpawnPoint.position = player.transform.position;
         SceneManager.LoadScene("BattleScene");
+        playerSpawnPoint = player.transform.position; 
     }
     public void QuestPhase()
     {   
         mode = Mode.QuestMode;
         player.controller.QuestMode();
-        player.transform.position = player.playerSpawnPoint.position;
         SceneManager.LoadScene("TEST_PJP");
+        //eventController.playchangeScene
+        player.transform.position = playerSpawnPoint;
     }
 }
