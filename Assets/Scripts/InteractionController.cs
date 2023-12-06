@@ -38,13 +38,16 @@ public class InteractionController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)&& npcInter == true)
         {
-            SettingUI(npcInter);
-            gManager.Action(trigObject);
+            Action();
         }
     }
     
 
-
+    public void Action()
+    {
+        SettingUI(npcInter);
+        gManager.Action(trigObject);
+    }
 
     /// <summary>
     /// interaction을 tag로 소지한 객체의 collision 충돌시 작동
