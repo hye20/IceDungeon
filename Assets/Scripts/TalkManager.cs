@@ -53,13 +53,14 @@ public class TalkManager : MonoBehaviour
         talkData.Add(31 + 2000, new string[] { "Gm에게 가야할듯...:0" });
 
         talkData.Add(40 + 1000, new string[] { "1.A 선택지, 2.B 선택지" });
-        talkData.Add(41 + 1000, new string[] { "41번 1.A 선택지 결과값:0" });
-        talkData.Add(42 + 1000, new string[] { "42번 2.B 선택지 결과값:1" });
 
-        talkData.Add(50 + 1000, new string[] { "50번 1.A 선택지 결과값:1" });
-        talkData.Add(60 + 1000, new string[] { "60번 2.B 선택지 결과값:2" });
+        talkData.Add(50 + 1000, new string[] { "1.A 선택지 결과값:0" });
+        talkData.Add(51 + 1000, new string[] { "퀘스트 종료로 넘김:0" });
 
-        talkData.Add(70+ 1000, new string[] { "퀘스트 종료" });
+        talkData.Add(60 + 1000, new string[] { "2.B 선택지 결과값:1" });
+
+        talkData.Add(70+ 1000, new string[] { "70퀘스트 종료:0" });
+        talkData.Add(80+ 1000, new string[] { "80퀘스트 종료:0" });
 
 
 

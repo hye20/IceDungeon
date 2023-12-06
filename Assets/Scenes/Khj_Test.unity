@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29419e92da1ccff40b60211409644212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 10
+  questId: 20
   questActionIndex: 0
   questObject:
   - {fileID: 1534707981}
@@ -1249,6 +1249,7 @@ MonoBehaviour:
   - {fileID: 57319118}
   - {fileID: 884802013}
   choice: 0
+  btnChoicNum: 0
 --- !u!4 &80656782
 Transform:
   m_ObjectHideFlags: 0
@@ -5135,7 +5136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863192600250987766, guid: e1ba6ce69545c9f428411c49a4feebc1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

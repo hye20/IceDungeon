@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
 {
-    //DialogueManager dialogueManager;
+    public static InteractionController instance;
     public GManager gManager;
     
     [Header("이름 창")]
@@ -21,7 +21,7 @@ public class InteractionController : MonoBehaviour
 
 
     [Header("Npc 접속 가능 확인")]
-    public bool npcInter=false;
+    public bool npcInter = false;
 
     // Npc 인식
     public GameObject trigObject;

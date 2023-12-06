@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GManager : MonoBehaviour
 {
+    InteractionController interactionController;
     InteractionType interactionType;
     public TalkManager talkManager;
     public QuestManager questManager;
@@ -22,6 +23,16 @@ public class GManager : MonoBehaviour
     public bool isAction = false;
     public int talkIndex;
 
+    // 존재하는 버튼 수
+    int btnint;
+    //
+    public int lbtnint;
+    public void Awake()
+    {
+        interactionController = GetComponent<InteractionController>();
+        interactionType = GetComponent<InteractionType>();
+    }
+
     public void Start()
     {
         Debug.Log(questManager.CheckQuest());
@@ -38,15 +49,13 @@ public class GManager : MonoBehaviour
         Talk(interactionType.id, interactionType.isNpc);
 
         talkPanel.SetActive(isAction);
-        
     }
     
     void Talk(int id, bool isNpc)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        Debug.Log(questTalkIndex);
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
-        Debug.Log(id + questTalkIndex + talkIndex);
+        Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
 
         // Talk 데이터가 값을 가지고 있지 않으면
         // Talk 의 종료
@@ -77,23 +86,21 @@ public class GManager : MonoBehaviour
             else if(questManager.choice == true)
             {
                 talkName.text = interactionType.GetName();
-
+                btnint = talkData.Split(',').Length;
                 for (int i = 0; i < talkData.Split(',').Length; i++)
                 {
                     btnList[i].gameObject.SetActive(true);
                     btnList[i].gameObject.GetComponentInChildren<Text>().text = talkData.Split(",")[i];
                     // 각 버튼에 대한 이벤트 추가
                     int index = i; // 중요: 람다식 내에서 반복 변수를 사용할 때 변수 복사
-                    btnList[i].onClick.AddListener(() => OnClickButton(index, id));
+                    btnList[i].onClick.AddListener(() => OnClickButton(index));
                 }
                 for (int i = talkData.Split(',').Length; i < btnList.Length; i++)
                 {
                     btnList[i].gameObject.SetActive(false);
                     btnList[i].gameObject.GetComponentInChildren<Text>().text = "";
                 }
-                talkImg.sprite = talkManager.GetPortait(id, int.Parse(talkData.Split(':')[1]));
             }
-
             talkImg.color = new Color(1, 1, 1, 1);
         }
         else
@@ -102,18 +109,17 @@ public class GManager : MonoBehaviour
             talkText.text = talkData;
             talkImg.color = new Color(1, 1, 1, 0);
         }
-
         isAction = true;
         talkIndex++;
     }
 
-    void OnClickButton(int buttonIndex, int id)
+    void OnClickButton(int buttonIndex)
     {
-        questManager.ChoiceQuest(buttonIndex+1,id);
+        lbtnint = buttonIndex - btnint;
+        questManager.btnChoicNum = buttonIndex + 1;
         for (int i = 0; i < btnList.Length; i++)
         {
             btnList[i].gameObject.SetActive(false);
         }
-        talkPanel.SetActive(true);
     }
 }
