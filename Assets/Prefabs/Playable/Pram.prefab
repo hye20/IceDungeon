@@ -937,8 +937,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3484129035278679778}
   - {fileID: 3902121702025968467}
@@ -1032,8 +1032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   IsPlayerTurn: 1
-  ItemManager: {fileID: 0}
-  ItemSpriteRenderer: {fileID: 0}
   ArrowCanvas: {fileID: 9076304936306799901}
   animator: {fileID: 0}
   ArrowButtons:
@@ -1046,10 +1044,11 @@ MonoBehaviour:
   LDButtonPressed: 0
   RDButtonPressed: 0
   DiceCount: 100
-  is_Attack: 0
-  is_Magic: 0
-  is_Guard: 0
-  is_Victory: 0
+  animAtk: 0
+  animMagic: 0
+  animGuard: 0
+  ItemManager: {fileID: 0}
+  ItemSpriteRenderer: {fileID: 0}
 --- !u!114 &4282134009817620013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,6 +1061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4475b49f99e9664b8099e3db7b48b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 985235462659211869}
+  playerSpawnPoint: {fileID: 9025449354921319338, guid: d0fa6aca80e03bd4f9d69b3f3ed97842, type: 3}
   HP: 100
   MP: 0
   atk: 50
@@ -1069,7 +1070,6 @@ MonoBehaviour:
   SP: 0
   dice: 0
   AP: 0
-  controller: {fileID: 985235462659211869}
 --- !u!50 &4296956450886825648
 Rigidbody2D:
   serializedVersion: 4
