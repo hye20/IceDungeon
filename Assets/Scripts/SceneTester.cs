@@ -26,7 +26,7 @@ public class SceneTester : MonoBehaviour
             player.transform.position = new Vector3(1, -0.25f, 0);
 
             player.GetComponent<PlayerController>().IsPlayerTurn = true;
-            player.GetComponent<PlayerController>().DiceCount = 10000;
+            player.GetComponent<PlayerController>().diceCount = 10000;
             player.GetComponent<PlayerController>().animator.Play("Idle_RU");
         } 
     }

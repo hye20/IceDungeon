@@ -36,7 +36,7 @@ public class DiceManager : MonoBehaviour
         randomDiceNumber = Random.Range(0, 6);
         DiceCountTextUpdate(diceCount);
 
-        if(playerController.DiceCount == 0)
+        if(playerController.diceCount == 0)
         {
             AnimatedDice.SetActive(true);
             NumberedDice.SetActive(false);
@@ -50,7 +50,7 @@ public class DiceManager : MonoBehaviour
         diceCount = randomDiceNumber + 1;
         DiceCountText.text = diceCount.ToString();
 
-        playerController.DiceCount = diceCount;
+        playerController.diceCount = diceCount;
         playerController.IsPlayerTurn = true;
 
         AnimatedDice.SetActive(false);

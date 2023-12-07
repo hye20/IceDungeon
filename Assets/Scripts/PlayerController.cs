@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Diagnostics.Contracts;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -34,8 +35,6 @@ public class PlayerController : MonoBehaviour
     public Canvas StatusCanvas;
     public Canvas UICanvas;
 
-    public int DiceCount;//�ൿ��
-
     /*************Battle Mode****************/
     public bool animAtk;
     public bool animMagic;
@@ -44,7 +43,11 @@ public class PlayerController : MonoBehaviour
     public ItemManager ItemManager;
     public SpriteRenderer ItemSpriteRenderer;
     PenguinStarter penguinStarter;
-    DiceManager diceManager;
+
+    //DiceManager diceManager;
+
+    public int diceCount;
+    public Text diceText;
 
     void Awake()
     {
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
-        diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
+        //diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
 
         gManager = GetComponent<GManager>();
 
@@ -111,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     public void RandomDice()
     {
-        if (DiceCount != 0 ||
+        if (diceCount != 0 ||
             ArrowCanvas.gameObject.activeSelf == true ||
             IsPlayerTurn == true)
         {
@@ -119,8 +122,8 @@ public class PlayerController : MonoBehaviour
         }
 
         IsPlayerTurn = true;
-        DiceCount = Random.Range(minDiceCount, maxDiceCount + 1);
-        diceText.text = DiceCount.ToString();
+        diceCount = Random.Range(90, 100+ 1);
+        diceText.text = diceCount.ToString();
 
         PlayerTurn();
     }
@@ -138,7 +141,7 @@ public class PlayerController : MonoBehaviour
         Move();
         PramMagic();
 
-        if (DiceCount == 0)
+        if (diceCount == 0)
         {
             IsPlayerTurn = false;
         }
@@ -160,8 +163,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Move_LU", false);
                 transform.position = _endPos;
 
-                DiceCount--;
-                diceManager.diceCount--;
+                diceCount--;
+                //diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -179,8 +182,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Move_RU", false);
                 transform.position = _endPos;
 
-                DiceCount--;
-                diceManager.diceCount--;
+                diceCount--;
+                //diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -198,8 +201,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Move_LD", false);
                 transform.position = _endPos;
 
-                DiceCount--;
-                diceManager.diceCount--;
+                diceCount--;
+                //diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -217,8 +220,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Move_RD", false);
                 transform.position = _endPos;
 
-                DiceCount--;
-                diceManager.diceCount--;
+                diceCount--;
+                //diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
