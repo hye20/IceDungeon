@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Font.meta
 guid: d3ef5f90963ca794fa046fd3cf8a2875
+========
+guid: 76b5c0851c74600478ad63affb7b9c74
+>>>>>>>> 841dea996bcfd6fa5614d181867c8d8464e36b94:Assets/Prefabs/Effect.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

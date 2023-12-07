@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Audios.meta
 guid: 8bd16ce2dba5fde4da16550debee9aa6
+========
+guid: ebbfdb3436348b141bac323b35125401
+>>>>>>>> 841dea996bcfd6fa5614d181867c8d8464e36b94:Assets/Animations/Effect.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

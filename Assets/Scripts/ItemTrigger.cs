@@ -10,14 +10,12 @@ public class ItemTrigger : MonoBehaviour
 
     public Button ItemButton;
 
-    [SerializeField]
-    ItemManager itemManager;
+    public ItemManager ItemManager;
     public ItemDatabase ItemDatabase;
 
     void Start()
     {
         ItemButton.interactable = false;
-        itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -27,7 +25,7 @@ public class ItemTrigger : MonoBehaviour
             ItemName.GetComponent<TextMeshPro>().color = new Vector4(1, 1, 1, 1);
             ItemButton.interactable = true;
             ItemButton.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
-        }        
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -42,8 +40,8 @@ public class ItemTrigger : MonoBehaviour
 
     public void ObtainItem()
     {
-        itemManager.obtainItem = true;
-        itemManager.Items.Add(ItemDatabase);
+        ItemManager.obtainItem = true;        
+        ItemManager.Items.Add(ItemDatabase);
         Destroy(gameObject);
     }
 }

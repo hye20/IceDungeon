@@ -8,6 +8,8 @@ public class ObjectTrigger : MonoBehaviour
 
     void Awake()
     {
+        //_controller = GameObject.Find("Pram_F").GetComponent<PlayerController>();
+
         if(GameObject.FindGameObjectWithTag("Pram"))
         {
             _controller = GameObject.Find("Pram").GetComponent<PlayerController>();

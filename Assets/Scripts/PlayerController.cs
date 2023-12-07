@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
+using System.Collections;
+using System.Diagnostics.Contracts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
+
+    public ItemManager ItemManager;
+    public SpriteRenderer ItemSpriteRenderer;
+    PenguinStarter penguinStarter;
+
     public Canvas ArrowCanvas;
 
     private Vector3 _luDirection;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     public Animator animator;
+    public GameObject[] EffectList;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -31,20 +35,17 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public Canvas StatusCanvas;
-    public Canvas UICanvas;
-
     public int DiceCount;//�ൿ��
+    public int DiceAdvantage;
+    public int DicePenalty;
+
 
     /*************Battle Mode****************/
-    public bool animAtk;
-    public bool animMagic;
-    public bool animGuard;
-
-    public ItemManager ItemManager;
-    public SpriteRenderer ItemSpriteRenderer;
-    PenguinStarter penguinStarter;
-    DiceManager diceManager;
+    public bool is_Attack;
+    public bool is_Magic;
+    public bool is_Guard;
+    public bool is_Victory;
+    public Coroutine currentCoroutine;
 
     void Awake()
     {
@@ -57,10 +58,7 @@ public class PlayerController : MonoBehaviour
 
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
-        penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
-        diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
-
-        gManager = GetComponent<GManager>();
+        //penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Starter();
+        //Starter();
         PlayerTurn();
         //ItemObtained();
     }
@@ -100,27 +98,10 @@ public class PlayerController : MonoBehaviour
                     Destroy(startCamera);
                     isStart = false;
 
-                    penguinStarter.penguinReturn = false;
-
-                    StatusCanvas.gameObject.SetActive(true);
-                    UICanvas.gameObject.SetActive(true);
+                    penguinStarter.penguinReturn = false;                    
                 }
             }
         }
-    }
-
-    public void RandomDice()
-    {
-        if (DiceCount != 0 ||
-            ArrowCanvas.gameObject.activeSelf == true ||
-            IsPlayerTurn == true)
-        {
-            return;
-        }
-
-        IsPlayerTurn = true;
-
-        PlayerTurn();
     }
 
     void PlayerTurn()
@@ -134,7 +115,9 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
         Move();
-        PramMagic();
+        AttackAnim();
+        MagicAnim();
+        VictoryAnim();
 
         if (DiceCount == 0)
         {
@@ -159,7 +142,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -178,7 +160,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -197,7 +178,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -216,7 +196,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -230,9 +209,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     public void BattleMode()
     {
-        animator.SetTrigger("RU_Trigger");
+        animator.Play("Idle_RU",-1,0);
         IsPlayerTurn = false;
     }
     public void QuestMode()
@@ -240,17 +220,40 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("RU_Trigger");
         IsPlayerTurn = true;
     }
-    public void PramMagic()
+    public void AttackAnim()
     {
-        if (animMagic) animator.SetBool("M_Attack_RU", true);
+        if (is_Attack) animator.SetBool("Attack", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_RU") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Attack", false);
+            is_Attack = false;
+        }
+    }
+    public void MagicAnim()
+    {
+        if (is_Magic) animator.SetBool("Magic", true);
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            animator.SetBool("M_Attack_RU", false);
-            animMagic = false;
+            animator.SetBool("Magic", false);
+            is_Magic = false;
         }
-        //_animator.SetBool("M_Attack_LD", false);*/
     }
+    public void VictoryAnim()
+    {
+        if (is_Victory) animator.SetBool("Victory", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Victory", false);
+            is_Victory = false;
+        }
+    }
+
     void OnButtonClicked(int number)
     {
         switch (number)

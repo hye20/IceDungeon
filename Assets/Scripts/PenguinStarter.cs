@@ -17,10 +17,7 @@ public class PenguinStarter : MonoBehaviour
     float timerSpeed = 1.5f;
 
     bool isPicking = false;
-    public bool itemPicked = false;
-
-    public SpriteRenderer PickedItem;
-    public SpriteRenderer HaloLight;    
+    bool itemPicked = false;
 
     public bool returned;
     public bool penguinReturn;
@@ -89,19 +86,15 @@ public class PenguinStarter : MonoBehaviour
         {
             animator.ResetTrigger("Picking");
             animator.SetBool("Spinning", true);
-            itemPicked = true;
-
-            PickedItem.enabled = true;
-            HaloLight.enabled = true;
+            itemPicked = true;            
         }
     }
 
     void Spinning()
     {
-        if (itemPicked && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_Spin") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if(itemPicked && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_Spin") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             itemPicked = false;
-
             animator.SetBool("Spinning", false);
         }
     }
@@ -110,9 +103,6 @@ public class PenguinStarter : MonoBehaviour
     {
         if(!returned && animator.GetCurrentAnimatorStateInfo(0).IsName(gameObject.name + "_WalkR"))
         {
-            PickedItem.enabled = false;
-            HaloLight.enabled = false;
-
             transform.position = Vector3.MoveTowards(transform.position, startPos, moveSpeed * Time.deltaTime);
 
             if(transform.position == startPos)

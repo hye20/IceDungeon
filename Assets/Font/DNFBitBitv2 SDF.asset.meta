@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Font/DNFBitBitv2 SDF.asset.meta
 guid: 13fddafc9b8f25e4398ec810d307e2e8
 NativeFormatImporter:
+========
+guid: edb11b54b2900f14fb65947b21bd8c92
+PrefabImporter:
+>>>>>>>> 841dea996bcfd6fa5614d181867c8d8464e36b94:Assets/Prefabs/Effect/AttackOnce.prefab.meta
   externalObjects: {}
   mainObjectFileID: 11400000
   userData: 
