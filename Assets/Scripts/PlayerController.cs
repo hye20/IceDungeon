@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Diagnostics.Contracts;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -15,11 +13,6 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     public bool IsPlayerTurn;
-
-    public ItemManager ItemManager;
-    public SpriteRenderer ItemSpriteRenderer;
-    PenguinStarter penguinStarter;
-
     public Canvas ArrowCanvas;
 
     private Vector3 _luDirection;
@@ -30,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     public Animator animator;
-    public GameObject[] EffectList;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -39,20 +31,16 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public int DiceCount;//�ൿ��
-    public int DiceAdvantage;
-    public int DicePenalty;
     public Canvas StatusCanvas;
     public Canvas UICanvas;
 
     public int DiceCount;//�ൿ��
 
     /*************Battle Mode****************/
-    public bool is_Attack;
-    public bool is_Magic;
-    public bool is_Guard;
-    public bool is_Victory;
-    public Coroutine currentCoroutine;
+    public bool animAtk;
+    public bool animMagic;
+    public bool animGuard;
+
     public ItemManager ItemManager;
     public SpriteRenderer ItemSpriteRenderer;
     PenguinStarter penguinStarter;
@@ -146,9 +134,7 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
         Move();
-        AttackAnim();
-        MagicAnim();
-        VictoryAnim();
+        PramMagic();
 
         if (DiceCount == 0)
         {
@@ -246,7 +232,7 @@ public class PlayerController : MonoBehaviour
 
     public void BattleMode()
     {
-        animator.Play("Idle_RU",-1,0);
+        animator.SetTrigger("RU_Trigger");
         IsPlayerTurn = false;
     }
     public void QuestMode()
@@ -254,39 +240,17 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("RU_Trigger");
         IsPlayerTurn = true;
     }
-    public void AttackAnim()
+    public void PramMagic()
     {
-        if (is_Attack) animator.SetBool("Attack", true);
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_RU") &&
-            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            animator.SetBool("Attack", false);
-            is_Attack = false;
-        }
-    }
-    public void MagicAnim()
-    {
-        if (is_Magic) animator.SetBool("Magic", true);
+        if (animMagic) animator.SetBool("M_Attack_RU", true);
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            animator.SetBool("Magic", false);
-            is_Magic = false;
+            animator.SetBool("M_Attack_RU", false);
+            animMagic = false;
         }
+        //_animator.SetBool("M_Attack_LD", false);*/
     }
-    public void VictoryAnim()
-    {
-        if (is_Victory) animator.SetBool("Victory", true);
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory") &&
-            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            animator.SetBool("Victory", false);
-            is_Victory = false;
-        }
-    }
-
     void OnButtonClicked(int number)
     {
         switch (number)

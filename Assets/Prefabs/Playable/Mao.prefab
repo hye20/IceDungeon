@@ -842,9 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 1
-  IsPlayerTurn: 1
-  ItemManager: {fileID: 0}
-  ItemSpriteRenderer: {fileID: 5116415999133260345}
+  IsPlayerTurn: 0
   ArrowCanvas: {fileID: 8376143026380630264}
   animator: {fileID: 4475679228995686000}
   ArrowButtons:
@@ -862,6 +860,8 @@ MonoBehaviour:
   animAtk: 0
   animMagic: 0
   animGuard: 0
+  ItemManager: {fileID: 0}
+  ItemSpriteRenderer: {fileID: 5116415999133260345}
 --- !u!50 &2408318758605439634
 Rigidbody2D:
   serializedVersion: 4
@@ -946,7 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4475b49f99e9664b8099e3db7b48b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5476404836357401801}
+  controller: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
   HP: 100
   MP: 200
   atk: 0
