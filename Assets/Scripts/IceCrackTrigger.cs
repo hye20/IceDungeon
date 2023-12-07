@@ -14,6 +14,8 @@ public class IceCrackTrigger : MonoBehaviour
     SpriteRenderer currentSpriteRenderer;
     public Sprite CrackedSprite;
 
+    AudioSource audioSource;
+
     private PlayerController _controller;
 
     void Start()
@@ -27,6 +29,8 @@ public class IceCrackTrigger : MonoBehaviour
 
         currentSpriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        audioSource = GetComponent<AudioSource>();
 
         if(SceneManager.GetActiveScene().name == "Minigame1")
         {
@@ -43,6 +47,8 @@ public class IceCrackTrigger : MonoBehaviour
 
         if (isTriggered && (playerPos.position - new Vector3(0, 0.25f, 0) != transform.position))
         {
+            audioSource.Play();
+
             isTriggered = false;
             currentSpriteRenderer.sprite = CrackedSprite;
             boxCollider.enabled = true;

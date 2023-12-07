@@ -15,11 +15,15 @@ public class DiceManager : MonoBehaviour
     public int diceCount;
     int randomDiceNumber;
 
+    AudioSource audioSource;
+
     PlayerController playerController;
 
     void Awake()
     {
         diceCount = 0;
+
+        audioSource = GetComponent<AudioSource>();
 
         if (GameObject.FindGameObjectWithTag("Pram"))
         {
@@ -36,7 +40,7 @@ public class DiceManager : MonoBehaviour
         randomDiceNumber = Random.Range(0, 6);
         DiceCountTextUpdate(diceCount);
 
-        if(playerController.DiceCount == 0)
+        if (playerController.DiceCount == 0)
         {
             AnimatedDice.SetActive(true);
             NumberedDice.SetActive(false);
@@ -46,6 +50,9 @@ public class DiceManager : MonoBehaviour
 
     public void DiceClicked()
     {
+        audioSource.Play();
+
+
         NumberedDice.GetComponent<Image>().sprite = DiceNumberSprites[randomDiceNumber];
         diceCount = randomDiceNumber + 1;
         DiceCountText.text = diceCount.ToString();

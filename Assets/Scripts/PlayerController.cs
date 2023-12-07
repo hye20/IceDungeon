@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]bool isStart = true;
+    public bool isStart = true;
     GManager gManager;
     /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
