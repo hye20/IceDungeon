@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Diagnostics.Contracts;
-using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]bool isStart = true;
-    GManager gManager;
+
     /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
 
@@ -39,13 +35,10 @@ public class PlayerController : MonoBehaviour
     public bool LDButtonPressed = false;
     public bool RDButtonPressed = false;
 
-    public int DiceCount;//пїЅаµїпїЅпїЅ
+    public int DiceCount;//Заµї·В
     public int DiceAdvantage;
     public int DicePenalty;
-    public Canvas StatusCanvas;
-    public Canvas UICanvas;
 
-    public int DiceCount;//пїЅаµїпїЅпїЅ
 
     /*************Battle Mode****************/
     public bool is_Attack;
@@ -53,10 +46,6 @@ public class PlayerController : MonoBehaviour
     public bool is_Guard;
     public bool is_Victory;
     public Coroutine currentCoroutine;
-    public ItemManager ItemManager;
-    public SpriteRenderer ItemSpriteRenderer;
-    PenguinStarter penguinStarter;
-    DiceManager diceManager;
 
     void Awake()
     {
@@ -69,10 +58,7 @@ public class PlayerController : MonoBehaviour
 
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
-        penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
-        diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
-
-        gManager = GetComponent<GManager>();
+        //penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -85,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Starter();
+        //Starter();
         PlayerTurn();
         //ItemObtained();
     }
@@ -112,27 +98,10 @@ public class PlayerController : MonoBehaviour
                     Destroy(startCamera);
                     isStart = false;
 
-                    penguinStarter.penguinReturn = false;
-
-                    StatusCanvas.gameObject.SetActive(true);
-                    UICanvas.gameObject.SetActive(true);
+                    penguinStarter.penguinReturn = false;                    
                 }
             }
         }
-    }
-
-    public void RandomDice()
-    {
-        if (DiceCount != 0 ||
-            ArrowCanvas.gameObject.activeSelf == true ||
-            IsPlayerTurn == true)
-        {
-            return;
-        }
-
-        IsPlayerTurn = true;
-
-        PlayerTurn();
     }
 
     void PlayerTurn()
@@ -173,7 +142,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -192,7 +160,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -211,7 +178,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -230,7 +196,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -243,6 +208,7 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
     }
+
 
     public void BattleMode()
     {
@@ -268,6 +234,7 @@ public class PlayerController : MonoBehaviour
     public void MagicAnim()
     {
         if (is_Magic) animator.SetBool("Magic", true);
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
