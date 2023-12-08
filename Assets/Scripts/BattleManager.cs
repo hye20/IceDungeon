@@ -9,6 +9,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Transform[] monterSpawnPoint;
     [SerializeField] private Monster[] monsterData;
     [SerializeField] private Monster[] monsters;//monsters instance
+
+    [SerializeField] private UIPlayerState healthBar;
+    [SerializeField] private UIMonstersStatus monstersBar;
+
     public bool playerTurn = true;
     private bool monsters_is_dead = false;
     private bool battle_end = false;
@@ -63,6 +67,10 @@ public class BattleManager : MonoBehaviour
     {
         //select target.
         //do action
+    }
+    private void Stagger()
+    {
+
     }
     public void PlayerAction()
     {
@@ -144,7 +152,7 @@ public class BattleManager : MonoBehaviour
         {
             monsters[i] = Instantiate(monsterData[0]);
             monsters[i].transform.position = monterSpawnPoint[i].position;
-            Debug.Log(monsters[i].HP);
+            monsters[i].gameObject.name = monsterData[0].name + (i+1);
         }
     }
     private bool Check_Monsters_Dead()

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int MaxHP = 100;
-    public int HP=100;
-    private int MaxMP = 200;
-    public int MP=200;
+    public float MaxHP = 100;
+    public float HP=100;
+    public float MaxMP = 200;
+    public float MP=200;
     public int atk;
     public int def;
     public int SP;//spell power, 마법은 방관있음
