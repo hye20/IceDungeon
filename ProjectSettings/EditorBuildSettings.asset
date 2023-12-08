@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigame1.unity
     guid: c0bc8e8ebbd5ffa4e991d42509e07deb
+  - enabled: 1
+    path: Assets/Scenes/Dk+Quest.unity
+    guid: 599ca7409184c4342abc16ebe01d6ca3
   m_configObjects: {}
