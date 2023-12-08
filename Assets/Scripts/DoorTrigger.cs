@@ -31,7 +31,7 @@ public class DoorTrigger : MonoBehaviour
 
     void Update()
     {
-        if (FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (doorOpened && FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             FaderAnimator.Play("FadeIn");
             playerPos.position = new Vector3(7.5f, 5, 0);

@@ -25,6 +25,8 @@ public class PenguinStarter : MonoBehaviour
     public bool returned;
     public bool penguinReturn;
 
+    public Animator FaderAnimator;
+
     PlayerController controller;
 
     void Start()
@@ -117,6 +119,8 @@ public class PenguinStarter : MonoBehaviour
 
             if(transform.position == startPos)
             {
+                FaderAnimator.Play("FadeOut");
+
                 penguinReturn = true;
                 Destroy(gameObject);
             }

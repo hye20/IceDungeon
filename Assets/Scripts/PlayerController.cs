@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _endPos;
 
     public Animator animator;
+    public Animator FaderAnimator;
 
     public Button[] ArrowButtons = new Button[4];
 
@@ -77,6 +78,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (penguinStarter.penguinReturn)
+        {
+            StartCoroutine(PlayerStarter());
+        }
+
         Starter();
         PlayerTurn();
         ItemObtained();
@@ -97,6 +103,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Falling", false);
                 animator.SetBool("Lying", true);
 
+                /*
                 if(penguinStarter.penguinReturn)
                 {
                     animator.SetBool("Lying", false);
@@ -113,6 +120,7 @@ public class PlayerController : MonoBehaviour
                     QuestPanel.SetActive(true);
                     DicePanel.SetActive(true);
                 }
+                */
             }
         }
     }
@@ -298,6 +306,32 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("Obtain_Trigger");
                 ArrowCanvas.gameObject.SetActive(true);
             }
+        }
+    }
+
+    IEnumerator PlayerStarter()
+    {
+        if (penguinStarter.penguinReturn)
+        {
+            yield return new WaitForSeconds(5.0f);
+
+            FaderAnimator.Play("FadeIn");
+
+            yield return new WaitForSeconds(5.0f);
+
+            animator.SetBool("Lying", false);
+            GameObject startCamera = GameObject.Find("StartCamera");
+            Destroy(startCamera);
+            isStart = false;
+
+            penguinStarter.penguinReturn = false;
+
+            StatusCanvas.gameObject.SetActive(true);
+
+            SettingButton.SetActive(true);
+            HelpButton.SetActive(true);
+            QuestPanel.SetActive(true);
+            DicePanel.SetActive(true);
         }
     }
 

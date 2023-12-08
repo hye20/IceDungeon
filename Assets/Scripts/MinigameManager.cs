@@ -53,7 +53,7 @@ public class MinigameManager : MonoBehaviour
         if(FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") && FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             restartButtonPressed = true;
-            FaderAnimator.Play("FadeIn");            
+            FaderAnimator.Play("FadeIn");
         }
     }
 
