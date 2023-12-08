@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Penguin
   - IceCracked
+  - PlayerTrigger
   layers:
   - Default
   - TransparentFX

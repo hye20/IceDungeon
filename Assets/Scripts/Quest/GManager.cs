@@ -7,8 +7,9 @@ public class GManager : MonoBehaviour
 {
     InteractionController interactionController;
     InteractionType interactionType;
-    public TalkManager talkManager;
-    public QuestManager questManager;
+    TalkManager talkManager;
+    QuestManager questManager;
+    PlayerTrigger playerTrigger;
 
     // ¥Î»≠√¢
     [Header ("TalkDateWrite")]
@@ -34,11 +35,20 @@ public class GManager : MonoBehaviour
     {
         interactionController = GetComponent<InteractionController>();
         interactionType = GetComponent<InteractionType>();
+        talkManager = GetComponent<TalkManager>();
+        questManager = GetComponent<QuestManager>();
     }
 
     public void Start()
     {
-        Debug.Log(questManager.CheckQuest());
+        interactionController = GameObject.Find("Parm")?.GetComponent<InteractionController>();
+
+        if (interactionController == null)
+        {
+            interactionController = GameObject.Find("Moro")?.GetComponent<InteractionController>();
+        }
+        questDetail.text =questManager.CheckQuest();
+        questTitle.text =questManager.CheckQuestTitle();
     }
 
 
@@ -49,12 +59,12 @@ public class GManager : MonoBehaviour
         isAction = true;
         scanObject = _scanObject;
         interactionType = scanObject.GetComponent<InteractionType>();
-        Talk(interactionType.id, interactionType.isNpc);
+        Talk(interactionType.id, interactionType.isNpc, interactionType.isPlayerTb);
 
         talkPanel.SetActive(isAction);
     }
     
-    void Talk(int id, bool isNpc)
+    void Talk(int id, bool isNpc, bool isPlayerTb)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
@@ -65,9 +75,11 @@ public class GManager : MonoBehaviour
         if (talkData == null)
         {
             isAction = false;
+            
             talkIndex = 0;
             Time.timeScale = 1;
             questDetail.text = questManager.CheckQuest(id);
+            questTitle.text = questManager.CheckQuestTitle();
             return;
         }
 
@@ -112,6 +124,7 @@ public class GManager : MonoBehaviour
             talkText.text = talkData;
             talkImg.color = new Color(1, 1, 1, 0);
         }
+        
         isAction = true;
         talkIndex++;
     }

@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ce64b1dd49ea64aa597c9641c3c5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   NpcName: {fileID: 241085624099277262}
   NpcButton: {fileID: 1813650455331176587}
 --- !u!1001 &104709329929217065
@@ -413,7 +414,15 @@ PrefabInstance:
     - target: {fileID: 1639317361193536489, guid: e0acb476ed2c62242b68478e61c1f109, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1999993104743186698}
+      objectReference: {fileID: 5302960457240539337}
+    - target: {fileID: 1639317361193536489, guid: e0acb476ed2c62242b68478e61c1f109, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TalkNpc
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639317361193536489, guid: e0acb476ed2c62242b68478e61c1f109, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NpcTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -11,36 +11,23 @@ public class InteractionController : MonoBehaviour
     public static InteractionController instance;
     public GManager gManager;
     
-    [Header("이름 창")]
-    public GameObject go_npcTalk;
-    public GameObject go_npcTalkImg;
-    [SerializeField] Text txt_TargetName;
-    [SerializeField] Text txt_TargetTalk;
-
     [Header("Npc 접속 가능 확인")]
-    public bool npcInter = false;
-
+    public bool isNpcInter = false;
+    public bool isPlayerInter = false;
+    public bool isChest = false;
     // Npc 인식
     public GameObject trigObject;
 
-    public void SettingUI(bool p_flag)
+    private void Update()
     {
-        go_npcTalk.SetActive(p_flag);
-        go_npcTalkImg.SetActive(p_flag);
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q)&& npcInter == true)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            Action();
+            Action(); 
         }
     }
-    
 
     public void Action()
     {
-        SettingUI(npcInter);
         gManager.Action(trigObject);
     }
 
@@ -55,7 +42,7 @@ public class InteractionController : MonoBehaviour
         {
             if (trigObject == null)
             {
-                npcInter = true;
+                isNpcInter = true;
                 Transform toq = collision.gameObject.transform.parent;
 
                 if (toq!=null)  
@@ -68,6 +55,24 @@ public class InteractionController : MonoBehaviour
                 }
             }
         }
+        else if (collision.gameObject.tag == "PlayerTrigger")
+        {
+            if (trigObject == null)
+            {
+                isPlayerInter = true;
+
+                trigObject = collision.gameObject;
+            }
+        }
+        else if(collision.gameObject.tag == "chest")
+        {
+            if (trigObject == null)
+            {
+                isChest = true;
+
+                trigObject = collision.gameObject;
+            }
+        }
     }
 
 
@@ -75,12 +80,29 @@ public class InteractionController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Interaction")
         {
-            if (trigObject != null && npcInter == true)
+            if (trigObject != null && isNpcInter == true)
             {
-                npcInter = false;
+                isNpcInter = false;
                 trigObject = null;
                 Debug.Log("Npc 접촉 해제");
             }
         }
+        else if (collision.gameObject.tag == "PlayerTrigger")
+        {
+            if (trigObject != null && isPlayerInter == true)
+            {
+                isPlayerInter = false;
+                Destroy(trigObject);
+            }
+        }
+        else if (collision.gameObject.tag == "chest")
+        {
+            if (trigObject != null && isChest == true)
+            {
+                isPlayerInter = false;
+                trigObject = null;
+            }
+        }
+
     }
 }
