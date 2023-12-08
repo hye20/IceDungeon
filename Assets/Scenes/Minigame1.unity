@@ -3260,7 +3260,7 @@ MonoBehaviour:
   CrackedIcePrefab: {fileID: 1472455222285948716, guid: e65445db965a0c440b7af1529728e700, type: 3}
   Stage1RestartPos: {fileID: 884427236}
   Stage2RestartPos: {fileID: 2001944624}
-  Stage3RestartPos: {fileID: 0}
+  Stage3RestartPos: {fileID: 427340107}
   IceCount: 0
   Stage1ClearIceAnim1: {fileID: 485359178}
   Stage1ClearIceAnim2: {fileID: 1968921749}
