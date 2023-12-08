@@ -8,9 +8,14 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     public bool isStart = true;
-    GManager gManager;
+
     /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
+
+    public ItemManager ItemManager;
+    public SpriteRenderer ItemSpriteRenderer;
+    PenguinStarter penguinStarter;
+    DiceManager diceManager;
 
     public bool IsPlayerTurn;
     public Canvas ArrowCanvas;
@@ -42,17 +47,21 @@ public class PlayerController : MonoBehaviour
     public int DiceCount;//�ൿ��
 
     /*************Battle Mode****************/
-    public bool animAtk;
-    public bool animMagic;
-    public bool animGuard;
-
-    public ItemManager ItemManager;
-    public SpriteRenderer ItemSpriteRenderer;
-    PenguinStarter penguinStarter;
-    DiceManager diceManager;
+    public bool is_Attack;
+    public bool is_Magic;
+    public bool is_Victory;
+    public bool is_Guard;
 
     void Awake()
     {
+        DiceCount = 0;
+        FaderAnimator = GameObject.Find("Fader").GetComponent<Animator>();
+
+        SettingButton = GameObject.Find("UICanvas").transform.Find("Setting_Button").gameObject;
+        HelpButton = GameObject.Find("UICanvas").transform.Find("Help_Button").gameObject;
+        QuestPanel = GameObject.Find("UICanvas").transform.Find("Quest_Panel").gameObject;
+        DicePanel = GameObject.Find("UICanvas").transform.Find("Dice_Panel").gameObject;
+
         _luDirection = new Vector3(-0.5f, 0.25f, 0);
         _ruDirection = new Vector3(0.5f, 0.25f, 0);
         _ldDirection = new Vector3(-0.5f, -0.25f, 0);
@@ -60,12 +69,10 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
-        //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
+        ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
         diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
-
-        gManager = GetComponent<GManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
@@ -102,41 +109,8 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetBool("Falling", false);
                 animator.SetBool("Lying", true);
-
-                /*
-                if(penguinStarter.penguinReturn)
-                {
-                    animator.SetBool("Lying", false);
-                    GameObject startCamera = GameObject.Find("StartCamera");
-                    Destroy(startCamera);
-                    isStart = false;
-
-                    penguinStarter.penguinReturn = false;
-
-                    StatusCanvas.gameObject.SetActive(true);
-
-                    SettingButton.SetActive(true);
-                    HelpButton.SetActive(true);
-                    QuestPanel.SetActive(true);
-                    DicePanel.SetActive(true);
-                }
-                */
             }
         }
-    }
-
-    public void RandomDice()
-    {
-        if (DiceCount != 0 ||
-            ArrowCanvas.gameObject.activeSelf == true ||
-            IsPlayerTurn == true)
-        {
-            return;
-        }
-
-        IsPlayerTurn = true;
-
-        PlayerTurn();
     }
 
     void PlayerTurn()
@@ -150,7 +124,10 @@ public class PlayerController : MonoBehaviour
             ArrowCanvas.gameObject.SetActive(false);
         }
         Move();
-        PramMagic();
+
+        AttackAnim();
+        MagicAnim();
+        VictoryAnim();
 
         if (DiceCount == 0)
         {
@@ -256,17 +233,41 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("RU_Trigger");
         IsPlayerTurn = true;
     }
-    public void PramMagic()
+
+    public void AttackAnim()
     {
-        if (animMagic) animator.SetBool("M_Attack_RU", true);
+        if (is_Attack) animator.SetBool("Attack", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_RU") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Attack", false);
+            is_Attack = false;
+        }
+    }
+    public void MagicAnim()
+    {
+        if (is_Magic) animator.SetBool("Magic", true);
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("M_Attack_RU") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            animator.SetBool("M_Attack_RU", false);
-            animMagic = false;
+            animator.SetBool("Magic", false);
+            is_Magic = false;
         }
-        //_animator.SetBool("M_Attack_LD", false);*/
     }
+    public void VictoryAnim()
+    {
+        if (is_Victory) animator.SetBool("Victory", true);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory") &&
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("Victory", false);
+            is_Victory = false;
+        }
+    }
+
     void OnButtonClicked(int number)
     {
         switch (number)

@@ -17,7 +17,6 @@ public class DiceManager : MonoBehaviour
 
     AudioSource audioSource;
 
-    PlayerController playerController;
 
     void Awake()
     {
@@ -25,6 +24,7 @@ public class DiceManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
+        /*
         if (GameObject.FindGameObjectWithTag("Pram"))
         {
             playerController = GameObject.Find("Pram").GetComponent<PlayerController>();
@@ -33,6 +33,8 @@ public class DiceManager : MonoBehaviour
         {
             playerController = GameObject.Find("Mao").GetComponent<PlayerController>();
         }
+        */
+
     }
 
     void Update()
@@ -40,7 +42,7 @@ public class DiceManager : MonoBehaviour
         randomDiceNumber = Random.Range(0, 6);
         DiceCountTextUpdate(diceCount);
 
-        if (playerController.DiceCount == 0)
+        if (GameManager.instance.player.controller.DiceCount == 0)
         {
             AnimatedDice.SetActive(true);
             NumberedDice.SetActive(false);
@@ -52,13 +54,12 @@ public class DiceManager : MonoBehaviour
     {
         audioSource.Play();
 
-
         NumberedDice.GetComponent<Image>().sprite = DiceNumberSprites[randomDiceNumber];
         diceCount = randomDiceNumber + 1;
         DiceCountText.text = diceCount.ToString();
 
-        playerController.DiceCount = diceCount;
-        playerController.IsPlayerTurn = true;
+        GameManager.instance.player.controller.DiceCount = diceCount;
+        GameManager.instance.player.controller.IsPlayerTurn = true;        
 
         AnimatedDice.SetActive(false);
         NumberedDice.SetActive(true);
