@@ -32,7 +32,11 @@ public class PlayerController : MonoBehaviour
     public bool RDButtonPressed = false;
 
     public Canvas StatusCanvas;
-    public Canvas UICanvas;
+    
+    public GameObject SettingButton;
+    public GameObject HelpButton;
+    public GameObject QuestPanel;
+    public GameObject DicePanel;
 
     public int DiceCount;//�ൿ��
 
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         Starter();
         PlayerTurn();
-        //ItemObtained();
+        ItemObtained();
     }
 
     void Starter()
@@ -103,7 +107,11 @@ public class PlayerController : MonoBehaviour
                     penguinStarter.penguinReturn = false;
 
                     StatusCanvas.gameObject.SetActive(true);
-                    UICanvas.gameObject.SetActive(true);
+
+                    SettingButton.SetActive(true);
+                    HelpButton.SetActive(true);
+                    QuestPanel.SetActive(true);
+                    DicePanel.SetActive(true);
                 }
             }
         }

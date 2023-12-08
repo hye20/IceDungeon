@@ -10,7 +10,9 @@ public class ChestTrigger : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public Sprite ChestOpenSprite;
 
+    [SerializeField]
     ItemManager itemManager;
+    public ItemDatabase ItemDatabase;
     void Start()
     {
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
@@ -48,7 +50,8 @@ public class ChestTrigger : MonoBehaviour
     public void ChestClicked()
     {
         itemManager.obtainItem = true;
+        itemManager.Items.Add(ItemDatabase);
         spriteRenderer.sprite = ChestOpenSprite;
-        ChestButton.GetComponent<Image>().color = Color.clear;
+        ChestButton.gameObject.SetActive(false);
     }
 }

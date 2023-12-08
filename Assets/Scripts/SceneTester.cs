@@ -7,8 +7,11 @@ public class SceneTester : MonoBehaviour
 {
     GameObject player;
 
+    public Animator FaderAnimator;
+
     void Start()
     {
+        FaderAnimator.Play("FadeIn");
         player = GameObject.Find("Mao");
     }
 
