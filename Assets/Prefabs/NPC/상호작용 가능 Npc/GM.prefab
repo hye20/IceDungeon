@@ -172,7 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isObject: 0
   isNpc: 1
-  Item: 0
+  isItem: 0
+  isPlayerTb: 0
   NpcName: Gm
   id: 1000
 --- !u!114 &244165218345141447
@@ -210,6 +211,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2139295073455869870}
     m_Modifications:
+    - target: {fileID: 156643631971544551, guid: a98f6b939f1b2e4488620786538ae5c4, type: 3}
+      propertyPath: m_text
+      value: GM
+      objectReference: {fileID: 0}
     - target: {fileID: 1987768495710196461, guid: a98f6b939f1b2e4488620786538ae5c4, type: 3}
       propertyPath: m_Name
       value: NpcName

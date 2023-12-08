@@ -172,7 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isObject: 0
   isNpc: 1
-  Item: 0
+  isItem: 0
+  isPlayerTb: 0
   NpcName: Angel
   id: 2000
 --- !u!114 &8982056750851040323
@@ -210,6 +211,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1429218973099514153}
     m_Modifications:
+    - target: {fileID: 147005669357460925, guid: e0acb476ed2c62242b68478e61c1f109, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 440483591340780102, guid: e0acb476ed2c62242b68478e61c1f109, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -401,6 +406,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1429218973099514153}
     m_Modifications:
+    - target: {fileID: 156643631971544551, guid: a98f6b939f1b2e4488620786538ae5c4, type: 3}
+      propertyPath: m_text
+      value: Angel
+      objectReference: {fileID: 0}
     - target: {fileID: 156643631971544551, guid: a98f6b939f1b2e4488620786538ae5c4, type: 3}
       propertyPath: m_fontSize
       value: 8
