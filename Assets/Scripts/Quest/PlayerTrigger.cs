@@ -14,6 +14,8 @@ public class PlayerTrigger : MonoBehaviour
     InteractionType interactionType;
     public GameObject player;
 
+    public float lateTime = 0.5f;
+
     bool isTalk;
 
 
@@ -38,7 +40,7 @@ public class PlayerTrigger : MonoBehaviour
             interactionController = player.GetComponent<InteractionController>();
             if (!isTalk)
             {
-                Invoke("TalkPlay",0.5f);
+                Invoke("TalkPlay", lateTime);
             }
            
             isTalk = true;
