@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Player player;
     public Vector3 playerSpawnPoint;
-    enum Mode { QuestMode, BattleMode }//player.controller.NowMode
-    [SerializeField]private Mode mode;
+
+    public enum Mode { QuestMode, BattleMode }//player.controller.NowMode
+    public Mode mode;
 
 
     private void Start()

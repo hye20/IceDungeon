@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class IceCrackTrigger : MonoBehaviour
 {
-    Transform playerPos;
     BoxCollider2D boxCollider;
     bool isTriggered;
 
@@ -16,17 +15,8 @@ public class IceCrackTrigger : MonoBehaviour
 
     AudioSource audioSource;
 
-    private PlayerController _controller;
-
     void Start()
-    {
-        if (GameObject.FindGameObjectWithTag("Mao"))
-        {
-            playerPos = GameObject.Find("Mao").GetComponent<Transform>();
-        }
-
-        _controller = GameObject.Find("Mao").GetComponent<PlayerController>();
-
+    { 
         currentSpriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
@@ -40,12 +30,12 @@ public class IceCrackTrigger : MonoBehaviour
     
     void Update()
     {
-        if (!isTriggered && playerPos.position - new Vector3(0, 0.25f, 0) == transform.position)
+        if (!isTriggered && (GameManager.instance.player.transform.position - new Vector3(0, 0.25f, 0)) == transform.position)
         {
             isTriggered = true;
         }
 
-        if (isTriggered && (playerPos.position - new Vector3(0, 0.25f, 0) != transform.position))
+        if (isTriggered && (GameManager.instance.player.transform.position - new Vector3(0, 0.25f, 0) != transform.position))
         {
             audioSource.Play();
 

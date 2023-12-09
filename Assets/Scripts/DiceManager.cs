@@ -11,8 +11,6 @@ public class DiceManager : MonoBehaviour
     public Sprite[] DiceNumberSprites = new Sprite[6];
     public TextMeshProUGUI DiceCountText;
     public Button DiceButton;
-
-    public int diceCount;
     int randomDiceNumber;
 
     AudioSource audioSource;
@@ -20,27 +18,13 @@ public class DiceManager : MonoBehaviour
 
     void Awake()
     {
-        diceCount = 0;
-
         audioSource = GetComponent<AudioSource>();
-
-        /*
-        if (GameObject.FindGameObjectWithTag("Pram"))
-        {
-            playerController = GameObject.Find("Pram").GetComponent<PlayerController>();
-        }
-        else if (GameObject.FindGameObjectWithTag("Mao"))
-        {
-            playerController = GameObject.Find("Mao").GetComponent<PlayerController>();
-        }
-        */
-
     }
 
     void Update()
     {
         randomDiceNumber = Random.Range(0, 6);
-        DiceCountTextUpdate(diceCount);
+        DiceCountTextUpdate(GameManager.instance.player.controller.DiceCount);
 
         if (GameManager.instance.player.controller.DiceCount == 0)
         {
@@ -55,10 +39,9 @@ public class DiceManager : MonoBehaviour
         audioSource.Play();
 
         NumberedDice.GetComponent<Image>().sprite = DiceNumberSprites[randomDiceNumber];
-        diceCount = randomDiceNumber + 1;
-        DiceCountText.text = diceCount.ToString();
+        GameManager.instance.player.controller.DiceCount = randomDiceNumber + 1;
+        DiceCountText.text = GameManager.instance.player.controller.DiceCount.ToString();
 
-        GameManager.instance.player.controller.DiceCount = diceCount;
         GameManager.instance.player.controller.IsPlayerTurn = true;        
 
         AnimatedDice.SetActive(false);

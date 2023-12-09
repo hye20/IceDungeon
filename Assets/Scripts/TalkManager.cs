@@ -18,18 +18,8 @@ public class TalkManager : MonoBehaviour
 
     private void GenerateData()
     {
-        // Talk Data
-        // Npc Gm: 1000, Angel: 2000
-        // Box: 100 , Desk: 200
-        talkData.Add(1000, new string[] {   "안녕? :0",
-                                            "이 곳에 처음 왔구나? :4" ,
-                                            "한번 둘러보도록해:1"});
-        talkData.Add(2000, new string[] {   "안녕 하냥? :0",
-                                            "이 곳에 처음 왔구냐? :4",
-                                            "Gm을 찾아 보는 것도 나쁘지 않다냐?:1"});
-
-        talkData.Add(100, new string[] { "평범한 나무상자다" });
-        talkData.Add(200, new string[] { "누군가 사용한 흔적이 있는 책상이다" });
+        // 기본 대화 퀘스트가 없을때
+        NoneTalk();
 
         // Quest Talk
         talkData.Add(10 + 1000, new string[] {  "잘둘러 봤어? :0",
@@ -49,7 +39,6 @@ public class TalkManager : MonoBehaviour
 
 
         talkData.Add(30 + 1000, new string[] { "선택형 퀘스트의 시작:0" });
-        talkData.Add(31 + 1000, new string[] { "1.A 선택지 \n2.B 선택지:0" });
         talkData.Add(31 + 2000, new string[] { "Gm에게 가야할듯...:0" });
 
         talkData.Add(40 + 1000, new string[] { "1.A 선택지, 2.B 선택지" });
@@ -63,28 +52,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(80+ 1000, new string[] { "80퀘스트 종료:0" });
 
 
-
-        // Portait Data
-        // 0: Normal, 1: Speak, 2: Happy, 3: Angry, 4:...., 5:....
-        portaitData.Add(1000 + 0, portaitArr[0]);
-        portaitData.Add(1000 + 1, portaitArr[1]);
-        portaitData.Add(1000 + 2, portaitArr[2]);
-        portaitData.Add(1000 + 3, portaitArr[3]);
-        portaitData.Add(1000 + 4, portaitArr[4]);
-        portaitData.Add(1000 + 5, portaitArr[5]);
-        portaitData.Add(2000 + 0, portaitArr[6]);
-        portaitData.Add(2000 + 1, portaitArr[7]);
-        portaitData.Add(2000 + 2, portaitArr[8]);
-        portaitData.Add(2000 + 3, portaitArr[9]);
-        portaitData.Add(2000 + 4, portaitArr[10]);
-        portaitData.Add(2000 + 5, portaitArr[11]);
-        portaitData.Add(3000 + 0, portaitArr[12]);
-        portaitData.Add(3000 + 1, portaitArr[13]);
-        portaitData.Add(3000 + 2, portaitArr[14]);
-        portaitData.Add(3000 + 3, portaitArr[15]);
-        portaitData.Add(3000 + 4, portaitArr[16]);
-        portaitData.Add(3000 + 5, portaitArr[17]);
-
+        NonePortait();
     }
 
 
@@ -104,6 +72,47 @@ public class TalkManager : MonoBehaviour
 
         if (talkIndex == talkData[id].Length) { return null; }
         else { return talkData[id][talkIndex]; }
+    }
+
+    void NoneTalk()
+    {
+        // Talk Data
+        // Npc Gm: 1000, Angel: 2000
+        // Box: 100 , Desk: 200
+        talkData.Add(1000, new string[] {   "안녕? :0",
+                                            "이 곳에 처음 왔구나? :4" ,
+                                            "한번 둘러보도록해:1"});
+        talkData.Add(2000, new string[] {   "안녕 하냥? :0",
+                                            "이 곳에 처음 왔구냐? :4",
+                                            "Gm을 찾아 보는 것도 나쁘지 않다냐?:1"});
+
+        talkData.Add(100, new string[] { "안이 비어있는 상자다" });
+        talkData.Add(600, new string[] { "한번 사용할 독백 창이다",
+                                         "이 독백창은 1번 가동후 사라진다"});
+    }
+
+    void NonePortait()
+    {
+        // 사진 관리 (바뀌는 이미지)
+        // 0: Normal, 1: Speak, 2: Happy, 3: Angry, 4:...., 5:....
+        portaitData.Add(1000 + 0, portaitArr[0]);
+        portaitData.Add(1000 + 1, portaitArr[1]);
+        portaitData.Add(1000 + 2, portaitArr[2]);
+        portaitData.Add(1000 + 3, portaitArr[3]);
+        portaitData.Add(1000 + 4, portaitArr[4]);
+        portaitData.Add(1000 + 5, portaitArr[5]);
+        portaitData.Add(2000 + 0, portaitArr[6]);
+        portaitData.Add(2000 + 1, portaitArr[7]);
+        portaitData.Add(2000 + 2, portaitArr[8]);
+        portaitData.Add(2000 + 3, portaitArr[9]);
+        portaitData.Add(2000 + 4, portaitArr[10]);
+        portaitData.Add(2000 + 5, portaitArr[11]);
+        portaitData.Add(3000 + 0, portaitArr[12]);
+        portaitData.Add(3000 + 1, portaitArr[13]);
+        portaitData.Add(3000 + 2, portaitArr[14]);
+        portaitData.Add(3000 + 3, portaitArr[15]);
+        portaitData.Add(3000 + 4, portaitArr[16]);
+        portaitData.Add(3000 + 5, portaitArr[17]);
     }
 
     public Sprite GetPortait(int id, int portraitIndex)

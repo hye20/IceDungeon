@@ -52,6 +52,11 @@ public class PenguinStarter : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.instance.player.controller.isStart && GameManager.instance.mode == GameManager.Mode.QuestMode)
+        {
+            Destroy(gameObject);
+        }
+
         Movement();
         Picking();
         Spinning();

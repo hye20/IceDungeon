@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 2408318758605439634}
   - component: {fileID: 8982793600894306329}
   - component: {fileID: 1914490991622604421}
+  - component: {fileID: 4477013876549617125}
   m_Layer: 0
   m_Name: Mao
   m_TagString: Mao
@@ -842,9 +843,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 1
+  ItemManager: {fileID: 0}
+  ItemSpriteRenderer: {fileID: 5116415999133260345}
   IsPlayerTurn: 0
   ArrowCanvas: {fileID: 8376143026380630264}
   animator: {fileID: 4475679228995686000}
+  FaderAnimator: {fileID: 0}
   ArrowButtons:
   - {fileID: 6732145749551583968}
   - {fileID: 2576066952027984888}
@@ -855,13 +859,11 @@ MonoBehaviour:
   LDButtonPressed: 0
   RDButtonPressed: 0
   StatusCanvas: {fileID: 7797289479497324220}
-  UICanvas: {fileID: 0}
   DiceCount: 100
-  animAtk: 0
-  animMagic: 0
-  animGuard: 0
-  ItemManager: {fileID: 0}
-  ItemSpriteRenderer: {fileID: 5116415999133260345}
+  is_Attack: 0
+  is_Magic: 0
+  is_Victory: 0
+  is_Guard: 0
 --- !u!50 &2408318758605439634
 Rigidbody2D:
   serializedVersion: 4
@@ -932,7 +934,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
+  m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
 --- !u!114 &1914490991622604421
 MonoBehaviour:
@@ -946,15 +948,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4475b49f99e9664b8099e3db7b48b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  playerSpawnPoint: {fileID: 0}
+  MaxHP: 100
   HP: 100
+  MaxMP: 200
   MP: 200
   atk: 0
   def: 0
   SP: 0
   dice: 6
   AP: 0
+  controller: {fileID: 0}
+--- !u!114 &4477013876549617125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5476404836357401801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62c5fa5f05d7a74a9a5cdabcbbe05cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gManager: {fileID: 0}
+  isNpcInter: 0
+  isPlayerInter: 0
+  isChest: 0
+  trigObject: {fileID: 0}
 --- !u!1 &5695457330348491529
 GameObject:
   m_ObjectHideFlags: 0

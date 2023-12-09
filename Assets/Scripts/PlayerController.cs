@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer ItemSpriteRenderer;
     PenguinStarter penguinStarter;
     DiceManager diceManager;
+    EventManager eventManager;
 
     public bool IsPlayerTurn;
     public Canvas ArrowCanvas;
@@ -39,10 +41,12 @@ public class PlayerController : MonoBehaviour
 
     public Canvas StatusCanvas;
     
+    /*
     public GameObject SettingButton;
     public GameObject HelpButton;
     public GameObject QuestPanel;
     public GameObject DicePanel;
+    */
 
     public int DiceCount;//ï¿½àµ¿ï¿½ï¿½
 
@@ -57,10 +61,12 @@ public class PlayerController : MonoBehaviour
         DiceCount = 0;
         FaderAnimator = GameObject.Find("Fader").GetComponent<Animator>();
 
+        /*
         SettingButton = GameObject.Find("UICanvas").transform.Find("Setting_Button").gameObject;
         HelpButton = GameObject.Find("UICanvas").transform.Find("Help_Button").gameObject;
         QuestPanel = GameObject.Find("UICanvas").transform.Find("Quest_Panel").gameObject;
         DicePanel = GameObject.Find("UICanvas").transform.Find("Dice_Panel").gameObject;
+        */
 
         _luDirection = new Vector3(-0.5f, 0.25f, 0);
         _ruDirection = new Vector3(0.5f, 0.25f, 0);
@@ -69,23 +75,30 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
         diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {
             int number = i;
             ArrowButtons[i].onClick.AddListener(() => OnButtonClicked(number));
         }
-
     }
-
 
     void Update()
     {
-        if (penguinStarter.penguinReturn)
+        //¼öÁ¤ÇÊ¿ä
+        if (GameManager.instance.mode == GameManager.Mode.QuestMode)
+        {
+            if (SceneManager.GetActiveScene().name == "DKTest")
+            {
+                ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+            }
+        }
+
+            if (penguinStarter.penguinReturn)
         {
             StartCoroutine(PlayerStarter());
         }
@@ -152,7 +165,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -171,7 +183,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -190,7 +201,6 @@ public class PlayerController : MonoBehaviour
                 transform.position = _endPos;
 
                 DiceCount--;
-                diceManager.diceCount--;
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -208,8 +218,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Move_RD", false);
                 transform.position = _endPos;
 
-                DiceCount--;
-                diceManager.diceCount--;
+                DiceCount--;                
                 ArrowCanvas.gameObject.SetActive(true);
             }
         }
@@ -260,7 +269,7 @@ public class PlayerController : MonoBehaviour
     {
         if (is_Victory) animator.SetBool("Victory", true);
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory") &&
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Victory1") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             animator.SetBool("Victory", false);
@@ -328,11 +337,6 @@ public class PlayerController : MonoBehaviour
             penguinStarter.penguinReturn = false;
 
             StatusCanvas.gameObject.SetActive(true);
-
-            SettingButton.SetActive(true);
-            HelpButton.SetActive(true);
-            QuestPanel.SetActive(true);
-            DicePanel.SetActive(true);
         }
     }
 

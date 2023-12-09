@@ -15,11 +15,14 @@ public class EquipmentStater : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, endPos, 1f * Time.deltaTime);
-
-        if(penguinStarter.itemPicked)
+        if (GameManager.instance.player.controller.isStart)
         {
-            Destroy(gameObject);
+            transform.position = Vector3.MoveTowards(transform.position, endPos, 2.0f * Time.deltaTime);
+
+            if (penguinStarter.itemPicked)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

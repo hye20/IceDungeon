@@ -9,43 +9,25 @@ using UnityEngine.UI;
 public class InteractionController : MonoBehaviour
 {
     public static InteractionController instance;
-    public GManager gManager;
+    public EventManager gManager;
     
-    [Header("이름 창")]
-    public GameObject go_npcTalk;
-    public GameObject go_npcTalkImg;
-    [SerializeField] Text txt_TargetName;
-    [SerializeField] Text txt_TargetTalk;
-
-    string npcChildName = "Quset";
-
-
     [Header("Npc 접속 가능 확인")]
-    public bool npcInter = false;
-
+    public bool isNpcInter = false;
+    public bool isPlayerInter = false;
+    public bool isChest = false;
     // Npc 인식
     public GameObject trigObject;
-    // Npc 상호 작용 가능한지 확인 하는 것
-    GameObject ChildQ;
 
-    public void SettingUI(bool p_flag)
+    private void Update()
     {
-        go_npcTalk.SetActive(p_flag);
-        go_npcTalkImg.SetActive(p_flag);
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q)&& npcInter == true)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            Action();
+            Action(); 
         }
     }
-    
 
     public void Action()
     {
-        SettingUI(npcInter);
         gManager.Action(trigObject);
     }
 
@@ -60,20 +42,35 @@ public class InteractionController : MonoBehaviour
         {
             if (trigObject == null)
             {
-                npcInter = true;
-                Transform toq = collision.gameObject.transform.parent.parent;
+                isNpcInter = true;
+                Transform toq = collision.gameObject.transform.parent;
 
                 if (toq!=null)  
                 {
                     trigObject = toq.gameObject;
-
-                    ChildQ = toq.Find(npcChildName).gameObject;
-                    ChildQ.SetActive(true);
                 }
                 else
                 {
                     Debug.Log("not toq:" + toq);
                 }
+            }
+        }
+        else if (collision.gameObject.tag == "PlayerTrigger")
+        {
+            if (trigObject == null)
+            {
+                isPlayerInter = true;
+
+                trigObject = collision.gameObject;
+            }
+        }
+        else if(collision.gameObject.tag == "chest")
+        {
+            if (trigObject == null)
+            {
+                isChest = true;
+
+                trigObject = collision.gameObject;
             }
         }
     }
@@ -83,14 +80,29 @@ public class InteractionController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Interaction")
         {
-            if (trigObject != null && npcInter == true)
+            if (trigObject != null && isNpcInter == true)
             {
-                npcInter = false;
+                isNpcInter = false;
                 trigObject = null;
-                ChildQ.SetActive(false);
-                ChildQ = null;
                 Debug.Log("Npc 접촉 해제");
             }
         }
+        else if (collision.gameObject.tag == "PlayerTrigger")
+        {
+            if (trigObject != null && isPlayerInter == true)
+            {
+                isPlayerInter = false;
+                Destroy(trigObject);
+            }
+        }
+        else if (collision.gameObject.tag == "chest")
+        {
+            if (trigObject != null && isChest == true)
+            {
+                isPlayerInter = false;
+                trigObject = null;
+            }
+        }
+
     }
 }
