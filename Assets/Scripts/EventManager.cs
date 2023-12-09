@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
 public class EventManager : MonoBehaviour
 {
     InteractionController interactionController;
@@ -12,14 +12,14 @@ public class EventManager : MonoBehaviour
     PlayerTrigger playerTrigger;
 
     // 대화창
-    [Header ("TalkDateWrite")]
+    [Header("TalkDateWrite")]
     public GameObject talkPanel;
     public Text talkText;
     public Text talkName;
     public Image talkImg;
     // 퀘스트 창
-    public TMP_Text questTitle;
-    public TMP_Text questDetail;
+    //public TMP_Text questTitle;
+    //public TMP_Text questDetail;
 
     public Button[] btnList;
 
@@ -35,8 +35,8 @@ public class EventManager : MonoBehaviour
     {
         interactionController = GetComponent<InteractionController>();
         interactionType = GetComponent<InteractionType>();
-        talkManager = GetComponent<TalkManager>();
-        questManager = GetComponent<QuestManager>();
+        talkManager = GameObject.Find("QuestManager").GetComponent<TalkManager>();
+        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
     }
 
     public void Start()
@@ -47,8 +47,8 @@ public class EventManager : MonoBehaviour
         {
             interactionController = GameObject.Find("Mao")?.GetComponent<InteractionController>();
         }
-        questDetail.text =questManager.CheckQuest();
-        questTitle.text =questManager.CheckQuestTitle();
+        //questDetail.text = questManager.CheckQuest();
+        //questTitle.text = questManager.CheckQuestTitle();
     }
 
 
@@ -63,7 +63,7 @@ public class EventManager : MonoBehaviour
 
         talkPanel.SetActive(isAction);
     }
-    
+
     void Talk(int id, bool isNpc, bool isPlayerTb)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
@@ -75,30 +75,31 @@ public class EventManager : MonoBehaviour
         if (talkData == null)
         {
             isAction = false;
-            
+
             talkIndex = 0;
             Time.timeScale = 1;
-            questDetail.text = questManager.CheckQuest(id);
-            questTitle.text = questManager.CheckQuestTitle();
+            //questDetail.text = questManager.CheckQuest(id);
+            //questTitle.text = questManager.CheckQuestTitle();            
+
             return;
         }
 
         if (Time.timeScale != 0)
         {
-            Time.timeScale = 0; 
+            Time.timeScale = 0;
         }
 
         // 이름과 대화창을 끌어옴
         if (isNpc)
         {
-            if (questManager.choice==false)
+            if (questManager.choice == false)
             {
                 talkName.text = interactionType.GetName();
                 talkText.text = talkData.Split(':')[0];
                 talkImg.sprite = talkManager.GetPortait(id, int.Parse(talkData.Split(':')[1]));
 
             }
-            else if(questManager.choice == true)
+            else if (questManager.choice == true)
             {
                 talkName.text = interactionType.GetName();
                 btnint = talkData.Split(',').Length;
@@ -124,7 +125,7 @@ public class EventManager : MonoBehaviour
             talkText.text = talkData;
             talkImg.color = new Color(1, 1, 1, 0);
         }
-        
+
         isAction = true;
         talkIndex++;
     }

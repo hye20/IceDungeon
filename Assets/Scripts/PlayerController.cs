@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer ItemSpriteRenderer;
     PenguinStarter penguinStarter;
     DiceManager diceManager;
-    EventManager eventManager;
 
     public bool IsPlayerTurn;
     public Canvas ArrowCanvas;
@@ -78,7 +77,6 @@ public class PlayerController : MonoBehaviour
         ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
         diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
-        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {

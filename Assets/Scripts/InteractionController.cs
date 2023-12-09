@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class InteractionController : MonoBehaviour
 {
     public static InteractionController instance;
-    public EventManager gManager;
-    
+    public EventManager eventManager;
+
     [Header("Npc 접속 가능 확인")]
     public bool isNpcInter = false;
     public bool isPlayerInter = false;
@@ -22,13 +22,18 @@ public class InteractionController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Action(); 
+            Action();
         }
+    }
+
+    private void Awake()
+    {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
 
     public void Action()
     {
-        gManager.Action(trigObject);
+        eventManager.Action(trigObject);
     }
 
     /// <summary>
@@ -45,7 +50,7 @@ public class InteractionController : MonoBehaviour
                 isNpcInter = true;
                 Transform toq = collision.gameObject.transform.parent;
 
-                if (toq!=null)  
+                if (toq != null)
                 {
                     trigObject = toq.gameObject;
                 }
@@ -64,7 +69,7 @@ public class InteractionController : MonoBehaviour
                 trigObject = collision.gameObject;
             }
         }
-        else if(collision.gameObject.tag == "chest")
+        else if (collision.gameObject.tag == "chest")
         {
             if (trigObject == null)
             {

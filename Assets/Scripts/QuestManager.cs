@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
@@ -20,12 +21,30 @@ public class QuestManager : MonoBehaviour
     public bool choice = false;
     public int btnChoicNum = 0;
 
+    bool startMinigame = false;
+
     void Awake()
     {
         questList = new Dictionary<int, QuestData>();
         GenerateData();
     }
-    
+
+    void Update()
+    {
+        if (startMinigame && GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") &&
+    GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            startMinigame = false;
+
+            SceneManager.LoadScene("Minigame1");
+            GameManager.instance.player.transform.position = new Vector3(1, -0.25f, 0);
+
+            GameManager.instance.player.controller.IsPlayerTurn = true;
+            GameManager.instance.player.controller.GetComponent<PlayerController>().DiceCount = 10000;
+            GameManager.instance.player.controller.GetComponent<PlayerController>().animator.Play("Idle_RU");
+        }
+    }
+
     void GenerateData()
     {
         questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
@@ -153,6 +172,16 @@ public class QuestManager : MonoBehaviour
     {
         switch (questId)
         {
+            case 10:
+                {
+                    if (questActionIndex == questList[questId].npcId.Length && !startMinigame)
+                    {
+                        GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
+                        startMinigame = true;
+                    }
+
+                    break;
+                }
             case 30:
                 if (questActionIndex == questList[questId].npcId.Length)
                 {
