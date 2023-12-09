@@ -28,14 +28,14 @@ public class TalkManager : MonoBehaviour
         talkData.Add(11 + 1000, new string[] {  "Angel에게 안 가봤어?:0",
                                                 "왼쪽에 있을거야 :4" });
 
-        talkData.Add(11 + 2000, new string[] {  "Gm 한테 내용 들었어?:0",
+        /*talkData.Add(11 + 2000, new string[] {  "Gm 한테 내용 들었어?:0",
                                                 "응 이동굴의 전설은 ...:4" ,
-                                                "Shaman Variant 말을 걸어야해!!:2"});
+                                                "Shaman Variant 말을 걸어야해!!:2"});*/
 
         talkData.Add(20 + 1000, new string[] { "Shaman Variant 만나고 옴 :0" });
-        talkData.Add(20 + 2000, new string[] { "아직 이야기 진행중:0" });
-        talkData.Add(20 + 3000, new string[] { "Gm에게 가야할듯...:4" });
-        talkData.Add(21 + 2000, new string[] { "Gm에게 가야할듯...:0" });
+        /*  talkData.Add(20 + 2000, new string[] { "아직 이야기 진행중:0" });
+          talkData.Add(20 + 3000, new string[] { "Gm에게 가야할듯...:4" });
+          talkData.Add(21 + 2000, new string[] { "Gm에게 가야할듯...:0" });*/
 
 
         talkData.Add(30 + 1000, new string[] { "선택형 퀘스트의 시작:0" });
@@ -48,8 +48,8 @@ public class TalkManager : MonoBehaviour
 
         talkData.Add(60 + 1000, new string[] { "2.B 선택지 결과값:1" });
 
-        talkData.Add(70+ 1000, new string[] { "70퀘스트 종료:0" });
-        talkData.Add(80+ 1000, new string[] { "80퀘스트 종료:0" });
+        talkData.Add(70 + 1000, new string[] { "70퀘스트 종료:0" });
+        talkData.Add(80 + 1000, new string[] { "80퀘스트 종료:0" });
 
 
         NonePortait();

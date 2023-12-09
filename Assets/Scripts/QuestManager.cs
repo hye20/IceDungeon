@@ -49,6 +49,8 @@ public class QuestManager : MonoBehaviour
     {
         questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
                                         , new int[] { 1000, 1000 }));
+        questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나기 \n Angel 만나기"
+                                        , new int[] { 1000, 1000 }));
         /*
         questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나로 가기"
                                         , new int[] { 3000, 1000 }));
@@ -65,7 +67,7 @@ public class QuestManager : MonoBehaviour
         questList.Add(80, new QuestData("게임 타이틀H", "선택 퀘스트!"
                        , new int[] { 1000, 1000 }));
         */
-        questList.Add(20, new QuestData("게임 타이틀I", "퀘스트 클리어!", new int[] { 0 }));
+        questList.Add(30, new QuestData("게임 타이틀I", "퀘스트 클리어!", new int[] { 0 }));
 
     }
 
@@ -90,9 +92,9 @@ public class QuestManager : MonoBehaviour
         {
             NextQuest();
         }
-        else if(choice)
+        else if (choice)
         {
-            ChoiceQuest(btnChoicNum==0?1:btnChoicNum);
+            ChoiceQuest(btnChoicNum == 0 ? 1 : btnChoicNum);
         }
 
         UiActive();
@@ -116,7 +118,7 @@ public class QuestManager : MonoBehaviour
 
     public void ChoiceQuest(int number)
     {
-        questId += 10*number;
+        questId += 10 * number;
         questActionIndex = 0;
         //ChoiceUISet(false); 
     }
@@ -134,18 +136,16 @@ public class QuestManager : MonoBehaviour
         switch (questId)
         {
             case 10:
+                {
+                    if (questActionIndex == questList[questId].npcId.Length)
+                    {
+                        GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
+                        startMinigame = true;
+                        Debug.Log("aa");
+                    }
 
-                if (questActionIndex == questList[questId].npcId.Length)
-                {
-                    questObject[0].SetActive(true);
+                    break;
                 }
-                break;
-            case 20:
-                if (questActionIndex == questList[questId].npcId.Length)
-                {
-                    questObject[0].SetActive(false);
-                }
-                break;
             case 50:
                 if (questActionIndex == questList[questId].npcId.Length)
                 {
@@ -172,16 +172,17 @@ public class QuestManager : MonoBehaviour
     {
         switch (questId)
         {
-            case 10:
+            /*case 10:
                 {
-                    if (questActionIndex == questList[questId].npcId.Length && !startMinigame)
+                    if (questActionIndex == questList[questId].npcId.Length)
                     {
                         GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
                         startMinigame = true;
+                        Debug.Log("aa");
                     }
 
                     break;
-                }
+                }*/
             case 30:
                 if (questActionIndex == questList[questId].npcId.Length)
                 {

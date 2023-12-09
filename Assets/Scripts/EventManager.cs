@@ -78,6 +78,7 @@ public class EventManager : MonoBehaviour
 
             talkIndex = 0;
             Time.timeScale = 1;
+            questManager.CheckQuest(id);
             //questDetail.text = questManager.CheckQuest(id);
             //questTitle.text = questManager.CheckQuestTitle();            
 
