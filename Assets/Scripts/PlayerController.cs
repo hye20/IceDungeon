@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     /*************Quest Mode***************/
     private float moveSpeed = 1.0f;
 
+<<<<<<< Updated upstream
+=======
+    public ItemManager ItemManager;
+    public SpriteRenderer ItemSpriteRenderer;
+    PenguinStarter penguinStarter;
+    DiceManager diceManager;
+
+>>>>>>> Stashed changes
     public bool IsPlayerTurn;
     public Canvas ArrowCanvas;
 
@@ -61,9 +69,13 @@ public class PlayerController : MonoBehaviour
         //ItemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         //ItemSpriteRenderer = transform.Find("ItemSprite").GetComponent<SpriteRenderer>();
         penguinStarter = GameObject.FindWithTag("Penguin").GetComponent<PenguinStarter>();
+<<<<<<< Updated upstream
         //diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
 
         gManager = GetComponent<GManager>();
+=======
+        diceManager = GameObject.Find("DiceManager").GetComponent<DiceManager>();
+>>>>>>> Stashed changes
 
         for (int i = 0; i < ArrowButtons.Length; i++)
         {

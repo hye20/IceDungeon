@@ -7,7 +7,11 @@ using TMPro;
 public class NpcTrigger : MonoBehaviour
 {
     // Quest game Manager
+<<<<<<< Updated upstream
     GManager gManager;
+=======
+    EventManager eventManager;
+>>>>>>> Stashed changes
     InteractionController interactionController;
     
     // interactionType 가 소지하고있는 이름 혹은 그 값들

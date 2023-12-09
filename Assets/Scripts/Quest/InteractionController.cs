@@ -9,7 +9,11 @@ using UnityEngine.UI;
 public class InteractionController : MonoBehaviour
 {
     public static InteractionController instance;
+<<<<<<< Updated upstream
     public GManager gManager;
+=======
+    public EventManager eventManager;
+>>>>>>> Stashed changes
     
     [Header("Npc 접속 가능 확인")]
     public bool isNpcInter = false;
@@ -26,9 +30,14 @@ public class InteractionController : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+    }
+
     public void Action()
     {
-        gManager.Action(trigObject);
+        eventManager.Action(trigObject);
     }
 
     /// <summary>
