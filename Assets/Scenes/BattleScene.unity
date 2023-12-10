@@ -452,6 +452,9 @@ MonoBehaviour:
   - {fileID: 429718962}
   - {fileID: 417279203}
   - {fileID: 1371699618}
+  _effectList:
+  - {fileID: 4325596375035782712, guid: edb3076d90b9d9640a9eceb16cd27687, type: 3}
+  - {fileID: 8690043717157726275, guid: 806a1e5709534904cba3d8cc917a1bc3, type: 3}
   playerTurn: 1
   btnList: {fileID: 2054263473}
   attackBtn: {fileID: 226654434}
@@ -1033,6 +1036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 789057864}
   - component: {fileID: 789057863}
+  - component: {fileID: 789057865}
   m_Layer: 0
   m_Name: Battle Camera
   m_TagString: Untagged
@@ -1106,6 +1110,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &789057865
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789057861}
+  m_Enabled: 1
 --- !u!1 &797114571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1171,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d59c001ed4c871a4db797dbca0373494, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

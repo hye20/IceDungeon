@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //¼öÁ¤ÇÊ¿ä
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½
         if (GameManager.instance.mode == GameManager.Mode.QuestMode)
         {
             if (SceneManager.GetActiveScene().name == "DKTest")
@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PlayerStarter()
     {
-        if (SceneManager.GetActiveScene().name == "DKTest")
+        if (SceneManager.GetActiveScene().name == "DKTest"&&isStart)
         {
             if (penguinStarter.penguinReturn)
             {

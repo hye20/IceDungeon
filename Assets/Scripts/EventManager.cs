@@ -11,13 +11,13 @@ public class EventManager : MonoBehaviour
     public QuestManager questManager;
     PlayerTrigger playerTrigger;
 
-    // ´ëÈ­Ã¢
+    // ï¿½ï¿½È­Ã¢
     [Header("TalkDateWrite")]
     public GameObject talkPanel;
     public Text talkText;
     public Text talkName;
     public Image talkImg;
-    // Äù½ºÆ® Ã¢
+    // ï¿½ï¿½ï¿½ï¿½Æ® Ã¢
     //public TMP_Text questTitle;
     //public TMP_Text questDetail;
 
@@ -28,7 +28,7 @@ public class EventManager : MonoBehaviour
     public int talkIndex;
 
 
-    // Á¸ÀçÇÏ´Â ¹öÆ° ¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½
     int btnint;
     //
     public int lbtnint;
@@ -53,8 +53,8 @@ public class EventManager : MonoBehaviour
     }
 
 
-    // ÀÌ Çàµ¿À» ½ÇÇàÇÏ¸é
-    // ´ëÈ­¸¦ ÇÑ´Ù
+    // ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
+    // ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ñ´ï¿½
     public void Action(GameObject _scanObject)
     {
         isAction = true;
@@ -71,8 +71,8 @@ public class EventManager : MonoBehaviour
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
         //Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
 
-        // Talk µ¥ÀÌÅÍ°¡ °ªÀ» °¡Áö°í ÀÖÁö ¾ÊÀ¸¸é
-        // Talk ÀÇ Á¾·á
+        // Talk ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // Talk ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (talkData == null)
         {
             isAction = false;
@@ -91,7 +91,7 @@ public class EventManager : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        // ÀÌ¸§°ú ´ëÈ­Ã¢À» ²ø¾î¿È
+        // ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È­Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isNpc)
         {
             if (questManager.choice == false)
@@ -109,8 +109,8 @@ public class EventManager : MonoBehaviour
                 {
                     btnList[i].gameObject.SetActive(true);
                     btnList[i].gameObject.GetComponentInChildren<Text>().text = talkData.Split(",")[i];
-                    // °¢ ¹öÆ°¿¡ ´ëÇÑ ÀÌº¥Æ® Ãß°¡
-                    int index = i; // Áß¿ä: ¶÷´Ù½Ä ³»¿¡¼­ ¹Ýº¹ º¯¼ö¸¦ »ç¿ëÇÒ ¶§ º¯¼ö º¹»ç
+                    // ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ß°ï¿½
+                    int index = i; // ï¿½ß¿ï¿½: ï¿½ï¿½ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     btnList[i].onClick.AddListener(() => OnClickButton(index));
                 }
                 for (int i = talkData.Split(',').Length; i < btnList.Length; i++)

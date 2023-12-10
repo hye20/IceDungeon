@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private UIPlayerState _playerStatus;
     [SerializeField] private UIMonster[] _monstersBar;
+    [SerializeField] private GameObject[] _effectList;
 
     public bool playerTurn = true;
     private bool _monsters_is_dead = false;
@@ -87,7 +88,7 @@ public class BattleManager : MonoBehaviour
     }
     private void Stagger()
     {
-        //°æÁ÷.
+        //ï¿½ï¿½ï¿½ï¿½.
     }
     public void PlayerAction()
     {
@@ -105,6 +106,7 @@ public class BattleManager : MonoBehaviour
         Invoke("ChangeTurn", 3.0f);
         //play atk anim
         GameManager.instance.player.controller.is_Attack = true;
+        Instantiate(_effectList[0]).transform.position = _monsters[index].transform.position;
         _monsters[index].HP -= GameManager.instance.player.atk;
         Debug.Log("player's attack");
         _monstersBar[index].UpdateTatgetValue(_monsters[index].HP, _monsters[index].maxHP);
@@ -128,6 +130,7 @@ public class BattleManager : MonoBehaviour
             if (!_monsters[i].is_dead)
             {
                 _monsters[i].HP -= GameManager.instance.player.SP;
+                Instantiate(_effectList[1]).transform.position = _monsters[i].transform.position;
                 _monstersBar[i].UpdateTatgetValue(_monsters[i].HP, _monsters[i].maxHP);
             }
         }
@@ -177,7 +180,7 @@ public class BattleManager : MonoBehaviour
 
     private void SetMonsters()
     {
-        int rand = Random.Range(1, 4);//1~3¸¶¸®
+        int rand = Random.Range(1, 4);//1~3ï¿½ï¿½ï¿½ï¿½
         _monsters = new Monster[rand];
         for (int i = 0; i < rand; i++)
         {
@@ -217,10 +220,12 @@ public class BattleManager : MonoBehaviour
                 if (randomAction == 1)
                 {
                     MonsterAtk(_monsters[i]);
+                    Instantiate(_effectList[0]).transform.position = GameManager.instance.player.transform.position;
                 }
                 else if (randomAction == 2)
                 {
                     MonsterSkill(_monsters[i]);
+                    Instantiate(_effectList[0]).transform.position = GameManager.instance.player.transform.position;
                 }
                 //random action
                 //monster atk

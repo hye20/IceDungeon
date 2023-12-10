@@ -44,14 +44,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //****************************************************************************
-        //FOR_TEST, test Àü¿ë ÄÚµå ¿©±â¿¡ Ãß°¡ÇØÁÖ¼¼¿ä
+        //FOR_TEST, test ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ß°ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½
         if(Input.GetKeyDown(KeyCode.F))
         {
             if (mode == Mode.QuestMode)BattlePhase();
             else if (mode == Mode.BattleMode)QuestPhase();
         }
         //*****************************************************************************
-
         if(Minigame1Clear && mode == Mode.QuestMode)
         {
             orangePenguin = GameObject.Find("Orange_Penguin_MiniGame");
@@ -63,7 +62,7 @@ public class GameManager : MonoBehaviour
         mode = Mode.BattleMode;
         player.controller.BattleMode();
         SceneManager.LoadScene("BattleScene");
-        playerSpawnPoint = player.transform.position; 
+        playerSpawnPoint = player.transform.position;
     }
     public void QuestPhase()
     {

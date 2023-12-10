@@ -41,6 +41,7 @@ public class DoorTrigger : MonoBehaviour
         {
             FaderAnimator.Play("FadeIn");
             playerPos.position = new Vector3(7.5f, 5, 0);
+            doorOpened = false;
         }
     }
 

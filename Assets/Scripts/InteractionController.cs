@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
@@ -11,15 +12,19 @@ public class InteractionController : MonoBehaviour
     public static InteractionController instance;
     public EventManager eventManager;
 
-    [Header("Npc Á¢¼Ó °¡´É È®ÀÎ")]
+    [Header("Npc ì ‘ì† ê°€ëŠ¥ í™•ì¸")]
     public bool isNpcInter = false;
     public bool isPlayerInter = false;
     public bool isChest = false;
-    // Npc ÀÎ½Ä
+    // Npc ì¸ì‹
     public GameObject trigObject;
 
     private void Update()
     {
+        if(SceneManager.GetActiveScene().name == "DKTest")
+        {
+            FindEvent();
+        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Action();
@@ -28,7 +33,7 @@ public class InteractionController : MonoBehaviour
 
     private void Awake()
     {
-        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+        FindEvent();
     }
 
     public void Action()
@@ -36,10 +41,15 @@ public class InteractionController : MonoBehaviour
         eventManager.Action(trigObject);
     }
 
+    public void FindEvent()
+    {
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+    }
+
     /// <summary>
-    /// interactionÀ» tag·Î ¼ÒÁöÇÑ °´Ã¼ÀÇ collision Ãæµ¹½Ã ÀÛµ¿
-    /// trigObject ´Â Ãæµ¹ÇÑ Npc¸¦ gameObject·Î ÀÎ½ÄÀ» ÇÔ
-    /// ChildQ´Â gameObject·Î ÀÌ¹ÌÁö °ªÀ» °¡Á®¿Í¼­ ÀÛ¾÷
+    /// interactionì„ tagë¡œ ì†Œì§€í•œ ê°ì²´ì˜ collision ì¶©ëŒì‹œ ì‘ë™
+    /// trigObject ëŠ” ì¶©ëŒí•œ Npcë¥¼ gameObjectë¡œ ì¸ì‹ì„ í•¨
+    /// ChildQëŠ” gameObjectë¡œ ì´ë¯¸ì§€ ê°’ì„ ê°€ì ¸ì™€ì„œ ì‘ì—…
     /// </summary>
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -89,7 +99,7 @@ public class InteractionController : MonoBehaviour
             {
                 isNpcInter = false;
                 trigObject = null;
-                Debug.Log("Npc Á¢ÃË ÇØÁ¦");
+                Debug.Log("Npc ì ‘ì´‰ í•´ì œ");
             }
         }
         else if (collision.gameObject.tag == "PlayerTrigger")

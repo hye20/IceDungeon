@@ -60,7 +60,6 @@ public class Monster : MonoBehaviour
             float alpha = renderer.material.color.a;
             alpha -= 0.01f;
             renderer.material.color = new Color(1, 1, 1, alpha);
-            Debug.Log(renderer.material.color);
             if (renderer.material.color.a <= 0f)
             {
                 this.gameObject.SetActive(false);
