@@ -32,7 +32,7 @@ public class QuestManager : MonoBehaviour
     void Update()
     {
         if (startMinigame && GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") &&
-    GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             startMinigame = false;
 
@@ -48,7 +48,7 @@ public class QuestManager : MonoBehaviour
     void GenerateData()
     {
         questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
-                                        , new int[] { 1000, 1000 }));
+                                        , new int[] { 1000 }));
         questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나기 \n Angel 만나기"
                                         , new int[] { 1000, 1000 }));
         /*
@@ -141,7 +141,7 @@ public class QuestManager : MonoBehaviour
                     {
                         GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
                         startMinigame = true;
-                        Debug.Log("aa");
+                        GameManager.instance.playerSpawnPoint = GameManager.instance.player.transform.position;
                     }
 
                     break;

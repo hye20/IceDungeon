@@ -26,6 +26,9 @@ public class BattleManager : MonoBehaviour
 
     public float delay;//for test
 
+    AudioSource audioSource;
+    public AudioClip VictoryClip;
+
     void Start()
     {
         if (instance == null)
@@ -46,6 +49,8 @@ public class BattleManager : MonoBehaviour
         SetMonsters();
         exitBtn.onClick.AddListener(GameManager.instance.QuestPhase);
         exitBtn.gameObject.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -138,6 +143,9 @@ public class BattleManager : MonoBehaviour
             exitBtn.gameObject.SetActive(true);
             GameManager.instance.player.controller.is_Victory = true;
             _battle_end = true;
+
+            audioSource.clip = VictoryClip;
+            audioSource.PlayOneShot(VictoryClip);
         }
     }
     private void PlayerRun() 

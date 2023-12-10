@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MinigameManager : MonoBehaviour
 {
@@ -54,6 +55,16 @@ public class MinigameManager : MonoBehaviour
         {
             restartButtonPressed = true;
             FaderAnimator.Play("FadeIn");
+        }
+
+        if(GameManager.instance.Minigame1Clear
+            && FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut")
+            && FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            SceneManager.LoadScene("DKTest");
+            GameManager.instance.player.transform.position = GameManager.instance.playerSpawnPoint;
+
+            GameManager.instance.player.controller.DiceCount = 0;
         }
     }
 
@@ -118,5 +129,11 @@ public class MinigameManager : MonoBehaviour
     public void RestartButton()
     {        
         FaderAnimator.Play("FadeOut");
+    }
+
+    public void MinigameOver()
+    {
+        FaderAnimator.Play("FadeOut");
+        GameManager.instance.Minigame1Clear = true;
     }
 }

@@ -13,10 +13,14 @@ public class ChestTrigger : MonoBehaviour
     [SerializeField]
     ItemManager itemManager;
     public ItemDatabase ItemDatabase;
+
+    AudioSource audioSource;
     void Start()
     {
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -49,6 +53,8 @@ public class ChestTrigger : MonoBehaviour
 
     public void ChestClicked()
     {
+        audioSource.Play();
+
         itemManager.obtainItem = true;
         itemManager.Items.Add(ItemDatabase);
         spriteRenderer.sprite = ChestOpenSprite;

@@ -11,22 +11,33 @@ public class UIManager : MonoBehaviour
     public GameObject DicePanel;
 
     public Camera StarterCamera;
+    EventManager eventManager;
 
     void Start()
     {
-        
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
     
     void Update()
     {
         if (!GameManager.instance.player.controller.isStart && GameManager.instance.mode == GameManager.Mode.QuestMode)
         {
-            SettingButton.SetActive(true);
-            HelpButton.SetActive(true);
-            QuestPanel.SetActive(true);
-            DicePanel.SetActive(true);
+            if (eventManager.isAction)
+            {
+                SettingButton.SetActive(false);
+                HelpButton.SetActive(false);
+                QuestPanel.SetActive(false);
+                DicePanel.SetActive(false);
+            }
+            else
+            {
+                SettingButton.SetActive(true);
+                HelpButton.SetActive(true);
+                QuestPanel.SetActive(true);
+                DicePanel.SetActive(true);
 
-            Destroy(StarterCamera);
+                Destroy(StarterCamera);
+            }
         }
     }
 }

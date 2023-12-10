@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public bool RDButtonPressed = false;
 
     public Canvas StatusCanvas;
-    
+
     /*
     public GameObject SettingButton;
     public GameObject HelpButton;
@@ -319,22 +319,25 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PlayerStarter()
     {
-        if (penguinStarter.penguinReturn)
+        if (SceneManager.GetActiveScene().name == "DKTest")
         {
-            yield return new WaitForSeconds(3.0f);
+            if (penguinStarter.penguinReturn)
+            {
+                yield return new WaitForSeconds(3.0f);
 
-            FaderAnimator.Play("FadeIn");
+                FaderAnimator.Play("FadeIn");
 
-            yield return new WaitForSeconds(3.0f);
+                yield return new WaitForSeconds(3.0f);
 
-            animator.SetBool("Lying", false);
-            GameObject startCamera = GameObject.Find("StartCamera");
-            Destroy(startCamera);
-            isStart = false;
+                animator.SetBool("Lying", false);
+                GameObject startCamera = GameObject.Find("StartCamera");
+                Destroy(startCamera);
+                isStart = false;
 
-            penguinStarter.penguinReturn = false;
+                penguinStarter.penguinReturn = false;
 
-            StatusCanvas.gameObject.SetActive(true);
+                StatusCanvas.gameObject.SetActive(true);
+            }
         }
     }
 

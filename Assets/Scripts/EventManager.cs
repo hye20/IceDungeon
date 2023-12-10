@@ -27,6 +27,7 @@ public class EventManager : MonoBehaviour
     public bool isAction = false;
     public int talkIndex;
 
+
     // 존재하는 버튼 수
     int btnint;
     //
@@ -68,7 +69,7 @@ public class EventManager : MonoBehaviour
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
-        Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
+        //Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
 
         // Talk 데이터가 값을 가지고 있지 않으면
         // Talk 의 종료

@@ -9,12 +9,16 @@ public class DoorTrigger : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public Sprite DoorOpenSprite;
 
-    bool doorOpened;
+    public bool doorOpened;
 
     ItemManager itemManager;
 
     Transform playerPos;
     public Animator FaderAnimator;
+
+    AudioSource audioSource;
+    public AudioClip DoorLockedClip;
+    public AudioClip DoorUnlockedClip;
 
     void Start()
     {
@@ -27,6 +31,8 @@ public class DoorTrigger : MonoBehaviour
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
 
         doorOpened = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -58,6 +64,9 @@ public class DoorTrigger : MonoBehaviour
 
     public void DoorButtonClikced()
     {
+        audioSource.clip = DoorLockedClip;
+        audioSource.Play();
+
         if (!doorOpened)
         {
             if (itemManager.Items == null)
@@ -71,6 +80,9 @@ public class DoorTrigger : MonoBehaviour
                         spriteRenderer.sprite = DoorOpenSprite;
                         itemManager.Items.RemoveAt(i);
                         doorOpened = true;
+
+                        audioSource.clip = DoorUnlockedClip;
+                        audioSource.Play();
                     }
                 }
             }
@@ -78,6 +90,7 @@ public class DoorTrigger : MonoBehaviour
         else
         {
             FaderAnimator.Play("FadeOut");
+            audioSource.clip = null;
         }
     }
 }

@@ -14,7 +14,7 @@ public class PlayerTrigger : MonoBehaviour
     InteractionType interactionType;
     public GameObject player;
 
-    public float lateTime = 0.5f;
+    public float lateTime;
 
     bool isTalk;
 
@@ -28,7 +28,7 @@ public class PlayerTrigger : MonoBehaviour
     {
         if (isTalk && Input.GetKeyDown(KeyCode.Q))
         {
-            TalkPlay(); 
+            TalkPlay();
         }
     }
 
@@ -42,7 +42,7 @@ public class PlayerTrigger : MonoBehaviour
             {
                 Invoke("TalkPlay", lateTime);
             }
-           
+
             isTalk = true;
         }
     }

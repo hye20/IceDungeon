@@ -459,6 +459,7 @@ MonoBehaviour:
   runBtn: {fileID: 1128724893}
   exitBtn: {fileID: 1264364162}
   delay: 0
+  VictoryClip: {fileID: 8300000, guid: db20945ab3211604da683d36f9437a6d, type: 3}
 --- !u!4 &361641043
 Transform:
   m_ObjectHideFlags: 0
@@ -780,11 +781,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 625680765}
+  m_Father: {fileID: 1264364165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 855, y: -335}
+  m_AnchoredPosition: {x: -5, y: 105}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573749895
@@ -916,7 +917,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1264364165}
-  - {fileID: 573749894}
   - {fileID: 188042330}
   - {fileID: 429718958}
   - {fileID: 417279200}
@@ -2892,7 +2892,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 573749894}
   m_Father: {fileID: 625680765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}

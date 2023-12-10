@@ -6,18 +6,21 @@ public class AudioManager : MonoBehaviour
 {
     PlayerController playerController;
 
-    AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip DungeonBGM;
     bool isAudioPlaying = false;
+
+    public DoorTrigger DoorTrigger;
+    public AudioSource EnvironmentAudioSource;
+    public AudioClip EnvironmentClip;
+    bool isEnvironmentAudioPlaying = false;
 
     void Start()
     {
         if(GameObject.Find("Mao"))
         {
             playerController = GameObject.Find("Mao").GetComponent<PlayerController>();
-        }
-
-        audioSource = GetComponent<AudioSource>();
+        }        
     }
     
     void Update()
@@ -26,6 +29,12 @@ public class AudioManager : MonoBehaviour
         {
             isAudioPlaying = true;
             audioSource.PlayOneShot(DungeonBGM);
+        }
+
+        if(DoorTrigger.doorOpened && !isEnvironmentAudioPlaying)
+        {
+            isEnvironmentAudioPlaying = true;
+            EnvironmentAudioSource.PlayOneShot(EnvironmentClip);
         }
     }    
 }

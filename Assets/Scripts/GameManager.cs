@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public enum Mode { QuestMode, BattleMode }//player.controller.NowMode
     public Mode mode;
 
+    GameObject orangePenguin;
+    public bool Minigame1Clear;
 
     private void Start()
     {
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(this.player.gameObject);
         }
+
+        Minigame1Clear = false;
     }
     private void Awake()
     {
@@ -47,6 +51,12 @@ public class GameManager : MonoBehaviour
             else if (mode == Mode.BattleMode)QuestPhase();
         }
         //*****************************************************************************
+
+        if(Minigame1Clear && mode == Mode.QuestMode)
+        {
+            orangePenguin = GameObject.Find("Orange_Penguin_MiniGame");
+            Destroy(orangePenguin);
+        }
     }
     public void BattlePhase()
     {
