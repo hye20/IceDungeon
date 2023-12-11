@@ -22,20 +22,22 @@ public class TalkManager : MonoBehaviour
         NoneTalk();
 
         // Quest Talk
-        talkData.Add(10 + 1000, new string[] {  "잘둘러 봤어? :0",
+        talkData.Add(10 + 600, new string[] { "한번 사용할 독백 창이다",
+                                            "이 독백창은 1번 가동후 사라진다"});
+        talkData.Add(11 + 1000, new string[] {  "잘둘러 봤어? :0",
                                                 "이 동굴에는 전설이 있어 :4" ,
                                                 "왼쪽의 Angel이 알려줄거야!!:2"});
-        talkData.Add(11 + 1000, new string[] {  "Angel에게 안 가봤어?:0",
-                                                "왼쪽에 있을거야 :4" });
+      /*  talkData.Add(11 + 1000, new string[] {  "Angel에게 안 가봤어?:0",
+                                                "왼쪽에 있을거야 :4" });*/
 
-        talkData.Add(11 + 2000, new string[] {  "Gm 한테 내용 들었어?:0",
+        /*talkData.Add(11 + 2000, new string[] {  "Gm 한테 내용 들었어?:0",
                                                 "응 이동굴의 전설은 ...:4" ,
-                                                "Shaman Variant 말을 걸어야해!!:2"});
+                                                "Shaman Variant 말을 걸어야해!!:2"});*/
 
         talkData.Add(20 + 1000, new string[] { "Shaman Variant 만나고 옴 :0" });
-        talkData.Add(20 + 2000, new string[] { "아직 이야기 진행중:0" });
+      /*  talkData.Add(20 + 2000, new string[] { "아직 이야기 진행중:0" });
         talkData.Add(20 + 3000, new string[] { "Gm에게 가야할듯...:4" });
-        talkData.Add(21 + 2000, new string[] { "Gm에게 가야할듯...:0" });
+        talkData.Add(21 + 2000, new string[] { "Gm에게 가야할듯...:0" });*/
 
 
         talkData.Add(30 + 1000, new string[] { "선택형 퀘스트의 시작:0" });

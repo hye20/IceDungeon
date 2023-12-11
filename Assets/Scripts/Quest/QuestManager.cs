@@ -25,11 +25,38 @@ public class QuestManager : MonoBehaviour
         questList = new Dictionary<int, QuestData>();
         GenerateData();
     }
+<<<<<<< Updated upstream
     
     void GenerateData()
     {
         questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
                                         , new int[] { 1000, 2000 }));
+=======
+
+    void Update()
+    {
+        if (startMinigame && GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeOut") &&
+            GameManager.instance.player.controller.FaderAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            startMinigame = false;
+
+            SceneManager.LoadScene("Minigame1");
+            GameManager.instance.player.transform.position = new Vector3(1, -0.25f, 0);
+
+            GameManager.instance.player.controller.IsPlayerTurn = true;
+            GameManager.instance.player.controller.GetComponent<PlayerController>().DiceCount = 10000;
+            GameManager.instance.player.controller.GetComponent<PlayerController>().animator.Play("Idle_RU");
+        }
+    }
+
+    void GenerateData()
+    {
+        questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
+                                        , new int[] { 1000 }));
+        questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나기 \n Angel 만나기"
+                                        , new int[] { 1000, 1000 }));
+        /*
+>>>>>>> Stashed changes
         questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나로 가기"
                                         , new int[] { 3000, 1000 }));
         questList.Add(30, new QuestData("게임 타이틀C", "선택 퀘스트!"
@@ -44,8 +71,13 @@ public class QuestManager : MonoBehaviour
                                , new int[] { 1000, 1000 }));
         questList.Add(80, new QuestData("게임 타이틀H", "선택 퀘스트!"
                        , new int[] { 1000, 1000 }));
+<<<<<<< Updated upstream
 
         questList.Add(90, new QuestData("게임 타이틀I", "퀘스트 클리어!", new int[] { 0 }));
+=======
+        */
+        questList.Add(30, new QuestData("게임 타이틀I", "퀘스트 클리어!", new int[] { 0 }));
+>>>>>>> Stashed changes
 
     }
 
@@ -114,18 +146,16 @@ public class QuestManager : MonoBehaviour
         switch (questId)
         {
             case 10:
+                {
+                    if (questActionIndex == questList[questId].npcId.Length)
+                    {
+                        GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
+                        startMinigame = true;
+                        Debug.Log("aa");
+                    }
 
-                if (questActionIndex == questList[questId].npcId.Length)
-                {
-                    questObject[0].SetActive(true);
+                    break;
                 }
-                break;
-            case 20:
-                if (questActionIndex == questList[questId].npcId.Length)
-                {
-                    questObject[0].SetActive(false);
-                }
-                break;
             case 50:
                 if (questActionIndex == questList[questId].npcId.Length)
                 {
@@ -152,6 +182,20 @@ public class QuestManager : MonoBehaviour
     {
         switch (questId)
         {
+<<<<<<< Updated upstream
+=======
+            /*case 10:
+                {
+                    if (questActionIndex == questList[questId].npcId.Length)
+                    {
+                        GameManager.instance.player.controller.FaderAnimator.Play("FadeOut");
+                        startMinigame = true;
+                        Debug.Log("aa");
+                    }
+
+                    break;
+                }*/
+>>>>>>> Stashed changes
             case 30:
                 if (questActionIndex == questList[questId].npcId.Length)
                 {
