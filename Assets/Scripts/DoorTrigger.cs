@@ -42,6 +42,9 @@ public class DoorTrigger : MonoBehaviour
             FaderAnimator.Play("FadeIn");
             playerPos.position = new Vector3(7.5f, 5, 0);
             doorOpened = false;
+
+            GameManager.instance.player.transform.Find("Snow").gameObject.SetActive(true);
+            GameManager.instance.player.transform.Find("Blizzard").gameObject.SetActive(true);
         }
     }
 
