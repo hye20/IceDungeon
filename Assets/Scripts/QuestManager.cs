@@ -47,7 +47,7 @@ public class QuestManager : MonoBehaviour
 
     void GenerateData()
     {
-        questList.Add(10, new QuestData("게임 타이틀A", "Gm 만나기 \n Angel 만나기"
+        questList.Add(10, new QuestData("오랜지펭귄 만나기", "G오랜지펭귄"
                                         , new int[] { 1000 }));
         questList.Add(20, new QuestData("게임 타이틀B", "Gm 만나기 \n Angel 만나기"
                                         , new int[] { 1000, 1000 }));

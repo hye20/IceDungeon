@@ -22,11 +22,10 @@ public class TalkManager : MonoBehaviour
         NoneTalk();
 
         // Quest Talk
-        talkData.Add(10 + 600, new string[] { "한번 사용할 독백 창이다",
-                                            "이 독백창은 1번 가동후 사라진다"});
-        talkData.Add(11 + 1000, new string[] {  "잘둘러 봤어? :0",
-                                                "이 동굴에는 전설이 있어 :4" ,
-                                                "왼쪽의 Angel이 알려줄거야!!:2"});
+        /*talkData.Add(11 + 600, new string[] { "한번 사용할 독백 창이다",
+                                            "이 독백창은 1번 가동후 사라진다"});*/
+        talkData.Add(10 + 1000, new string[] {  "이대로 붙잡힐수는 없다펭! :0",
+                                                "따라올테면 따라와봐라펭! :4" });
         /*  talkData.Add(11 + 1000, new string[] {  "Angel에게 안 가봤어?:0",
                                                   "왼쪽에 있을거야 :4" });*/
 

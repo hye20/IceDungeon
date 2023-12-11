@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PlayerStarter()
     {
-        if (SceneManager.GetActiveScene().name == "DKTest"&&isStart)
+        if (SceneManager.GetActiveScene().name == "DKTest"&& isStart)
         {
             if (penguinStarter.penguinReturn)
             {

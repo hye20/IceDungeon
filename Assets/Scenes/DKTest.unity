@@ -13037,12 +13037,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portaitArr:
-  - {fileID: -1436248850, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
-  - {fileID: -267167439, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
-  - {fileID: -551863556, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
-  - {fileID: 1961023455, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
-  - {fileID: 211211723, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
-  - {fileID: -2053620630, guid: 2d324d69f5b35724b81c6fd5d31bc490, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
+  - {fileID: 512359743, guid: 371d2c30f5fbbf941b50ed769483e6f8, type: 3}
   - {fileID: 293182348, guid: 8c6a3c2ec9cfb084c823049a15f10145, type: 3}
   - {fileID: 367311397, guid: 8c6a3c2ec9cfb084c823049a15f10145, type: 3}
   - {fileID: 49691082, guid: 8c6a3c2ec9cfb084c823049a15f10145, type: 3}
@@ -30757,7 +30757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -58198,54 +58198,6 @@ MonoBehaviour:
           m_StringArgument: HelpBook_Open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2087447544}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1346915993}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 605502774}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 114718297740852609}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1346915996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66963,7 +66915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -96998,7 +96950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -113888,6 +113840,8 @@ MonoBehaviour:
   HelpButton: {fileID: 1346915993}
   QuestPanel: {fileID: 605502774}
   DicePanel: {fileID: 114718297740852609}
+  BookAnimator: {fileID: 1873111923}
+  HelpExitButton: {fileID: 1595501960}
   StarterCamera: {fileID: 730751330}
 --- !u!4 &2109054541
 Transform:
