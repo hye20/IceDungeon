@@ -11,18 +11,12 @@ public class UIManager : MonoBehaviour
     public GameObject QuestPanel;
     public GameObject DicePanel;
 
-    public Animator BookAnimator;
-    public Button HelpExitButton;
-
     public Camera StarterCamera;
     EventManager eventManager;
 
     void Start()
     {
         eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
-
-        HelpButton.GetComponent<Button>().onClick.AddListener(OnHelpButtonClicked);
-        HelpExitButton.onClick.AddListener(OnHelpExitButtonClicked);
     }
     
     void Update()
@@ -45,20 +39,6 @@ public class UIManager : MonoBehaviour
 
                 Destroy(StarterCamera);
             }
-        }
-    }
-
-    void OnHelpButtonClicked()
-    {
-        eventManager.isAction = true;
-    }
-
-    void OnHelpExitButtonClicked()
-    {
-        if (BookAnimator.GetCurrentAnimatorStateInfo(0).IsName("HelpBook_Closed")
-            && BookAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            eventManager.isAction = false;
         }
     }
 }
