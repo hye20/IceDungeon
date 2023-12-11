@@ -50,8 +50,17 @@ public class GameManager : MonoBehaviour
             if (mode == Mode.QuestMode)BattlePhase();
             else if (mode == Mode.BattleMode)QuestPhase();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            player.transform.position = new Vector3(40f, 10.2f, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            player.transform.position = new Vector3(20.5f, 9.5f, 0);
+        }
         //*****************************************************************************
-        if(Minigame1Clear && mode == Mode.QuestMode)
+        if (Minigame1Clear && mode == Mode.QuestMode)
         {
             orangePenguin = GameObject.Find("Orange_Penguin_MiniGame");
             Destroy(orangePenguin);

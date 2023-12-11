@@ -23,7 +23,7 @@ public class SceneTester : MonoBehaviour
 
     void EnterMiniGame1()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha3))
         {
             SceneManager.LoadScene("Minigame1");
             player.transform.position = new Vector3(1, -0.25f, 0);
