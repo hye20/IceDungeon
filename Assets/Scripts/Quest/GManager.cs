@@ -68,7 +68,7 @@ public class GManager : MonoBehaviour
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
-        //Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
+        Debug.Log($" id: {id} ,questTalkIndex: {questTalkIndex}, talkIndex: {talkIndex}");
 
         // Talk 데이터가 값을 가지고 있지 않으면
         // Talk 의 종료
@@ -77,7 +77,6 @@ public class GManager : MonoBehaviour
             isAction = false;
             
             talkIndex = 0;
-<<<<<<<< Updated upstream:Assets/Scripts/Quest/GManager.cs
             Time.timeScale = 1;
             questDetail.text = questManager.CheckQuest(id);
             questTitle.text = questManager.CheckQuestTitle();
@@ -89,15 +88,6 @@ public class GManager : MonoBehaviour
             Time.timeScale = 0; 
         }
 
-========
-            questManager.CheckQuest(id);
-            //questDetail.text = questManager.CheckQuest(id);
-            //questTitle.text = questManager.CheckQuestTitle();            
-
-            return;
-        }
-
->>>>>>>> Stashed changes:Assets/Scripts/Quest/EventManager.cs
         // 이름과 대화창을 끌어옴
         if (isNpc)
         {

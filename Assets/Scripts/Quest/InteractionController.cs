@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
@@ -25,10 +24,6 @@ public class InteractionController : MonoBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().name == "DKTest")
-        {
-            FindEvent();
-        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Action(); 
@@ -37,17 +32,12 @@ public class InteractionController : MonoBehaviour
 
     private void Awake()
     {
-        FindEvent();
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
 
     public void Action()
     {
         eventManager.Action(trigObject);
-    }
-
-    public void FindEvent()
-    {
-        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
 
     /// <summary>

@@ -18,7 +18,7 @@ public class PlayerTrigger : MonoBehaviour
     InteractionType interactionType;
     public GameObject player;
 
-    public float lateTime;
+    public float lateTime = 0.5f;
 
     bool isTalk;
 
