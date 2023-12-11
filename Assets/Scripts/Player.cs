@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         else if (name == "Mao")
         {
             HP = MaxHP; MP = MaxMP;
-            atk = 80; def = 0; SP = 20;
+            atk = 80; def = 0; SP = 50;
         }
     }
     public void UpdateMaxHP(int MaxHP)
