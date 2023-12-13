@@ -8,12 +8,11 @@ public class Player : MonoBehaviour
     public float HP=100;
     public float MaxMP = 200;
     public float MP=200;
-    public float speed;
     public float atk;
     public float def;
-    public float SP;//spell power, ¸¶¹ýÀº ¹æ°üÀÖÀ½
-
-    public bool has_turn;
+    public float SP;//spell power, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float speed;
+    public int priority;
 
     public int dice;
     public int AP; //activity point (dice*n)
