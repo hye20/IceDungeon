@@ -53,16 +53,17 @@ public class BattleManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
     }
-
+    /*****************************************
+     전투의 진행
+    1. 몬스터, 플레이어의 생존 여부 판정
+        ㄴ 어느 한쪽이 전멸했다면 전투는 종료
+    2. 턴의 시작은 항상 플레이어의 행동 선택 - btnList.setActive(true)
+        ㄴ 선택 종료시 setActive(false) -> 플레이어의 추가입력 방지.
+    3. 플레이어의 선택이 마무리가 되면 전투 참여자들의 Speed값에 따라 차례대로 공격
+     ******************************************/
     void Update()
     {
         Check_Monsters_Dead();
-        /*
-        if (GameManager.instance.player.HP > 0 && !monsters_is_dead)
-        {
-            PlayerAction();
-            MonsterAction();
-        }*/
         if (GameManager.instance.player.HP <= 0)
         {
             Debug.Log($"player HP : {GameManager.instance.player.HP}");
@@ -88,7 +89,7 @@ public class BattleManager : MonoBehaviour
     }
     private void Stagger()
     {
-        //����.
+        //몬스터 진동, 경직 함수 추가 예정
     }
     public void PlayerAction()
     {
@@ -99,6 +100,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PlayerAtk(int index)
     {
+        SetPriority();
         for(int i=0;i< _monsters.Length; i++)
         {
             _monsters[i].able_target=false;
@@ -110,17 +112,10 @@ public class BattleManager : MonoBehaviour
         _monsters[index].HP -= GameManager.instance.player.atk;
         Debug.Log("player's attack");
         _monstersBar[index].UpdateTatgetValue(_monsters[index].HP, _monsters[index].maxHP);
-        //selectTarget();
-        /*
-        for (int i = 0; i < _monsters.Length; i++)
-        {
-            if (!_monsters[i].is_dead) _monsters[i].HP -= GameManager.instance.player.atk;
-            _monstersBar[i].UpdateTatgetValue(_monsters[i].HP, _monsters[i].maxHP);
-        }
-        */
     }
     private void PlayerMagic()
     {
+        SetPriority();
         btnList.gameObject.SetActive(false);
         Invoke("ChangeTurn", 3.0f);
         GameManager.instance.player.controller.is_Magic = true;
@@ -134,6 +129,11 @@ public class BattleManager : MonoBehaviour
                 _monstersBar[i].UpdateTatgetValue(_monsters[i].HP, _monsters[i].maxHP);
             }
         }
+    }
+    private void SetPriority()
+    {
+        //1. interface - status를 만들어서 직접 참조하여 이를 기반으로 Queue를 구성한다.
+        //2. Dictionary 형태로 구현하여 일일히 대조하여 Queue를 생성한다.
     }
     public void PrintResult()
     {
@@ -227,10 +227,8 @@ public class BattleManager : MonoBehaviour
                     MonsterSkill(_monsters[i]);
                     Instantiate(_effectList[0]).transform.position = GameManager.instance.player.transform.position;
                 }
-                //random action
-                //monster atk
+                Invoke("ChangeTurn", 2.0f);
             }
-            Invoke("ChangeTurn", 2.0f);
         }
     }
     private void MonsterAtk(Monster monster)

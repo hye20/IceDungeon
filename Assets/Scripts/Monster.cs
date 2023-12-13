@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public int HP = 100;
-    public int maxHP = 100;
-    public int atk;
-    public int SP;
+    /// <summary>
+    /// monster Index
+    /// </summary>
     public int index;
+    
+    public float HP = 100;
+    public float maxHP = 100;
+    public float atk;
+    public float SP;
+    public float speed;
+    public int priority;
+
+    public string[] actions;//atk, defense, counter
     public string[] skills;
-    public string[] actions;
+
     public bool is_dead;
     public bool able_target;
 
@@ -26,9 +34,9 @@ public class Monster : MonoBehaviour
         targetArrow.transform.position = transform.position + new Vector3(0, col.bounds.extents.y * 1.1f, 0);
         targetArrow.SetActive(false);
         animator = GetComponent<Animator>();
-        HP = 100;
-        atk = 5;
-        SP = 10;
+        HP = 100f;
+        atk = 5f;
+        SP = 10f;
         is_dead = false;
     }
 

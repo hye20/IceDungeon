@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float MaxHP = 100;
+    public float MaxHP = 100f;
     public float HP=100;
     public float MaxMP = 200;
     public float MP=200;
-    public int atk;
-    public int def;
-    public int SP;//spell power, 마법은 방관있음
+    public float speed;
+    public float atk;
+    public float def;
+    public float SP;//spell power, 마법은 방관있음
 
-    public int dice=6;
-    public int AP=0; //activity point (dice*n)
+    public bool has_turn;
+
+    public int dice;
+    public int AP; //activity point (dice*n)
 
     public PlayerController controller;
     
     void Start()
     {
+        dice = 6;
+        AP = 0;
         gameObject.name = this.tag;
         DontDestroyOnLoad(this.gameObject);
         controller = GetComponent<PlayerController>();
@@ -34,13 +39,17 @@ public class Player : MonoBehaviour
     {
         if(name=="Pram")
         {
+            MaxHP = 100f;
+            MaxHP = 100f;
             HP = MaxHP; MP = MaxMP;
-            atk = 30; def = 0; SP = 50;
+            atk = 30f; def = 0f; SP = 50f;
         }
         else if (name == "Mao")
         {
+            MaxHP = 100f;
+            MaxHP = 100f;
             HP = MaxHP; MP = MaxMP;
-            atk = 80; def = 0; SP = 50;
+            atk = 80f; def = 0f; SP = 50f;
         }
     }
     public void UpdateMaxHP(int MaxHP)
